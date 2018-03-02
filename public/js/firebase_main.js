@@ -11,19 +11,19 @@ var config = {
   };
 firebase.initializeApp(config);
 var database = firebase.database();
-var loginUser;
 
-firebase.auth().onAuthStateChanged(function(user) {
-	if (user) {
-		loginUser = user;
-		console.log("User is logined", user)
-	} 
-	else {
-		loginUser = null;
-		console.log("User is not logined yet.");
-	}
-});
+function signin(account, pwd){
+  console.log(account);
+  firebase.auth().signInWithEmailAndPassword(account, pwd).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode);
+    if(errorCode == "auth/wrong-password"){
 
+    }
+  });
+}
 
 function signout(){
 	firebase.auth().signOut().then(function() {
@@ -34,4 +34,3 @@ function signout(){
 		console.log("User sign out error!");
 	});
 }
-
