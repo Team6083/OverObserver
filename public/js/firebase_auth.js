@@ -5,11 +5,7 @@ loginSmtBtn.addEventListener("click", function() {
 
 var signoutSmtBtn = document.getElementById("signoutSmtBtn");
 signoutSmtBtn.addEventListener("click", function() {
-  firebase.auth().signOut().then(function() {
-    console.log("User sign out!");
-  }, function(error) {
-    console.log("User sign out error!");
-  })
+  signout();
 }, false);
 
 var loginPanel = $('#loginPanel');
