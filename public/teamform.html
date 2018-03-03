@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overlooking Event Research</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script src="js/firebase_main.js"></script>
+</head>
+<body>
+
+<form>
+
+  <div class="form-group col-4">
+    <label for="隊伍號碼">請輸入隊伍號碼</label>
+    <input type="隊伍號碼" class="form-control" placeholder="隊伍號碼">
+  </div>
+  <div class="form-group col-4">
+    <label for="比賽場次">請輸入比賽場次</label>
+    <input type="比賽場次" class="form-control" placeholder="比賽場次">
+  </div>
+
+<h4>自動時間<span class="badge badge-secondary"></span></h4>
+
+<fieldset class="form-group">
+  <div class="row">
+    <legend class="col-form-label col-sm-2 pt-0">auto line</legend>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="auto line" value="option1" checked>
+        <label class="form-check-label" for="gridRadios1">
+          成功
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="auto line" value="option2" checked>
+        <label class="form-check-label" for="gridRadios2">
+          失敗
+        </label>
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<div class="form-row">
+  <div class="form-group col-2">
+    <label for="scale幾個">scale</label>
+    <input type="scale幾個" class="form-control" placeholder="scale幾個">
+  </div>
+  <div class="form-group col-2">
+    <label for="scale嘗試次數">scale嘗試次數</label>
+    <input type="scale嘗試次數" class="form-control" placeholder="scale嘗試次數">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-2">
+    <label for="">switch</label>
+    <input type="switch" class="form-control" placeholder="switch幾個">
+  </div>
+  <div class="form-group col-2">
+    <label for="switch嘗試次數">switch嘗試次數</label>
+    <input type="switch嘗試次數" class="form-control" placeholder="switch嘗試次數">
+  </div>
+</div>
+
+<h4>手動時間<span class="badge badge-secondary"></span></h4>
+
+    <div class="form-row">
+      <div class="form-group col-2">
+        <label for="scale幾個">scale</label>
+        <input type="scale幾個" class="form-control" placeholder="scale幾個">
+      </div>
+      <div class="form-group col-2">
+        <label for="scale嘗試次數">scale嘗試次數</label>
+        <input type="scale嘗試次數" class="form-control" placeholder="scale嘗試次數">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-2">
+        <label for="">switch</label>
+        <input type="switch" class="form-control" placeholder="switch幾個">
+      </div>
+      <div class="form-group col-2">
+        <label for="switch嘗試次數">switch嘗試次數</label>
+        <input type="switch嘗試次數" class="form-control" placeholder="switch嘗試次數">
+      </div>
+    </div>
+
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">爬升</legend>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="爬升" value="option1" checked>
+            <label class="form-check-label" for="gridRadios1">
+              成功
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="爬升" value="option2" checked>
+            <label class="form-check-label" for="gridRadios2">
+              失敗
+            </label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="form-row align-items-center">
+    <div class="col-5">
+      <label class="col-5" for="駕車技術">駕車技術</label>
+      <select class="col-5">
+        <div class="w-100"></div>
+        <option selected>請選擇</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
+    </div>
+
+<div class="w-100"></div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">特殊表現</label>
+        <textarea class="form-control" rows="4"></textarea>
+      </div>
+
+<div class="w-100"></div>
+
+  <button type="確定" class="btn btn-primary">確定送出</button>
+
+</form>
+</body>
+</html>
