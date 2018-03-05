@@ -14,14 +14,22 @@ var database = firebase.database();
 
 function signin(account, pwd){
   console.log(account);
+  $("#loginAlert").addClass("d-none");
   firebase.auth().signInWithEmailAndPassword(account, pwd).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode);
     if(errorCode == "auth/wrong-password"){
-
+      $("#loginAlert").html("密碼錯誤");
     }
+    else if(errorCode == "auth/invalid-email"){
+      $("#loginAlert").html("請輸入正確email");
+    }
+    else{
+      $("#loginAlert").html(errorCode);
+    }
+    $("#loginAlert").removeClass("d-none");
   });
 }
 
