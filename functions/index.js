@@ -35,3 +35,12 @@ exports.removeUserFromDatabase = functions.auth.user().onDelete((event) => {
   // Remove the user from your Realtime Database's /users node.
   return admin.database().ref("/users/" + uid).remove();
 });
+
+exports.updateUserName = functions.database.ref("/users/{userId}/name").onUpdate((event) => {
+  var name = event.data.val();
+  return admin.auth().updateUser(event.params.userId, {
+    displayName: name
+  }).catch((error) => {
+    console.log("Error fetching user data:", error);
+  });
+});
