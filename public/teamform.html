@@ -177,8 +177,31 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-12">
+                  <div class="col-6">
+                    <button type="button" class="btn btn-warning btn-lg btn-block" id="backBtn" data-toggle="modal" data-target="#backConfirmModal">回列表</button>
+                  </div>
+                  <div class="col-6">
                     <button type="button" class="btn btn-success btn-lg btn-block" id="sendBtn">確認送出</button>
+                  </div>
+                  <div class="modal fade" id="backConfirmModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">確認離開</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          確定要回上頁嗎?
+                          輸入的資料將會消失歐!
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                          <a href="/" role="button" class="btn btn-danger" >確定</a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </form>
