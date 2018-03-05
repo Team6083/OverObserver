@@ -7,143 +7,229 @@
   <title>Overlooking Event Research</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
   <script src="js/firebase_main.js"></script>
 </head>
+
 <body>
-
-<form>
-
-  <div class="form-group col-4">
-    <label for="隊伍號碼">請輸入隊伍號碼</label>
-    <input type="隊伍號碼" class="form-control" placeholder="隊伍號碼">
-  </div>
-  <div class="form-group col-4">
-    <label for="比賽場次">請輸入比賽場次</label>
-    <input type="比賽場次" class="form-control" placeholder="比賽場次">
+  <div id="navBarContainer">
   </div>
 
-<h4>自動時間<span class="badge badge-secondary"></span></h4>
+  <div class="container-fluid">
 
-<fieldset class="form-group">
-  <div class="row">
-    <legend class="col-form-label col-sm-2 pt-0">auto line</legend>
-    <div class="col-sm-10">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="auto line" value="option1" checked>
-        <label class="form-check-label" for="gridRadios1">
-          成功
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="auto line" value="option2" checked>
-        <label class="form-check-label" for="gridRadios2">
-          失敗
-        </label>
-      </div>
-    </div>
-  </div>
-</fieldset>
+    <div class="row mt-5">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 col-sm-12">
+        <div class="card-deck" id="scoringCard">
+          <div class="card bg-light mb-3 border-info">
+            <div class="card-header">
+              <div class="row font-weight-bold">
+                <div class="col">
+                  <h4 class="mb-lg-0 mb-2">Match: <span class="badge badge-info" id="matchId">N/A</span></h4>
+                </div>
+                <div class="w-100 d-lg-none"></div>
+                <div class="col">
+                  <h4 class="mb-0">Team: <span class="badge badge-info" id="teamId">N/A</span></h4>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form id="scoreForm">
+                <h3><span class="badge badge-secondary">自動時間</span></h3>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label">Auto line</label>
+                  </div>
+                  <div class="col-6">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-outline-success">
+                        <input type="radio" name="auto-success" id="auto-success" autocomplete="off"> 成功
+                      </label>
+                      <label class="btn btn-outline-warning">
+                        <input type="radio" name="auto-fail" id="auto-fail" autocomplete="off"> 失敗
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="ScaleAuto">
+                      <span class="badge badge-pill badge-dark">Scale</span>
+                      成功次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="auto-scale" id="auto-scale" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="ScaleAuto">
+                      <span class="badge badge-pill badge-dark">Scale</span>
+                      嘗試次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="auto-scale-try" id="auto-scale-try" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="SwitchAuto">
+                      <span class="badge badge-pill badge-dark">Switch</span>
+                      成功次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="auto-switch" id="auto-switch" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="SwitchAuto">
+                      <span class="badge badge-pill badge-dark">Switch</span>
+                      嘗試次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="auto-switch-try" id="auto-switch-try" value="0" min="0" disabled>
+                  </div>
+                </div>
 
-<div class="form-row">
-  <div class="form-group col-2">
-    <label for="scale幾個">scale</label>
-    <input type="scale幾個" class="form-control" placeholder="scale幾個">
-  </div>
-  <div class="form-group col-2">
-    <label for="scale嘗試次數">scale嘗試次數</label>
-    <input type="scale嘗試次數" class="form-control" placeholder="scale嘗試次數">
-  </div>
-</div>
-
-<div class="form-row">
-  <div class="form-group col-2">
-    <label for="">switch</label>
-    <input type="switch" class="form-control" placeholder="switch幾個">
-  </div>
-  <div class="form-group col-2">
-    <label for="switch嘗試次數">switch嘗試次數</label>
-    <input type="switch嘗試次數" class="form-control" placeholder="switch嘗試次數">
-  </div>
-</div>
-
-<h4>手動時間<span class="badge badge-secondary"></span></h4>
-
-    <div class="form-row">
-      <div class="form-group col-2">
-        <label for="scale幾個">scale</label>
-        <input type="scale幾個" class="form-control" placeholder="scale幾個">
-      </div>
-      <div class="form-group col-2">
-        <label for="scale嘗試次數">scale嘗試次數</label>
-        <input type="scale嘗試次數" class="form-control" placeholder="scale嘗試次數">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-2">
-        <label for="">switch</label>
-        <input type="switch" class="form-control" placeholder="switch幾個">
-      </div>
-      <div class="form-group col-2">
-        <label for="switch嘗試次數">switch嘗試次數</label>
-        <input type="switch嘗試次數" class="form-control" placeholder="switch嘗試次數">
-      </div>
-    </div>
-
-    <fieldset class="form-group">
-      <div class="row">
-        <legend class="col-form-label col-sm-2 pt-0">爬升</legend>
-        <div class="col-sm-10">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="爬升" value="option1" checked>
-            <label class="form-check-label" for="gridRadios1">
-              成功
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="爬升" value="option2" checked>
-            <label class="form-check-label" for="gridRadios2">
-              失敗
-            </label>
+                <!-- Teleop -->
+                <h3><span class="badge badge-secondary">手動時間</span></h3>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="ScaleTele">
+                      <span class="badge badge-pill badge-dark">Scale</span>
+                      成功次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="tele-scale" id="tele-scale" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="ScaleTele">
+                      <span class="badge badge-pill badge-dark">Scale</span>
+                      嘗試次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="tele-scale-try" id="tele-scale-try" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="SwitchTele">
+                      <span class="badge badge-pill badge-dark">Switch</span>
+                      成功次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="tele-switch" id="tele-switch" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="SwitchTele">
+                      <span class="badge badge-pill badge-dark">Switch</span>
+                      嘗試次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="tele-switch-try" id="tele-switch-try" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label">爬升</label>
+                  </div>
+                  <div class="col-6">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-outline-success">
+                        <input type="radio" name="climb-success" id="climb-success" autocomplete="off"> 成功
+                      </label>
+                      <label class="btn btn-outline-warning">
+                        <input type="radio" name="climb-fail" id="climb-fail" autocomplete="off"> 失敗
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label">駕車技術</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="drive-tech" id="drive-tech" value="0" min="0" max="10" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-4">
+                    <label class="col-form-label">特殊表現</label>
+                  </div>
+                  <div class="col-8">
+                    <textarea class="form-control" id="specialThing" rows="4"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <button type="button" class="btn btn-success btn-lg btn-block" id="sendBtn">確認送出</button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </fieldset>
-
-    <div class="form-row align-items-center">
-    <div class="col-5">
-      <label class="col-5" for="駕車技術">駕車技術</label>
-      <select class="col-5">
-        <div class="w-100"></div>
-        <option selected>請選擇</option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-      </select>
     </div>
+  </div>
 
-<div class="w-100"></div>
-
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">特殊表現</label>
-        <textarea class="form-control" rows="4"></textarea>
+  <!-- Login Panel-->
+  <div class="modal fade" id="loginPanel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        </div>
+        <div class="modal-body">
+          <div id="loginAlert" class="alert alert-danger d-none" role="alert"></div>
+          <label for="account">Email</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="account">
+          </div>
+          <label for="pwd">Password</label>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" id="pwd">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
+        </div>
       </div>
+    </div>
+  </div>
 
-<div class="w-100"></div>
+  <script>
+    $("#navBarContainer").load("/navBar.html");
+  </script>
+  <script src="js/firebase_auth.js"></script>
+  <script src="js/match_list.js"></script>
+  <script src="js/bootstrap-number-input.js"></script>
+  <script src="js/afterBody.js"></script>
+  <script>
+    if (findGetParameter("team") != null) {
+      $("#teamId").html(findGetParameter("team"));
+    }
 
-  <button type="確定" class="btn btn-primary">確定送出</button>
-
-</form>
+    if (findGetParameter("match") != null) {
+      $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
+    }
+  </script>
 </body>
+
 </html>
