@@ -2,7 +2,7 @@ function writeTeamForm(event, match, team, data) {
   firebase.database().ref("matchs/"+event+"/"+match+"/teamCollect/"+team).update(data);
 }
 
-$("#sendBtn").click(function(){
+$("#sendConfBtn").click(function(){
   var data = {};
   data["auto-success"] = $("#auto-success").parent().hasClass("active");
   data["auto-scale"] = $("#auto-scale").val();
@@ -18,4 +18,5 @@ $("#sendBtn").click(function(){
   data["specialThing"] = $("#specialThing").val();
   console.log(data);
   writeTeamForm(eventId, matchId, teamId, data);
+  window.location = "/";
 });
