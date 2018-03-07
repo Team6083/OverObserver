@@ -9,7 +9,7 @@ function addMatchList(match, teams, size) {
         tr += "</td>";
       } else {
         tr += "<td class=\"table-danger font-weight-bold\">";
-        tr += "<a href=\"/teamform.html?team="+teams.red[i.toString()].num+"&match="+match+"\">";
+        tr += "<a href=\"/teamform.html?team="+teams.red[i.toString()].num+"&match="+match+"\" class=\"text-dark\">";
         tr += teams.red[i.toString()].num;
         tr += "</a>"
         tr += "</td>";
@@ -23,7 +23,7 @@ function addMatchList(match, teams, size) {
         tr += "</td>";
       } else {
         tr += "<td class=\"table-primary font-weight-bold\">";
-        tr += "<a href=\"/teamform.html?team="+teams.blue[i.toString()].num+"&match="+match+"\">";
+        tr += "<a href=\"/teamform.html?team="+teams.blue[i.toString()].num+"&match="+match+"\" class=\"text-dark\">";
         tr += teams.blue[i.toString()].num;
         tr += "</a>"
         tr += "</td>";
@@ -40,7 +40,7 @@ function addMatchList(match, teams, size) {
         tr += "</td>";
       } else {
         tr += "<td class=\"table-danger font-weight-bold\">";
-        tr += "<a href=\"/teamform.html?team="+teams.red[i.toString()].num+"&match="+match+"\">";
+        tr += "<a href=\"/teamform.html?team="+teams.red[i.toString()].num+"&match="+match+"\" class=\"text-dark\">";
         tr += teams.red[i.toString()].num;
         tr += "</a>"
         tr += "</td>";
@@ -53,7 +53,7 @@ function addMatchList(match, teams, size) {
         tr += "</td>";
       } else {
         tr += "<td class=\"table-primary font-weight-bold\">";
-        tr += "<a href=\"/teamform.html?team="+teams.blue[i.toString()].num+"&match="+match+"\">";
+        tr += "<a href=\"/teamform.html?team="+teams.blue[i.toString()].num+"&match="+match+"\" class=\"text-dark\">";
         tr += teams.blue[i.toString()].num;
         tr += "</a>"
         tr += "</td>";
