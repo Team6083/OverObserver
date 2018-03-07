@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     $("#signoutSmtBtn").removeClass("disabled");
     loginPanel.modal('hide');
     console.log("User is logined", user);
-    if(location.assign.pathname == "/" || location.assign.pathname == "/index.html"){
+    if(location.pathname == "/" || location.pathname == "/index.html"){
       readList();
     }
   } else {
