@@ -241,18 +241,21 @@
     $("#navBarContainer").load("/navBar.html");
   </script>
   <script src="js/firebase_auth.js"></script>
-  <script src="js/match_list.js"></script>
   <script src="js/bootstrap-number-input.js"></script>
   <script src="js/afterBody.js"></script>
   <script>
-    if (findGetParameter("team") != null) {
+    var teamId = findGetParameter("team");
+    var matchId = findGetParameter("match");
+    if (teamId != null) {
       $("#teamId").html(findGetParameter("team"));
     }
 
-    if (findGetParameter("match") != null) {
+    if (matchId != null) {
       $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
     }
+    var eventId = findGetParameter("match").split("_")[0];
   </script>
+  <script src="js/saveteamform.js"></script>
 </body>
 
 </html>
