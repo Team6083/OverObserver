@@ -21,11 +21,13 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
 });
 
 exports.addUserData = functions.auth.user().onCreate((event) => {
-  return admin.database().ref('/users').child(event.data.uid).set({
-    name: event.data.displayName,
-    level: 1,
-    email: event.data.email
-  })
+  var userData = {};
+
+  userData["name"] = "unknow";
+  userData["level"] = 1;
+  userData["email"] = event.data.email;
+
+  return admin.database().ref('/users').child(event.data.uid).set(userData);
 });
 
 exports.removeUserFromDatabase = functions.auth.user().onDelete((event) => {
