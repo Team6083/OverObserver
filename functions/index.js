@@ -11,7 +11,9 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
   var type = data.message_type;
   switch (type) {
     case 'match_score':
-      return admin.database().ref('/matchs').child(data.message_data.event_key).child(data.message_data.match.key).set(data.message_data.match);
+      var matchData = data.message_data.match;
+      delete matchData["score_breakdown"];
+      return admin.database().ref('/matchs').child(data.message_data.event_key).child(data.message_data.match.key).update(matchData);
     default:
       return admin.database().ref('/webhooks').push({
         type: type,

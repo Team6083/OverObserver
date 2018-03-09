@@ -1,9 +1,3 @@
-$(".numInput").bootstrapNumber({
-	upClass: 'primary',
-	downClass: 'danger',
-	center: true
-});
-
 function findGetParameter(parameterName) {
     var result = null,
         tmp = [];

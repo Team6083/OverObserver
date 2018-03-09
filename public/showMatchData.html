@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overlooking Event Research</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script src="js/firebase_main.js"></script>
+</head>
+
+<body>
+  <div id="navBarContainer">
+  </div>
+  <div class="container-fluid">
+    <div class="row mt-5">
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-8 col-sm-12">
+        <div class="row">
+          <div class="col-lg col-12">
+            <h4>Event: <span class="badge badge-info" id="eventId">N/A</span></h4>
+          </div>
+          <div class="col-lg col-12">
+            <h4>Match: <span class="badge badge-info" id="matchId">N/A</span></h4>
+          </div>
+        </div>
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th scope="col" colspan="3">Teams</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody id="teamsTbody">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 col-sm-12">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="pills-result-tab" data-toggle="pill" href="#pills-result" role="tab">Match Results</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="pills-perform-tab" data-toggle="pill" href="#pills-perform" role="tab">Match Performance</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-result" role="tabpanel">
+            <table class="table table-bordered table-sm">
+              <tbody id="matchResultTbody"></tbody>
+            </table>
+            Scoring Plate Assignments: <span id="plateAssign"></span>
+          </div>
+          <div class="tab-pane fade" id="pills-perform" role="tabpanel">
+            <div class="card-deck">
+              <div class="card border-danger">
+                <div class="card-header">
+                  <h3><span class="badge badge-pill badge-danger" id="red1_title">N/A</span></h3>
+                </div>
+                <div class="card-body">
+                  Auto Scale: <span class="badge badge-light badge-pill" name="auto-scale">?%</span>
+                  Auto Switch: <span class="badge badge-light badge-pill" name="auto-switch">?%</span>
+                  Tele Scale: <span class="badge badge-light badge-pill" name="tele-scale">?%</span>
+                  Tele Switch: <span class="badge badge-light badge-pill" name="tele-switch">?%</span>
+                  <table class="table mt-3 table-sm">
+                    <tbody id="red1_tbody">
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card border-danger">
+                <div class="card-header">
+                  <h3><span class="badge badge-pill badge-danger" id="red2_title">N/A</span></h3>
+                </div>
+                <div class="card-body">
+                  Auto Scale: <span class="badge badge-light badge-pill" name="auto-scale">?%</span>
+                  Auto Switch: <span class="badge badge-light badge-pill" name="auto-switch">?%</span>
+                  Tele Scale: <span class="badge badge-light badge-pill" name="tele-scale">?%</span>
+                  Tele Switch: <span class="badge badge-light badge-pill" name="tele-switch">?%</span>
+                  <table class="table mt-3 table-sm">
+                    <tbody id="red2_tbody">
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card border-danger">
+                <div class="card-header">
+                  <h3><span class="badge badge-pill badge-danger" id="red3_title">N/A</span></h3>
+                </div>
+                <div class="card-body">
+                  Auto Scale: <span class="badge badge-light badge-pill" name="auto-scale">?%</span>
+                  Auto Switch: <span class="badge badge-light badge-pill" name="auto-switch">?%</span>
+                  Tele Scale: <span class="badge badge-light badge-pill" name="tele-scale">?%</span>
+                  Tele Switch: <span class="badge badge-light badge-pill" name="tele-switch">?%</span>
+                  <table class="table mt-3 table-sm">
+                    <tbody id="red3_tbody">
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="w-100 mb-3"></div>
+            <div class="card-deck">
+              <div class="card border-primary">
+                <div class="card-header">
+                  <h3><span class="badge badge-pill badge-primary" id="blue1_title">N/A</span></h3>
+                </div>
+                <div class="card-body">
+                  <table class="table mt-3 table-sm">
+                    Auto Scale: <span class="badge badge-light badge-pill" name="auto-scale">?%</span>
+                    Auto Switch: <span class="badge badge-light badge-pill" name="auto-switch">?%</span>
+                    Tele Scale: <span class="badge badge-light badge-pill" name="tele-scale">?%</span>
+                    Tele Switch: <span class="badge badge-light badge-pill" name="tele-switch">?%</span>
+                    <tbody id="blue1_tbody">
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card border-primary">
+                <div class="card-header">
+                  <h3><span class="badge badge-pill badge-primary" id="blue2_title">N/A</span></h3>
+                </div>
+                <div class="card-body">
+                  <table class="table mt-3 table-sm">
+                    Auto Scale: <span class="badge badge-light badge-pill" name="auto-scale">?%</span>
+                    Auto Switch: <span class="badge badge-light badge-pill" name="auto-switch">?%</span>
+                    Tele Scale: <span class="badge badge-light badge-pill" name="tele-scale">?%</span>
+                    Tele Switch: <span class="badge badge-light badge-pill" name="tele-switch">?%</span>
+                    <tbody id="blue2_tbody">
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card border-primary">
+                <div class="card-header">
+                  <h3><span class="badge badge-pill badge-primary" id="blue3_title">N/A</span></h3>
+                </div>
+                <div class="card-body">
+                  <table class="table mt-3 table-sm">
+                    Auto Scale: <span class="badge badge-light badge-pill" name="auto-scale">?%</span>
+                    Auto Switch: <span class="badge badge-light badge-pill" name="auto-switch">?%</span>
+                    Tele Scale: <span class="badge badge-light badge-pill" name="tele-scale">?%</span>
+                    Tele Switch: <span class="badge badge-light badge-pill" name="tele-switch">?%</span>
+                    <tbody id="blue3_tbody">
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Panel-->
+  <div class="modal fade" id="loginPanel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        </div>
+        <div class="modal-body">
+          <div id="loginAlert" class="alert alert-danger d-none" role="alert"></div>
+          <label for="account">Email</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="account">
+          </div>
+          <label for="pwd">Password</label>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" id="pwd">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $("#navBarContainer").load("/navBar.html");
+  </script>
+  <script src="js/firebase_auth.js"></script>
+  <script src="js/match_list.js"></script>
+  <script src="js/afterBody.js"></script>
+  <script src="js/showMatchData.js"></script>
+</body>
+
+</html>
