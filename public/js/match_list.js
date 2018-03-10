@@ -1,7 +1,7 @@
 function addMatchList(match, teams, mode) {
   var tr = "<tr>";
   if (mode == 0) {
-    tr += "<th scope=\"row\" rowspan=\"2\">" + "<a class=\"text-dark\" href=\"showMatchData.html?match="+match+"\">" + match.split("_")[1] + "</a></th>";
+    tr += "<th id=\"smallMatchTr\" scope=\"row\" rowspan=\"2\">" + "<a class=\"text-dark\" href=\"showMatchData.html?match="+match+"\">" + match.split("_")[1] + "</a></th>";
     for (var i = 0; i < 3; i++) {
       if (teams.red[i.toString()].finish) {
         tr += "<td class=\"table-danger\">";
@@ -62,7 +62,7 @@ function addMatchList(match, teams, mode) {
     tr += teams.blue.score;
     tr += "</td>";
   } else {
-    tr += "<th scope=\"row\">";
+    tr += "<th id=\"bigMatchTr\" scope=\"row\">";
     tr += "<a class=\"text-dark\" href=\"showMatchData.html?match="+ match + "\">";
     tr += match.split("_")[1];
     tr += "</a></th>"

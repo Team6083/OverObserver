@@ -48,6 +48,13 @@ function readList(){
 
         $("#big-tbody").append(addMatchList(childSnapshot.key,teamsData));
         $("#small-tbody").append(addMatchList(childSnapshot.key,teamsData,0));
+        if(childSnapshot.child("alliances/red/score").val()>childSnapshot.child("alliances/red/score").val()){
+          $("#smallMatchTr").addClass("table-danger");
+          $("#bigMatchTr").addClass("table-danger");
+        }else {
+          $("#smallMatchTr").addClass("table-primary");
+          $("#bigMatchTr").addClass("table-primary");
+        }
       });
     });
   });
