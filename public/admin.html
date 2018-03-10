@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overlooking Event Research</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+  <script src="js/firebase_main.js"></script>
+</head>
+
+<body>
+  <div id="navBarContainer">
+
+  </div>
+
+  <div class="container-fluid">
+    <div class="row mt-5">
+      <div class="col">
+        <div class="alert alert-warning d-none" role="alert" id="writeErrorAlert">
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 col-sm-12">
+        <div class="card-deck">
+          <div class="card bg-light mb-3">
+            <div class="card-header">
+              <h4>Event Settings</h4>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="row">
+                  <div class="col-6 col-lg-4">
+                    <label for="currentEvent">Current Event</label>
+                    <input type="text" class="form-control" placeholder="EventId" name="currentEvent" id="currentEvent">
+                  </div>
+                  <div class="col-6 col-lg-4">
+                  </div>
+                  <div class="col-6 col-lg-4">
+                  </div>
+                  <div class="col-6 col-lg-4">
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col">
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="setBtn">Set</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" id="fetchMatchsBtn">Fetch Matchs</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Panel-->
+  <div class="modal fade" id="loginPanel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        </div>
+        <div class="modal-body">
+          <div id="loginAlert" class="alert alert-danger d-none" role="alert"></div>
+          <label for="account">Email</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="account">
+          </div>
+          <label for="pwd">Password</label>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" id="pwd">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="setSuccessModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>設定成功</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $("#navBarContainer").load("/navBar.html")
+  </script>
+  <script src="js/firebase_auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    firebase.database().ref('settings').on('value', function(snapshot) {
+      $("#currentEvent").val(snapshot.child("currentEvent").val());
+    });
+
+    $("#setBtn").click(function() {
+      var updates = {};
+      updates['currentEvent'] = $("#currentEvent").val();
+      firebase.database().ref('events/'+$("#currentEvent").val()).once('value').then(function(snapshot) {
+        if(!snapshot.exists()){
+          addEvent($("#currentEvent").val());
+        }
+      });
+      firebase.database().ref('settings').update(updates, function(error) {
+        if (error == null) {
+          $("#setSuccessModal").modal('show');
+        } else {
+          $("#writeErrorAlert").html(error.code);
+          $("#writeErrorAlert").removeClass("d-none");
+        }
+      });
+    });
+
+    $("#fetchMatchsBtn").click(function() {
+      fetchEventMatchs($("#currentEvent").val());
+    });
+  </script>
+</body>
+
+</html>

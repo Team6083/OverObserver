@@ -6,3 +6,5 @@ $.ajax({
   },
   type: 'GET'
 });
+
+/events/{year}/simple
