@@ -1,5 +1,9 @@
 function writeTeamForm(event, match, team, data) {
-  firebase.database().ref("matchs/"+event+"/"+match+"/teamCollect/"+team).update(data);
+  firebase.database().ref("matchs/"+event+"/"+match+"/teamCollect/"+team).update(data, function(error) {
+    if (error != null) {
+      alert(error.code);
+    }
+  });
 }
 
 $("#sendConfBtn").click(function(){
@@ -16,6 +20,7 @@ $("#sendConfBtn").click(function(){
   data["climb-success"] = $("#climb-success").parent().hasClass("active");
   data["drive-tech"] = $("#drive-tech").val();
   data["specialThing"] = $("#specialThing").val();
+  data["recorder"] = firebase.auth().currentUser.displayName;
   console.log(data);
   writeTeamForm(eventId, matchId, teamId, data);
   window.location = "/";

@@ -71,21 +71,23 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
     $("tbody[name=\"" + childSnapshot.key + "\"]").append(tr);
     $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().append("<strong>"+childSnapshot.child("specialThing").val()+"</strong>");
 
+    var recorderEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=recorder]");
     var autoScaleEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=auto-scale]");
     var autoSwitchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=auto-switch]");
     var teleScaleEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-scale]");
     var teleSwitchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-switch]");
 
     //Success percent
-    var autoScaleRate = childSnapshot.child("auto-scale-try").val() == 0?-1:(childSnapshot.child("auto-scale").val()/childSnapshot.child("auto-scale-try").val()*100);
+    var autoScaleRate = childSnapshot.child("auto-scale-try").val() == 0 ? (childSnapshot.child("auto-scale").val() == 0?0:-1):(childSnapshot.child("auto-scale").val()/childSnapshot.child("auto-scale-try").val()*100);
     autoScaleEle.html(autoScaleRate.toString()+"%");
-    var autoSwitchRate = childSnapshot.child("auto-switch-try").val() == 0?-1:(childSnapshot.child("auto-switch").val()/childSnapshot.child("auto-switch-try").val()*100);
+    var autoSwitchRate = childSnapshot.child("auto-switch-try").val() == 0?(childSnapshot.child("auto-switch").val() == 0?0:-1):(childSnapshot.child("auto-switch").val()/childSnapshot.child("auto-switch-try").val()*100);
     autoSwitchEle.html(autoSwitchRate.toString()+"%");
-    var teleScaleRate = childSnapshot.child("tele-scale-try").val() == 0?-1:(childSnapshot.child("tele-scale").val()/childSnapshot.child("tele-scale-try").val()*100);
+    var teleScaleRate = childSnapshot.child("tele-scale-try").val() == 0?(childSnapshot.child("tele-scale").val() == 0?0:-1):(childSnapshot.child("tele-scale").val()/childSnapshot.child("tele-scale-try").val()*100);
     teleScaleEle.html(teleScaleRate.toString()+"%");
-    var teleSwitchRate = childSnapshot.child("tele-switch-try").val() == 0?-1:(childSnapshot.child("tele-switch").val()/childSnapshot.child("tele-switch-try").val()*100);
+    var teleSwitchRate = childSnapshot.child("tele-switch-try").val() == 0?(childSnapshot.child("tele-switch").val() == 0?0:-1):(childSnapshot.child("tele-switch").val()/childSnapshot.child("tele-switch-try").val()*100);
     teleSwitchEle.html(teleSwitchRate.toString()+"%");
 
+    recorderEle.html(childSnapshot.child("recorder").val());
     //Color
     //autoScaleRate
     if(autoScaleRate > 50){
@@ -142,5 +144,6 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
       teleSwitchEle.removeClass("badge-light");
       teleSwitchEle.addClass("badge-warning");
     }
+
   });
 });
