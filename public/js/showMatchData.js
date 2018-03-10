@@ -5,8 +5,8 @@ $("#eventId").html(eventId);
 firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once('value').then(function(snapshot) {
   var teamData = {};
   if (snapshot.val() != null) {
-    teamData["red"] = snapshot.child("red/teams").val();
-    teamData["blue"] = snapshot.child("blue/teams").val();
+    teamData["red"] = snapshot.child("red/team_keys").val();
+    teamData["blue"] = snapshot.child("blue/team_keys").val();
     teamData["red"].score = snapshot.child("red/score").val();
     teamData["blue"].score = snapshot.child("blue/score").val();
     $("#teamsTbody").append(addMatchList(matchId, teamData, 1));
@@ -16,7 +16,17 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once
       $("#blue" + (i + 1).toString() + "_tbody").attr("name", teamData.blue[i.toString()]);
       $("#red" + (i + 1).toString() + "_title").html(teamData.red[i.toString()]);
       $("#blue" + (i + 1).toString() + "_title").html(teamData.blue[i.toString()]);
+      $("#red" + (i + 1).toString() + "_editBtn").attr("href","/teamform.html?team="+teamData.red[i.toString()]+"&match="+matchId);
+      $("#blue" + (i + 1).toString() + "_editBtn").attr("href","/teamform.html?team="+teamData.blue[i.toString()]+"&match="+matchId);
     }
+    firebase.database().ref("users/"+firebase.auth().currentUser.uid+"/level").once('value').then(function(snapshot){
+      if(snapshot.val() >= 4){
+        for(var i = 0;i<3;i++){
+          $("#red" + (i + 1).toString() + "_editBtn").removeClass("d-none");
+          $("#blue" + (i + 1).toString() + "_editBtn").removeClass("d-none");
+        }
+      }
+    });
   }
 
 })

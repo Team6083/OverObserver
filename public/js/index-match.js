@@ -7,8 +7,10 @@ function readList(){
     $("#thisEvent").html(thisEvent);
     firebase.database().ref('matchs/' + thisEvent).orderByChild("time").once('value', function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        var red = childSnapshot.child("alliances/red/teams").val();
-        var blue = childSnapshot.child("alliances/blue/teams").val();
+        var red = childSnapshot.child("alliances/red/team_keys").val();
+        var blue = childSnapshot.child("alliances/blue/team_keys").val();
+        console.log(red);
+        console.log(blue);
         var teamsData = {
           red: {
             0: {
@@ -48,12 +50,13 @@ function readList(){
 
         $("#big-tbody").append(addMatchList(childSnapshot.key,teamsData));
         $("#small-tbody").append(addMatchList(childSnapshot.key,teamsData,0));
-        if(childSnapshot.child("alliances/red/score").val()>childSnapshot.child("alliances/red/score").val()){
-          $("#smallMatchTr").addClass("table-danger");
-          $("#bigMatchTr").addClass("table-danger");
+
+        if(childSnapshot.child("alliances/red/score").val()>childSnapshot.child("alliances/blue/score").val()){
+          $("#"+childSnapshot.key+"-small").addClass("table-danger");
+          $("#"+childSnapshot.key+"-big").addClass("table-danger");
         }else {
-          $("#smallMatchTr").addClass("table-primary");
-          $("#bigMatchTr").addClass("table-primary");
+          $("#"+childSnapshot.key+"-small").addClass("table-primary");
+          $("#"+childSnapshot.key+"-big").addClass("table-primary");
         }
       });
     });
