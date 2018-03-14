@@ -13,6 +13,7 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
     case 'match_score':
       var matchData = data.message_data.match;
       delete matchData["score_breakdown"];
+      delete matchData["alliances"].teams;
       return admin.database().ref('/matchs').child(data.message_data.event_key).child(data.message_data.match.key).update(matchData);
     default:
       return admin.database().ref('/webhooks').push({
