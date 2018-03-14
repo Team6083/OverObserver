@@ -181,7 +181,10 @@
                     <button type="button" class="btn btn-warning btn-lg btn-block" id="backBtn" data-toggle="modal" data-target="#leaveConfirmModal">回列表</button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-success btn-lg btn-block" id="sendBtn" data-toggle="modal" data-target="#sendConfirmModal">確認送出</button>
+                    <button type="button" class="btn btn-danger btn-lg btn-block" id="notshowBtn" data-toggle="modal" data-target="#notShowConfirmModal">標記未上場</button>
+                  </div>
+                  <div class="col-12">
+                    <button type="button" class="btn btn-success btn-lg btn-block mt-2" id="sendBtn" data-toggle="modal" data-target="#sendConfirmModal">確認送出</button>
                   </div>
                   <div class="modal fade" id="leaveConfirmModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -219,6 +222,23 @@
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
                           <button type="button" class="btn btn-success" id="sendConfBtn">確定</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="notShowConfirmModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">確認未上場?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                          <button type="button" class="btn btn-danger" id="notShowBtn">確定</a>
                         </div>
                       </div>
                     </div>

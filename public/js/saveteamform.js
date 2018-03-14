@@ -20,8 +20,17 @@ $("#sendConfBtn").click(function(){
   data["climb-success"] = $("#climb-success").parent().hasClass("active");
   data["drive-tech"] = $("#drive-tech").val();
   data["specialThing"] = $("#specialThing").val();
+  data["notShow"] = false;
   data["recorder"] = firebase.auth().currentUser.displayName;
-  console.log(data);
+  writeTeamForm(eventId, matchId, teamId, data);
+  window.location = "/";
+});
+
+$("#notShowBtn").click(function() {
+  var data = {};
+  data["recorder"] = firebase.auth().currentUser.displayName;
+  data["specialThing"] = $("#specialThing").val();
+  data["notShow"] = true;
   writeTeamForm(eventId, matchId, teamId, data);
   window.location = "/";
 });
