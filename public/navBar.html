@@ -14,6 +14,7 @@
       <li class="nav-item">
         <a class="nav-link" href="admin.html">Admin</a>
       </li>
+      <!--
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Dropdown
@@ -24,8 +25,12 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
-      </li>
+      </li>-->
     </ul>
+    <form class="form-inline mt-2 mr-lg-2" method="get" action="/teams.html" >
+      <input class="form-control mr-sm-2" name="team" type="search" placeholder="Team Num" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
   </div>
   <span class="navbar-text mt-2 mt-lg-0 mr-2 text-light" id="navUser"></span>
   <button class="btn btn-primary mt-2 mt-lg-0" id="signoutSmtBtn" onclick="signout();">Logout</button>

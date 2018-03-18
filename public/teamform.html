@@ -147,6 +147,28 @@
                 </div>
                 <div class="row form-group">
                   <div class="col-6">
+                    <label class="col-form-label" for="ExchangeTele">
+                      <span class="badge badge-pill badge-dark">Exchange</span>
+                      成功次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="tele-exchange" id="tele-exchange" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
+                    <label class="col-form-label" for="ExchangeTele">
+                      <span class="badge badge-pill badge-dark">Exchange</span>
+                      嘗試次數
+                    </label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control numInput" name="tele-exchange-try" id="tele-exchange-try" value="0" min="0" disabled>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-6">
                     <label class="col-form-label">爬升</label>
                   </div>
                   <div class="col-6">
@@ -196,12 +218,11 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          確定要離開嗎?
-                          輸入的資料將會消失歐!
+                          確定要離開嗎? 輸入的資料將會消失歐!
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                          <a href="/" role="button" class="btn btn-danger" >確定</a>
+                          <a id="backToListBtn" href="/" role="button" class="btn btn-danger">確定</a>
                         </div>
                       </div>
                     </div>
@@ -272,36 +293,70 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-  <script>
-    $("#navBarContainer").load("/navBar.html");
-  </script>
-  <script src="js/firebase_auth.js"></script>
-  <script src="js/bootstrap-number-input.js"></script>
-  <script src="js/afterBody.js"></script>
-  <script>
-    $(".numInput").bootstrapNumber({
-      upClass: 'primary',
-      downClass: 'danger',
-      center: true
-    });
+                  <script>
+                    $("#navBarContainer").load("/navBar.html");
+                  </script>
+                  <script src="js/firebase_auth.js"></script>
+                  <script src="js/bootstrap-number-input.js"></script>
+                  <script src="js/afterBody.js"></script>
+                  <script>
+                    $(".numInput").bootstrapNumber({
+                      upClass: 'primary',
+                      downClass: 'danger',
+                      center: true
+                    });
 
-    var teamId = findGetParameter("team");
-    var matchId = findGetParameter("match");
-    if (teamId != null) {
-      $("#teamId").html(findGetParameter("team"));
-    }
+                    var teamId = findGetParameter("team");
+                    var matchId = findGetParameter("match");
+                    if (teamId != null) {
+                      $("#teamId").html(findGetParameter("team"));
+                    }
 
-    if (matchId != null) {
-      $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
-    }
-    var eventId = findGetParameter("match").split("_")[0];
-  </script>
-  <script src="js/saveteamform.js"></script>
+                    if (matchId != null) {
+                      $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
+                    }
+                    var eventId = findGetParameter("match").split("_")[0];
+                    var editing = findGetParameter("edit");
+                    if (editing == 'true') {
+                      $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
+                    }
+
+                    firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + teamId).once('value').then(function(snapshot) {
+                      if (snapshot.exists()) {
+                        var data = snapshot.val();
+                        if (!data["notShow"]) {
+                          if (data["auto-success"]) {
+                            $("#auto-success").parent().addClass("active");
+                          } else {
+                            $("#auto-fail").parent().addClass("active");
+                          }
+                          $("#auto-scale").val(data["auto-scale"]);
+                          $("#auto-scale-try").val(data["auto-scale-try"]);
+                          $("#auto-switch").val(data["auto-switch"]);
+                          $("#auto-switch-try").val(data["auto-switch-try"]);
+                          $("#tele-scale").val(data["tele-scale"]);
+                          $("#tele-scale-try").val(data["tele-scale-try"]);
+                          $("#tele-switch").val(data["tele-switch"]);
+                          $("#tele-switch-try").val(data["tele-switch-try"]);
+                          if (data["climb-success"]) {
+                            $("#climb-success").parent().addClass("active");
+                          } else {
+                            $("#climb-fail").parent().addClass("active");
+                          }
+                          $("#drive-tech").val(data["drive-tech"]);
+                          $("#specialThing").val(data["specialThing"]);
+                          $('#tele-exchange').val(data["tele-exchange"]);
+                          $('#tele-exchange-try').val(data["tele-exchange-try"]);
+                        }
+                      }
+                    });
+                  </script>
+                  <script src="js/saveteamform.js"></script>
 </body>
 
 </html>

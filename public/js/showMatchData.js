@@ -16,8 +16,8 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once
       $("#blue" + (i + 1).toString() + "_tbody").attr("name", teamData.blue[i.toString()]);
       $("#red" + (i + 1).toString() + "_title").html(teamData.red[i.toString()]);
       $("#blue" + (i + 1).toString() + "_title").html(teamData.blue[i.toString()]);
-      $("#red" + (i + 1).toString() + "_editBtn").attr("href", "/teamform.html?team=" + teamData.red[i.toString()] + "&match=" + matchId);
-      $("#blue" + (i + 1).toString() + "_editBtn").attr("href", "/teamform.html?team=" + teamData.blue[i.toString()] + "&match=" + matchId);
+      $("#red" + (i + 1).toString() + "_editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.red[i.toString()] + "&match=" + matchId);
+      $("#blue" + (i + 1).toString() + "_editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.blue[i.toString()] + "&match=" + matchId);
     }
     firebase.database().ref("users/" + firebase.auth().currentUser.uid + "/level").once('value').then(function(snapshot) {
       if (snapshot.val() >= 4) {
@@ -66,10 +66,8 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
 
     if (childSnapshot.child("notShow").val()) {
       var front = "<div class=\"row\"><div class=\"col-12\">";
-      front += "紀錄者: <span class=\"badge badge-pill badge-info\" name=\"recorder\">N/A</span></div></div>";
+      front += "紀錄者: <span class=\"badge badge-pill badge-info\" name=\"recorder\">" + childSnapshot.child("recorder").val() +"</span></div></div>";
       $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().html(front + "<h1><span class=\"badge badge-secondary\">未上場</span></h1>");
-      var recorderEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=recorder]");
-      recorderEle.html(childSnapshot.child("recorder").val());
     } else {
       function addTr(title, value) {
         return "<tr><td>" + title + "</td><td>" + value + "</td></tr>";
@@ -84,6 +82,8 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
       tr += addTr("Scale 嘗試次數", childSnapshot.child("tele-scale-try").val());
       tr += addTr("Switch 成功次數", childSnapshot.child("tele-switch").val());
       tr += addTr("Switch 嘗試次數", childSnapshot.child("tele-switch-try").val());
+      tr += addTr("Exchange 成功次數", childSnapshot.child("tele-exchange").val());
+      tr += addTr("Exchange 嘗試次數", childSnapshot.child("tele-exchange-try").val());
       tr += addTr("爬升", childSnapshot.child("climb-success").val() ? "成功" : "失敗");
       tr += addTr("駕車技術", childSnapshot.child("drive-tech").val());
       $("tbody[name=\"" + childSnapshot.key + "\"]").append(tr);
@@ -94,6 +94,7 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
       var autoSwitchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=auto-switch]");
       var teleScaleEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-scale]");
       var teleSwitchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-switch]");
+      var teleExchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-exchange]");
 
       //Success percent
       var autoScaleRate = childSnapshot.child("auto-scale-try").val() == 0 ? (childSnapshot.child("auto-scale").val() == 0 ? 0 : -1) : (childSnapshot.child("auto-scale").val() / childSnapshot.child("auto-scale-try").val() * 100);
@@ -104,6 +105,8 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
       teleScaleEle.html(teleScaleRate.toString() + "%");
       var teleSwitchRate = childSnapshot.child("tele-switch-try").val() == 0 ? (childSnapshot.child("tele-switch").val() == 0 ? 0 : -1) : (childSnapshot.child("tele-switch").val() / childSnapshot.child("tele-switch-try").val() * 100);
       teleSwitchEle.html(teleSwitchRate.toString() + "%");
+      var teleExchRate = childSnapshot.child("tele-exchange-try").val() == 0 ? (childSnapshot.child("tele-exchange").val() == 0 ? 0 : -1) : (childSnapshot.child("tele-exchange").val() / childSnapshot.child("tele-exchange-try").val() * 100);
+      teleExchEle.html(teleExchRate.toString() + "%");
 
       recorderEle.html(childSnapshot.child("recorder").val());
       //Color
@@ -153,6 +156,18 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").on
       } else {
         teleSwitchEle.removeClass("badge-light");
         teleSwitchEle.addClass("badge-warning");
+      }
+
+      //teleExchRate
+      if (teleExchRate > 50) {
+        teleExchEle.removeClass("badge-light");
+        teleExchEle.addClass("badge-success");
+      } else if (teleExchRate < 0) {
+        teleExchEle.removeClass("badge-light");
+        teleExchEle.addClass("badge-danger");
+      } else {
+        teleExchEle.removeClass("badge-light");
+        teleExchEle.addClass("badge-warning");
       }
     }
 
