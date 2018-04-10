@@ -2,16 +2,41 @@
 提供團隊在FRC比賽時調查各隊資料
 使用Google Firebase
 
-#### 如何加入
-1. 先下載專案以及相關需求軟體
-要Deploy到firebase需要安裝 Node.js & npm
-2. 於專案的資料夾安裝Firebase CLI  
-輸入npm install -g firebase-tools安裝
-3. 切入functions資料夾安裝所需插件  
-輸入    npm install 安裝所需插件
-4. 登入Firebase CLI  
-輸入    firebase login 登入
+## Getting Started
 
-#### 目前進度
+### 需求
+
+* Git
+* Node.js 與 npm
+* Firebase CLI
+
+### 安裝 Firebase CLI
+
+注意: 安裝Firebase CLI之前，需要先安裝 Node.js 與 npm
+```
+npm install -g firebase-tools
+```
+這樣就準備好啦
+
+### 剩下的動作
+
+* 下載專案資料
+
+```
+git clone https://github.com/Team6083/FRC-Event-Research-System.git
+```
+* 安裝其他需求套件
+```
+cd FRC-Event-Research-System
+npm install
+```
+* 登入 Firebase CLI
+```
+firebase login
+```
+接著會跳出一個瀏覽器視窗，在裡面登入即可
+
+## 目前完成進度
+
 * 2018/03/02  登入系統完成，TBA Get 完成測試
 * 2018/03/18  登記系統全部完成，資料分析完成各隊最大、最小、平均值
