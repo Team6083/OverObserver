@@ -27,7 +27,7 @@ git clone https://github.com/Team6083/FRC-Event-Research-System.git
 ```
 * 安裝其他需求套件
 ```
-cd FRC-Event-Research-System
+cd FRC-Event-Research-System/functions
 npm install
 ```
 * 登入 Firebase CLI
