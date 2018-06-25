@@ -1,6 +1,7 @@
 # FRC-Event-Research-System
 提供團隊在FRC比賽時調查各隊資料
-使用Google Firebase
+使用Google Firebase 架設
+網站使用 Bootstrap, jQuery
 
 ## Getting Started
 
