@@ -1,4 +1,4 @@
-# FRC-Event-Research-System
+# OverObserver
 提供團隊在FRC比賽時調查各隊資料
 使用Google Firebase 架設
 網站使用 Bootstrap, jQuery
@@ -24,7 +24,7 @@ npm install -g firebase-tools
 * 下載專案資料
 
 ```
-git clone https://github.com/Team6083/FRC-Event-Research-System.git
+git clone https://github.com/Team6083/OverObserver.git
 ```
 * 安裝其他需求套件
 ```
