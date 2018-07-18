@@ -23,26 +23,27 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
   }
 });
 
-exports.addUserData = functions.auth.user().onCreate((event) => {
+exports.addUserData = functions.auth.user().onCreate((user) => {
   var userData = {};
 
   userData["name"] = "unknow";
   userData["level"] = 1;
-  userData["email"] = event.data.email;
+  userData["email"] = user.email;
 
-  return admin.database().ref('/users').child(event.data.uid).set(userData);
+  return admin.database().ref('/users').child(user.uid).set(userData);
 });
 
-exports.removeUserFromDatabase = functions.auth.user().onDelete((event) => {
+exports.removeUserFromDatabase = functions.auth.user().onDelete((user) => {
   // Get the uid of the deleted user.
-  var uid = event.data.uid;
+  var uid = user.uid;
 
   // Remove the user from your Realtime Database's /users node.
   return admin.database().ref("/users/" + uid).remove();
 });
 
-exports.updateUserName = functions.database.ref("/users/{userId}/name").onUpdate((event) => {
-  var name = event.data.val();
+exports.updateUserName = functions.database.ref("/users/{userId}/name").onUpdate((change, event) => {
+  var data = change.after;
+  var name = data.val();
   return admin.auth().updateUser(event.params.userId, {
     displayName: name
   }).catch((error) => {
@@ -50,9 +51,9 @@ exports.updateUserName = functions.database.ref("/users/{userId}/name").onUpdate
   });
 });
 
-exports.updateNumber = functions.database.ref("/matchs/{eventId}/{matchId}/teamCollect/{teamId}").onWrite((event) => {
-  var sourceData = event.data.val();
-  if(!event.data.exists()) return;
+exports.updateNumber = functions.database.ref("/matchs/{eventId}/{matchId}/teamCollect/{teamId}").onWrite((change, event) => {
+  var sourceData = change.after.val();
+  if(!change.after.exists()) return;
   var data = {};
   data["auto-scale"] = parseInt(sourceData["auto-scale"]);
   data["auto-scale-try"] = parseInt(sourceData["auto-scale-try"]);
