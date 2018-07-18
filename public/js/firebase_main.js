@@ -1,13 +1,13 @@
 
 console.log("Initing firebase")
 // Initialize Firebase
-var config = {
-    apiKey: "AIzaSyC-yolVgQcAADYtVjA0-P5hKeVLVV23G6s",
-    authDomain: "frc-event-reseearch.firebaseapp.com",
-    databaseURL: "https://frc-event-reseearch.firebaseio.com",
-    projectId: "frc-event-reseearch",
-    storageBucket: "frc-event-reseearch.appspot.com",
-    messagingSenderId: "350707716743"
+  var config = {
+    apiKey: "AIzaSyCaCf9xHQBtK31cmLTJ_LW3pdIrPSNHUls",
+    authDomain: "overobserver-1ed5b.firebaseapp.com",
+    databaseURL: "https://overobserver-1ed5b.firebaseio.com",
+    projectId: "overobserver-1ed5b",
+    storageBucket: "overobserver-1ed5b.appspot.com",
+    messagingSenderId: "309928594845"
   };
 firebase.initializeApp(config);
 var database = firebase.database();
