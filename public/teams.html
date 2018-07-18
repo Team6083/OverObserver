@@ -155,7 +155,7 @@
   <script src="js/afterBody.js"></script>
   <script src="js/showTeamMatchs.js"></script>
   <script>
-    var teamId = findGetParameter("team");
+    var teamId = "frc"+findGetParameter("team");
     $("#thisTeam").html(teamId);
     database.ref("settings").once('value').then(function(snapshot) {
       var eventId = snapshot.child("currentEvent").val();
