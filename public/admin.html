@@ -66,48 +66,12 @@
     </div>
   </div>
 
-  <!-- Login Panel-->
-  <div class="modal fade" id="loginPanel" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        </div>
-        <div class="modal-body">
-          <div id="loginAlert" class="alert alert-danger d-none" role="alert"></div>
-          <label for="account">Email</label>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" id="account">
-          </div>
-          <label for="pwd">Password</label>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" id="pwd">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="setSuccessModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <p>設定成功</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="loginContainer"></div>
+  <script>$("#loginContainer").load("/loginPanel.html");</script>
 
   <script>
     $("#navBarContainer").load("/navBar.html");
   </script>
-  <script src="js/firebase_auth.js"></script>
   <script src="js/admin.js"></script>
   <script>
     firebase.database().ref('settings').on('value', function(snapshot) {
@@ -121,12 +85,12 @@
       updates['matchLevel'] = $("#matchLevel").val();
       firebase.database().ref('events/'+$("#currentEvent").val()).once('value').then(function(snapshot) {
         if(!snapshot.exists()){
-          addEvent($("#currentEvent").val());
+          fetchEvent($("#currentEvent").val());
         }
       });
       firebase.database().ref('settings').update(updates, function(error) {
         if (error == null) {
-          $("#setSuccessModal").modal('show');
+          alert("設定成功");
         } else {
           $("#writeErrorAlert").html(error.code);
           $("#writeErrorAlert").removeClass("d-none");

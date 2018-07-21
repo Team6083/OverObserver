@@ -14,22 +14,20 @@ var database = firebase.database();
 
 function signin(account, pwd){
   console.log(account);
-  $("#loginAlert").addClass("d-none");
   firebase.auth().signInWithEmailAndPassword(account, pwd).catch(function(error) {
-    // Handle Errors here.
+    // Handle error
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode);
     if(errorCode == "auth/wrong-password"){
-      $("#loginAlert").html("密碼錯誤");
+      loginError("密碼錯誤");
     }
-    else if(errorCode == "auth/invalid-email"){
-      $("#loginAlert").html("請輸入正確email");
+    else if(errorCode == "auth/invalid-email" || errorCode == "auth/user-not-found"){
+      loginError("請輸入正確email");
     }
     else{
-      $("#loginAlert").html(errorCode);
+      loginError(errorCode);
     }
-    $("#loginAlert").removeClass("d-none");
   });
 }
 

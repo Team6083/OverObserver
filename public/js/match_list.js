@@ -1,3 +1,6 @@
+/*
+ *  Generate a row of match list with given data
+ */
 function addMatchList(match, teams, mode) {
   var tr = "<tr>";
   if (mode == 0) {

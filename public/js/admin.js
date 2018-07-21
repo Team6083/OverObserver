@@ -31,7 +31,7 @@ function ajaxEventTeamsSimple(eventKey) {
   });
 }
 
-function addEvent(eventKey){
+function fetchEvent(eventKey){
   $.when(ajaxEvent(eventKey)).done(function(event) {
     firebase.database().ref("events/"+eventKey).update(event);
     console.log(event);

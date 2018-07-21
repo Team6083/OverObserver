@@ -273,90 +273,22 @@
     </div>
   </div>
 
-  <!-- Login Panel-->
-  <div class="modal fade" id="loginPanel" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-        </div>
-        <div class="modal-body">
-          <div id="loginAlert" class="alert alert-danger d-none" role="alert"></div>
-          <label for="account">Email</label>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" id="account">
-          </div>
-          <label for="pwd">Password</label>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" id="pwd">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  <div id="loginContainer"></div>
+  <script>$("#loginContainer").load("/loginPanel.html");</script>
 
-                  <script>
-                    $("#navBarContainer").load("/navBar.html");
-                  </script>
-                  <script src="js/firebase_auth.js"></script>
-                  <script src="js/bootstrap-number-input.js"></script>
-                  <script src="js/afterBody.js"></script>
-                  <script>
-                    $(".numInput").bootstrapNumber({
-                      upClass: 'primary',
-                      downClass: 'danger',
-                      center: true
-                    });
-
-                    var teamId = findGetParameter("team");
-                    var matchId = findGetParameter("match");
-                    if (teamId != null) {
-                      $("#teamId").html(findGetParameter("team"));
-                    }
-
-                    if (matchId != null) {
-                      $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
-                    }
-                    var eventId = findGetParameter("match").split("_")[0];
-                    var editing = findGetParameter("edit");
-                    if (editing == 'true') {
-                      $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
-                    }
-
-                    firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + teamId).once('value').then(function(snapshot) {
-                      if (snapshot.exists()) {
-                        var data = snapshot.val();
-                        if (!data["notShow"]) {
-                          if (data["auto-success"]) {
-                            $("#auto-success").parent().addClass("active");
-                          } else {
-                            $("#auto-fail").parent().addClass("active");
-                          }
-                          $("#auto-scale").val(data["auto-scale"]);
-                          $("#auto-scale-try").val(data["auto-scale-try"]);
-                          $("#auto-switch").val(data["auto-switch"]);
-                          $("#auto-switch-try").val(data["auto-switch-try"]);
-                          $("#tele-scale").val(data["tele-scale"]);
-                          $("#tele-scale-try").val(data["tele-scale-try"]);
-                          $("#tele-switch").val(data["tele-switch"]);
-                          $("#tele-switch-try").val(data["tele-switch-try"]);
-                          if (data["climb-success"]) {
-                            $("#climb-success").parent().addClass("active");
-                          } else {
-                            $("#climb-fail").parent().addClass("active");
-                          }
-                          $("#drive-tech").val(data["drive-tech"]);
-                          $("#specialThing").val(data["specialThing"]);
-                          $('#tele-exchange').val(data["tele-exchange"]);
-                          $('#tele-exchange-try').val(data["tele-exchange-try"]);
-                        }
-                      }
-                    });
-                  </script>
-                  <script src="js/saveteamform.js"></script>
+  <script>
+    $("#navBarContainer").load("/navBar.html");
+  </script>
+  <script src="js/lib/bootstrap-number-input.js"></script>
+  <script src="js/afterBody.js"></script>
+  <script>
+    $(".numInput").bootstrapNumber({
+      upClass: 'primary',
+      downClass: 'danger',
+      center: true
+    });
+  </script>
+  <script src="js/teamform.js"></script>
 </body>
 
 </html>
