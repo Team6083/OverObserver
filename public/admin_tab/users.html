@@ -1,0 +1,243 @@
+<div class="row mb-3">
+  <div class="col-lg-6 col-sm-12 mb-sm-3 mb-lg-0">
+    <div class="input-group">
+      <input type="text" id="newAccount" class="form-control" placeholder="New User Email">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" id="addUserSend">Add New User  <span class="badge badge-pill badge-success fade" id="newOKSpan">OK</span></button>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-lg-6 col-sm-12 text-lg-right">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">Set Permission</button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item permi-drop" value="1">None</a>
+        <a class="dropdown-item permi-drop" value="2">Read</a>
+        <a class="dropdown-item permi-drop" value="3">Write</a>
+        <a class="dropdown-item permi-drop" value="4">Admin</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function checkAllClick() {
+    $(".userCheck").prop('checked', $("#checkAll").prop('checked'));
+  }
+</script>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">
+        <input type="checkbox" id="checkAll" onclick="checkAllClick()">
+      </th>
+      <th scope="col">UID</th>
+      <th scope="col">Email</th>
+      <th scope="col">Name</th>
+      <th scope="col">Permission</th>
+    </tr>
+  </thead>
+  <tbody id="user-table">
+    <tr>
+      <td>No Permission</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <fieldset disabled>
+          <label for="editUID">UID</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="editUID">
+          </div>
+          <label for="editAccount">Email</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" id="editAccount">
+          </div>
+        </fieldset>
+        <label for="editName">Name</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="editName">
+        </div>
+        <label for="editlevel">level</label>
+        <select class="form-control" id="editlevel">
+            <option>None</option>
+            <option>Read</option>
+            <option>Write</option>
+            <option>Admin</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="editUserSave">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/lib/md5.min.js"></script>
+
+<script>
+  function translevel(level){
+    var levelDis = "";
+    switch (level) {
+      case 1:
+        levelDis = 'None';
+        break;
+      case 2:
+        levelDis = 'Read';
+        break;
+      case 3:
+        levelDis = 'Write';
+        break;
+      case 4:
+        levelDis = 'Admin';
+        break;
+      default:
+        levelDis = 'Error';
+    }
+    return levelDis;
+  }
+
+  function revTranslevel(levelDis){
+    if(levelDis == "None"){
+      return 1;
+    }
+    else if(levelDis == "Read"){
+      return 2;
+    }
+    else if(levelDis=="Write"){
+      return 3;
+    }
+    else if(levelDis=="Admin"){
+      return 4;
+    }
+    else{
+      console.log("Error can't find level of "+levelDis);
+      return 1;
+    }
+  }
+
+  function generUserRow(userData) {
+    var tr = "<tr>";
+    tr += "<td>";
+    tr += "<input type='checkbox' class='userCheck' id='" + userData.UID + "'>";
+    tr += "</td>";
+    tr += "<th scope='row'><a data-toggle='modal' data-target='#editUserModal' data-user='" + JSON.stringify(userData) + "'>";
+    tr += userData.UID;
+    tr += "</a></th><td>";
+    tr += userData.email;
+    tr += "</td><td>";
+    tr += userData.name;
+    tr += "</td><td>";
+    tr += translevel(userData.level);
+    tr += "</td>";
+    return tr;
+  }
+</script>
+<script>
+  //Read on start
+  firebase.database().ref('users').orderByKey().on('value', function(snapshot) {
+    $("#user-table").text("");
+    snapshot.forEach(function(childSnapshot) {
+      var uid = childSnapshot.key;
+      var childData = childSnapshot.val();
+      var userdata = {
+        UID: uid,
+        name: childData.name,
+        email: childData.email,
+        level: childData.level
+      }
+      $("#user-table").append(generUserRow(userdata));
+    });
+  });
+
+  //ModalSet
+  $('#editUserModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget)
+    var user = button.data('user')
+    var modal = $(this)
+    modal.find("#editUID").val(user.UID);
+    modal.find("#editName").val(user.name);
+    modal.find("#editAccount").val(user.email);
+    modal.find("#editlevel").val(translevel(user.level));
+  });
+
+  //Reg user
+  var secondaryApp = firebase.initializeApp(config, "Secondary");
+  $("#addUserSend").click(function() {
+    secondaryApp.auth().createUserWithEmailAndPassword($("#newAccount").val(), md5(Math.random())).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    }).then(function(firebaseUser) {
+      console.log("User " + firebaseUser.uid + " created successfully!");
+      secondaryApp.auth().sendPasswordResetEmail($("#newAccount").val());
+      secondaryApp.auth().signOut();
+      $("#newAccount").val("");
+      $("#newOKSpan").addClass("show");
+      setTimeout(function() {
+        $("#newOKSpan").removeClass("show");
+      }, 2000);
+    });
+  });
+
+  //editUser
+  $("#editUserSave").click(function() {
+    firebase.database().ref('users').child($("#editUID").val()).update({
+      name: $("#editName").val(),
+      level: revTranslevel($("#editlevel").val())
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      $("#writeErrorAlert").html(errorCode);
+      $("#writeErrorAlert").removeClass("d-none");
+      alert(errorMessage);
+      console.log(error);
+    }).then(function() {
+      $("#editUserModal").modal('hide');
+    });
+  });
+
+  //Top Buttons
+  function getSelectedUser() {
+    var selectedUser = [];
+    var users = $(".userCheck");
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].checked) {
+        selectedUser.push(users[i].id);
+      }
+    }
+    return selectedUser;
+  }
+
+  $(".permi-drop").click(function() {
+    var targetlevel = $(this).attr('value');
+    var list = getSelectedUser();
+    list.forEach(function(uid) {
+      firebase.database().ref('users').child(uid).update({
+        level: parseInt(targetlevel)
+      }).catch(function(error) {
+        console.log("Error on " + uid + ":" + error.message);
+      });
+    });
+  });
+</script>

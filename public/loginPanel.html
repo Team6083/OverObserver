@@ -41,7 +41,7 @@
       $("#navUser").html(user.displayName);
       $("#signoutSmtBtn").removeClass("disabled");
       $("#loginPanel").modal('hide');
-      console.log("User is logined", user);
+      console.log("User is logined");
       $("#loginAlert").addClass("d-none");
       if(location.pathname == "/" || location.pathname == "/index.html"){
         readList();

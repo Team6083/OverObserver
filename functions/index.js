@@ -29,7 +29,6 @@ exports.addUserData = functions.auth.user().onCreate((user) => {
   userData["name"] = "unknow";
   userData["level"] = 1;
   userData["email"] = user.email;
-
   return admin.database().ref('/users').child(user.uid).set(userData);
 });
 

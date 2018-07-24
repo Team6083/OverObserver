@@ -40,13 +40,3 @@ function signout(){
 		console.log("User sign out error!");
 	});
 }
-
-function register(account, pwd){
-  console.log(account);
-  firebase.auth().createUserWithEmailAndPassword(account, pwd).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMsg = error.message;
-    console.log(errorCode);
-  });
-}
