@@ -165,22 +165,19 @@
   <script>
     //Load form
     var yearData = ffield['frc_'+year].fields;
-
-    var auto = yearData.autoTime;
-    var teleop = yearData.teleopTime;
-    var summ = yearData.summary;
-
-    for (var k in auto) {
-      var f = auto[k];
-      $("#autoForm").append(genetfform(k, f));
-    }
-    for (var k in teleop) {
-      var f = teleop[k];
-      $("#teleopForm").append(genetfform(k, f));
-    }
-    for (var k in summ) {
-      var f = summ[k];
-      $("#summaryForm").append(genetfform(k, f));
+    for (var k in yearData) {
+      var f = yearData[k];
+      var target;
+      if(f.mode == 'auto'){
+        target = $("#autoForm");
+      }
+      else if(f.mode == 'teleop'){
+        target = $("#teleopForm");
+      }
+      else{
+        target = $("#summaryForm");
+      }
+      target.append(genetfform(k, f));
     }
   </script>
   <script>

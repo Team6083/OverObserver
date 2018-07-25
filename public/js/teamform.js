@@ -39,19 +39,11 @@ function writeTeamForm(event, match, team, data) {
 
 $("#sendConfBtn").click(function() {
   var data = {};
-  for (var k in auto) {
-    var f = auto[k];
-    data = writeTeamFormData(k,f,data);
+  for (var k in yearData) {
+    var f = yearData[k];
+    data = writeTeamFormData(k, f, data);
   }
-  for (var k in teleop) {
-    var f = teleop[k];
-    data = writeTeamFormData(k,f,data);
-  }
-  for (var k in summ) {
-    var f = summ[k];
-    data = writeTeamFormData(k,f,data);
-  }
-
+  
   data["notShow"] = false;
   if (editing != 'true') {
     data["recorder"] = firebase.auth().currentUser.displayName;

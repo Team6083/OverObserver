@@ -22,7 +22,7 @@ function genetfform(k, v) {
 
 function writeTeamFormData(k,f,data){
   if(f.type == 'boolean'){
-    data[k] = $("#"+k).parent().hasClass("active");
+    data[k+"-success"] = $("#"+k+"-success").parent().hasClass("active");
   }
   else if(f.type == 'int'){
     data[k] = parseInt($("#"+k).val());
