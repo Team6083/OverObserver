@@ -25,21 +25,58 @@
   function checkAllClick() {
     $(".userCheck").prop('checked', $("#checkAll").prop('checked'));
   }
+
+  function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("userTable");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+      switching = false;
+      rows = table.getElementsByTagName("TR");
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        if (dir == "asc") {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else if (dir == "desc") {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        switchcount++;
+      } else {
+        if (switchcount == 0 && dir == "asc") {
+          dir = "desc";
+          switching = true;
+        }
+      }
+    }
+  }
 </script>
 
-<table class="table table-hover">
+<table class="table table-hover" id="userTable">
   <thead>
     <tr>
       <th scope="col">
         <input type="checkbox" id="checkAll" onclick="checkAllClick()">
       </th>
-      <th scope="col">UID</th>
-      <th scope="col">Email</th>
-      <th scope="col">Name</th>
-      <th scope="col">Permission</th>
+      <th scope="col" onclick="sortTable(0)">UID</th>
+      <th scope="col" onclick="sortTable(1)">Email</th>
+      <th scope="col" onclick="sortTable(2)">Name</th>
+      <th scope="col" onclick="sortTable(3)">Permission</th>
     </tr>
   </thead>
-  <tbody id="user-table">
+  <tbody id="userTbody">
     <tr>
       <td>No Permission</td>
     </tr>
@@ -89,7 +126,7 @@
 <script src="js/lib/md5.min.js"></script>
 
 <script>
-  function translevel(level){
+  function translevel(level) {
     var levelDis = "";
     switch (level) {
       case 1:
@@ -110,21 +147,17 @@
     return levelDis;
   }
 
-  function revTranslevel(levelDis){
-    if(levelDis == "None"){
+  function revTranslevel(levelDis) {
+    if (levelDis == "None") {
       return 1;
-    }
-    else if(levelDis == "Read"){
+    } else if (levelDis == "Read") {
       return 2;
-    }
-    else if(levelDis=="Write"){
+    } else if (levelDis == "Write") {
       return 3;
-    }
-    else if(levelDis=="Admin"){
+    } else if (levelDis == "Admin") {
       return 4;
-    }
-    else{
-      console.log("Error can't find level of "+levelDis);
+    } else {
+      console.log("Error can't find level of " + levelDis);
       return 1;
     }
   }
@@ -149,7 +182,7 @@
 <script>
   //Read on start
   firebase.database().ref('users').orderByKey().on('value', function(snapshot) {
-    $("#user-table").text("");
+    $("#userTbody").text("");
     snapshot.forEach(function(childSnapshot) {
       var uid = childSnapshot.key;
       var childData = childSnapshot.val();
@@ -159,7 +192,7 @@
         email: childData.email,
         level: childData.level
       }
-      $("#user-table").append(generUserRow(userdata));
+      $("#userTbody").append(generUserRow(userdata));
     });
   });
 
