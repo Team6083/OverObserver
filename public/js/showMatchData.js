@@ -57,6 +57,18 @@ function addMatchResult(red, title, blue) {
 }
 
 $.when(ajaxMatch()).done(function(match) {
+  for(var k in match.score_breakdown.red){
+    var tr = "<tr>";
+    tr+="<td class='table-danger'>"
+    tr+=match.score_breakdown.red[k];
+    tr+="</td><td>";
+    tr+=k;
+    tr+="</td><td class='table-primary'>";
+    tr+=match.score_breakdown.blue[k];
+    tr+="</td>";
+    tr+="</tr>";
+    $("#matchResultTbody").append(tr);
+  }
   $("#plateAssign").html(match.score_breakdown.red.tba_gameData);
 });
 

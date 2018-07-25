@@ -56,10 +56,23 @@
         </ul>
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade" id="pills-result" role="tabpanel">
-            <table class="table table-bordered table-sm">
-              <tbody id="matchResultTbody"></tbody>
-            </table>
-            Scoring Plate Assignments: <span id="plateAssign"></span>
+            <div class="row">
+              <div class="col-lg-8">
+                <table class="table table-sm">
+                  <thead>
+                    <tr class="text-center">
+                      <th scope="col">Red</th>
+                      <th scope="col">item</th>
+                      <th scope="col">Blue</th>
+                    </tr>
+                  </thead>
+                  <tbody id="matchResultTbody" class="text-center"></tbody>
+                </table>
+              </div>
+              <div class="col-lg-4">
+                Scoring Plate Assignments: <span id="plateAssign"></span>
+              </div>
+            </div>
           </div>
           <div class="tab-pane fade show active" id="pills-perform" role="tabpanel">
             <div class="card-deck">
@@ -271,7 +284,9 @@
     </div>
   </div>
   <div id="loginContainer"></div>
-  <script>$("#loginContainer").load("/loginPanel.html");</script>
+  <script>
+    $("#loginContainer").load("/loginPanel.html");
+  </script>
 
   <script>
     $("#navBarContainer").load("/navBar.html");
