@@ -50,7 +50,7 @@
 </div>
 
 <script>
-  function genefftable(k, v, mode) {
+  function genetfctable(k, v, mode) {
     var tr = "<tr>";
     tr += "<th scope='row'>";
     tr += k;
@@ -70,7 +70,7 @@
       tr += v.displayF;
       tr += '</label></div>';
     } else if (v.type == 'int') {
-      tr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>'
+      tr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>';
     }else if(v.type == 'textarea'){
       tr+='<textarea class="form-control" rows="'+v.row+'"></textarea>';
     }
@@ -81,17 +81,19 @@
 </script>
 
 <script>
+
+
   $('.tfcdropdown').click(function() {
     $("#tfctable").html("");
     var year = $(this).attr('selectYear');
     $("#tfc_drop_dis").text(year);
-    var yearData = ffield[year];
+    var yearData = ffield['frc_'+year];
 
     for (var modeName in yearData.fields){
       var mode = yearData.fields[modeName];
       for (var k in mode) {
         var f = mode[k];
-        $("#tfctable").append(genefftable(k, f, modeName));
+        $("#tfctable").append(genetfctable(k, f, modeName));
       }
     }
 

@@ -39,165 +39,19 @@
             <div class="card-body">
               <form id="scoreForm">
                 <h3><span class="badge badge-secondary">自動時間</span></h3>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label">Auto line</label>
-                  </div>
-                  <div class="col-6">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn btn-outline-success">
-                        <input type="radio" name="auto-success" id="auto-success" autocomplete="off"> 成功
-                      </label>
-                      <label class="btn btn-outline-warning">
-                        <input type="radio" name="auto-fail" id="auto-fail" autocomplete="off"> 失敗
-                      </label>
-                    </div>
-                  </div>
+                <div id="autoForm">
                 </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="ScaleAuto">
-                      <span class="badge badge-pill badge-dark">Scale</span>
-                      成功次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="auto-scale" id="auto-scale" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="ScaleAuto">
-                      <span class="badge badge-pill badge-dark">Scale</span>
-                      嘗試次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="auto-scale-try" id="auto-scale-try" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="SwitchAuto">
-                      <span class="badge badge-pill badge-dark">Switch</span>
-                      成功次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="auto-switch" id="auto-switch" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="SwitchAuto">
-                      <span class="badge badge-pill badge-dark">Switch</span>
-                      嘗試次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="auto-switch-try" id="auto-switch-try" value="0" min="0" disabled>
-                  </div>
-                </div>
+
 
                 <!-- Teleop -->
                 <h3><span class="badge badge-secondary">手動時間</span></h3>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="ScaleTele">
-                      <span class="badge badge-pill badge-dark">Scale</span>
-                      成功次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="tele-scale" id="tele-scale" value="0" min="0" disabled>
-                  </div>
+                <div id="teleopForm">
                 </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="ScaleTele">
-                      <span class="badge badge-pill badge-dark">Scale</span>
-                      嘗試次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="tele-scale-try" id="tele-scale-try" value="0" min="0" disabled>
-                  </div>
+
+                <div id="summaryForm">
                 </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="SwitchTele">
-                      <span class="badge badge-pill badge-dark">Switch</span>
-                      成功次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="tele-switch" id="tele-switch" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="SwitchTele">
-                      <span class="badge badge-pill badge-dark">Switch</span>
-                      嘗試次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="tele-switch-try" id="tele-switch-try" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="ExchangeTele">
-                      <span class="badge badge-pill badge-dark">Exchange</span>
-                      成功次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="tele-exchange" id="tele-exchange" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label" for="ExchangeTele">
-                      <span class="badge badge-pill badge-dark">Exchange</span>
-                      嘗試次數
-                    </label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="tele-exchange-try" id="tele-exchange-try" value="0" min="0" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label">爬升</label>
-                  </div>
-                  <div class="col-6">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                      <label class="btn btn-outline-success">
-                        <input type="radio" name="climb-success" id="climb-success" autocomplete="off"> 成功
-                      </label>
-                      <label class="btn btn-outline-warning">
-                        <input type="radio" name="climb-fail" id="climb-fail" autocomplete="off"> 失敗
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-6">
-                    <label class="col-form-label">駕車技術</label>
-                  </div>
-                  <div class="col-6">
-                    <input type="number" class="form-control numInput" name="drive-tech" id="drive-tech" value="0" min="0" max="10" disabled>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-4">
-                    <label class="col-form-label">特殊表現</label>
-                  </div>
-                  <div class="col-8">
-                    <textarea class="form-control" id="specialThing" rows="4"></textarea>
-                  </div>
-                </div>
+
+                <!-- EndBtn -->
                 <div class="row">
                   <div class="col-6">
                     <button type="button" class="btn btn-warning btn-lg btn-block" id="backBtn" data-toggle="modal" data-target="#leaveConfirmModal">回列表</button>
@@ -281,6 +135,54 @@
   </script>
   <script src="js/lib/bootstrap-number-input.js"></script>
   <script src="js/afterBody.js"></script>
+  <script>
+    var teamId = findGetParameter("team");
+    var matchId = findGetParameter("match");
+    if (teamId != null) {
+      $("#teamId").html(findGetParameter("team"));
+    }
+
+    if (matchId != null) {
+      $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
+    }
+    var eventId = findGetParameter("match").split("_")[0];
+    var editing = findGetParameter("edit");
+    // Fetching GET data
+
+    if (editing == 'true') {
+      $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
+    }
+    var year = 0;
+    for(var c in eventId){
+      if(isNaN(eventId[c])){
+        year = eventId.slice(0,c);
+        break;
+      }
+    }
+  </script>
+  <script src="js/teamform_genefield.js"></script>
+  <script src="js/teamform_config/load.js"></script>
+  <script>
+    //Load form
+    var yearData = ffield['frc_'+year].fields;
+
+    var auto = yearData.autoTime;
+    var teleop = yearData.teleopTime;
+    var summ = yearData.summary;
+
+    for (var k in auto) {
+      var f = auto[k];
+      $("#autoForm").append(genetfform(k, f));
+    }
+    for (var k in teleop) {
+      var f = teleop[k];
+      $("#teleopForm").append(genetfform(k, f));
+    }
+    for (var k in summ) {
+      var f = summ[k];
+      $("#summaryForm").append(genetfform(k, f));
+    }
+  </script>
   <script>
     $(".numInput").bootstrapNumber({
       upClass: 'primary',

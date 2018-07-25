@@ -1,20 +1,3 @@
-var teamId = findGetParameter("team");
-var matchId = findGetParameter("match");
-if (teamId != null) {
-  $("#teamId").html(findGetParameter("team"));
-}
-
-if (matchId != null) {
-  $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
-}
-var eventId = findGetParameter("match").split("_")[0];
-var editing = findGetParameter("edit");
-// Fetching GET data
-
-if (editing == 'true') {
-  $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
-}
-
 //fetch data for edit mode
 firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + teamId).once('value').then(function(snapshot) {
   if (snapshot.exists()) {
@@ -56,20 +39,19 @@ function writeTeamForm(event, match, team, data) {
 
 $("#sendConfBtn").click(function() {
   var data = {};
-  data["auto-success"] = $("#auto-success").parent().hasClass("active");
-  data["auto-scale"] = $("#auto-scale").val();
-  data["auto-scale-try"] = $("#auto-scale-try").val();
-  data["auto-switch"] = $("#auto-switch").val();
-  data["auto-switch-try"] = $("#auto-switch-try").val();
-  data["tele-scale"] = $("#tele-scale").val();
-  data["tele-scale-try"] = $("#tele-scale-try").val();
-  data["tele-switch"] = $("#tele-switch").val();
-  data["tele-switch-try"] = $("#tele-switch-try").val();
-  data["tele-exchange"] = $('#tele-exchange').val();
-  data["tele-exchange-try"] = $('#tele-exchange-try').val();
-  data["climb-success"] = $("#climb-success").parent().hasClass("active");
-  data["drive-tech"] = $("#drive-tech").val();
-  data["specialThing"] = $("#specialThing").val();
+  for (var k in auto) {
+    var f = auto[k];
+    data = writeTeamFormData(k,f,data);
+  }
+  for (var k in teleop) {
+    var f = teleop[k];
+    data = writeTeamFormData(k,f,data);
+  }
+  for (var k in summ) {
+    var f = summ[k];
+    data = writeTeamFormData(k,f,data);
+  }
+
   data["notShow"] = false;
   if (editing != 'true') {
     data["recorder"] = firebase.auth().currentUser.displayName;

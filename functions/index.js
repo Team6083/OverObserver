@@ -49,7 +49,7 @@ exports.updateUserName = functions.database.ref("/users/{userId}/name").onUpdate
     console.log("Error fetching user data:", error);
   });
 });
-
+/*
 exports.updateNumber = functions.database.ref("/matchs/{eventId}/{matchId}/teamCollect/{teamId}").onWrite((change, event) => {
   var sourceData = change.after.val();
   if(!change.after.exists()) return;
@@ -66,4 +66,4 @@ exports.updateNumber = functions.database.ref("/matchs/{eventId}/{matchId}/teamC
   data["tele-exchange-try"] = parseInt(sourceData["tele-exchange-try"]);
   data["drive-tech"] = parseInt(sourceData["drive-tech"]);
   return admin.database().ref("/matchs/" + event.params.eventId + "/" + event.params.matchId + "/teamCollect/" + event.params.teamId).update(data);
-});
+});*/
