@@ -1,0 +1,111 @@
+<div class="row mb-3">
+  <div class="col-lg-6 col-sm-12 mb-sm-3 mb-lg-0">
+    <div class="btn-group dropright">
+      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="tfc_drop_dis">
+        Select Config
+      </button>
+      <div class="dropdown-menu" id="tfc_drop">
+        <a class="dropdown-item" data-toggle="modal" data-target="#newtfcmodal">Generate New</a>
+        <div class="dropdown-divider"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/teamform_config/load.js"></script>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Mode</th>
+      <th scope="col">type</th>
+      <th scope="col">displayName</th>
+      <th scope="col">disp</th>
+    </tr>
+  </thead>
+  <tbody id="tfctable">
+    <th scope="row">Select year first</th>
+  </tbody>
+</table>
+
+<div class="modal fade" id="newtfcmodal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Teamform Config</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" id="tfc_gene_btn">Generate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function genefftable(k, v, mode) {
+    var tr = "<tr>";
+    tr += "<th scope='row'>";
+    tr += k;
+    tr += "</th><td>";
+    tr += mode;
+    tr += "</td><td>";
+    tr += v.type;
+    tr += "</td><td>";
+    tr += v.displayName;
+    tr += "</td><td>";
+    if (v.type == 'boolean') {
+      tr += '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-outline-success">';
+      tr += '<input type="radio" autocomplete="off">';
+      tr += v.displayT;
+      tr += '</label><label class="btn btn-outline-warning">';
+      tr += '<input type="radio" autocomplete="off">';
+      tr += v.displayF;
+      tr += '</label></div>';
+    } else if (v.type == 'int') {
+      tr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>'
+    }else if(v.type == 'textarea'){
+      tr+='<textarea class="form-control" rows="'+v.row+'"></textarea>';
+    }
+    tr += "</td>";
+    tr += "</tr>";
+    return tr;
+  }
+</script>
+
+<script>
+  $('.tfcdropdown').click(function() {
+    $("#tfctable").html("");
+    var year = $(this).attr('selectYear');
+    $("#tfc_drop_dis").text(year);
+    var yearData = ffield[year];
+
+    for (var modeName in yearData.fields){
+      var mode = yearData.fields[modeName];
+      for (var k in mode) {
+        var f = mode[k];
+        $("#tfctable").append(genefftable(k, f, modeName));
+      }
+    }
+
+    $(".numInput").bootstrapNumber({
+      upClass: 'primary',
+      downClass: 'danger',
+      center: true
+    });
+  });
+
+  $('#tfc_gene_btn').click(function(){
+
+  });
+
+</script>
+
+<script src="js/lib/bootstrap-number-input.js"></script>

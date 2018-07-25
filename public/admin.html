@@ -23,7 +23,6 @@
     <div class="row mt-5">
       <div class="col">
         <div class="alert alert-warning d-none" role="alert" id="writeErrorAlert">
-
         </div>
       </div>
     </div>
@@ -41,6 +40,9 @@
               <li class="nav-item">
                 <a class="nav-link" id="pills-users-tab" data-toggle="pill" href="#pills-users" role="tab">Users</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-tfconfig-tab" data-toggle="pill" href="#pills-tfconfig" role="tab">Teamform Config</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -55,9 +57,11 @@
               <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-esettings" role="tabpanel"></div>
                 <div class="tab-pane fade" id="pills-users" role="tabpanel"></div>
+                <div class="tab-pane fade" id="pills-tfconfig" role="tabpanel"></div>
                 <script>
                   $("#pills-esettings").load("/admin_tab/event_settings.html");
                   $("#pills-users").load("/admin_tab/users.html");
+                  $("#pills-tfconfig").load("/admin_tab/teamform_config.html");
                 </script>
               </div>
             </div>
