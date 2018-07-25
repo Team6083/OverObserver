@@ -43,7 +43,7 @@ $("#sendConfBtn").click(function() {
     var f = yearData[k];
     data = writeTeamFormData(k, f, data);
   }
-  
+
   data["notShow"] = false;
   if (editing != 'true') {
     data["recorder"] = firebase.auth().currentUser.displayName;
@@ -61,7 +61,6 @@ $("#notShowBtn").click(function() {
   if (editing != 'true') {
     data["recorder"] = firebase.auth().currentUser.displayName;
   }
-  data["specialThing"] = $("#specialThing").val();
   data["notShow"] = true;
   writeTeamForm(eventId, matchId, teamId, data);
   if (editing != 'true') {
