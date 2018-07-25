@@ -12,7 +12,12 @@
   </div>
 </div>
 
-<script src="js/teamform_config/load.js"></script>
+<script src="js/teamform_config.js"></script>
+<script>
+  for(var k in ffield){
+    $("#tfc_drop").append('<a class="dropdown-item tfcdropdown" selectYear="'+k+'">'+k+'</a>');
+  }
+</script>
 
 <table class="table table-hover">
   <thead>
@@ -50,12 +55,12 @@
 </div>
 
 <script>
-  function genetfctable(k, v, mode) {
+  function genetfctable(k, v) {
     var tr = "<tr>";
     tr += "<th scope='row'>";
     tr += k;
     tr += "</th><td>";
-    tr += mode;
+    tr += v.mode;
     tr += "</td><td>";
     tr += v.type;
     tr += "</td><td>";
@@ -81,20 +86,15 @@
 </script>
 
 <script>
-
-
   $('.tfcdropdown').click(function() {
     $("#tfctable").html("");
     var year = $(this).attr('selectYear');
     $("#tfc_drop_dis").text(year);
-    var yearData = ffield['frc_'+year];
+    var yearData = ffield[year];
 
-    for (var modeName in yearData.fields){
-      var mode = yearData.fields[modeName];
-      for (var k in mode) {
-        var f = mode[k];
-        $("#tfctable").append(genetfctable(k, f, modeName));
-      }
+    for (var k in yearData.fields){
+      var f = yearData.fields[k];
+      $("#tfctable").append(genetfctable(k, f));
     }
 
     $(".numInput").bootstrapNumber({

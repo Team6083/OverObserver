@@ -1,88 +1,86 @@
 var ffield = {
-  'frc_2018':{
-    year: 2018,
-    fields: {
+  'frc_2018': {
+    'year': 2018,
+    'fields': {
       'auto-scale': {
         'type': 'int',
-        'mode':'auto',
+        'mode': 'auto',
         'displayName': '<span class="badge badge-pill badge-dark">Scale</span>成功次數'
       },
       'auto-scale-try': {
         'type': 'int',
-        'mode':'auto',
+        'mode': 'auto',
         'displayName': '<span class="badge badge-pill badge-dark">Scale</span>嘗試次數'
       },
       'auto-switch': {
         'type': 'int',
-        'mode':'auto',
+        'mode': 'auto',
         'displayName': '<span class="badge badge-pill badge-dark">Switch</span>成功次數'
       },
       'auto-switch-try': {
         'type': 'int',
-        'mode':'auto',
+        'mode': 'auto',
         'displayName': '<span class="badge badge-pill badge-dark">Switch</span>嘗試次數'
       },
-      'autoLine':{
-        'type':'boolean',
-        'mode':'auto',
-        'displayName':'Auto line',
-        'displayT':'成功',
-        'displayF':'失敗',
-        'Ttag':'auto-success',
-        'Ftag':'auto-fail'
+      'autoLine': {
+        'type': 'boolean',
+        'mode': 'auto',
+        'displayName': 'Auto line',
+        'displayT': '成功',
+        'displayF': '失敗',
+        'Ttag': 'auto-success',
+        'Ftag': 'auto-fail'
       },
       'tele-scale': {
         'type': 'int',
-        'mode':'teleop',
+        'mode': 'teleop',
         'displayName': '<span class="badge badge-pill badge-dark">Scale</span>成功次數'
       },
       'tele-scale-try': {
         'type': 'int',
-        'mode':'teleop',
+        'mode': 'teleop',
         'displayName': '<span class="badge badge-pill badge-dark">Scale</span>嘗試次數'
       },
       'tele-switch': {
         'type': 'int',
-        'mode':'teleop',
+        'mode': 'teleop',
         'displayName': '<span class="badge badge-pill badge-dark">Switch</span>成功次數'
       },
       'tele-switch-try': {
         'type': 'int',
-        'mode':'teleop',
+        'mode': 'teleop',
         'displayName': '<span class="badge badge-pill badge-dark">Switch</span>嘗試次數'
       },
-      'tele-exchange':{
-        'type':'int',
-        'mode':'teleop',
+      'tele-exchange': {
+        'type': 'int',
+        'mode': 'teleop',
         'displayName': '<span class="badge badge-pill badge-dark">Exchange</span>成功次數'
       },
-      'tele-exchange-try':{
-        'type':'int',
-        'mode':'teleop',
+      'tele-exchange-try': {
+        'type': 'int',
+        'mode': 'teleop',
         'displayName': '<span class="badge badge-pill badge-dark">Exchange</span>嘗試次數'
       },
-      'climb':{
-        'type':'boolean',
-        'mode':'teleop',
-        'displayName':'爬升',
-        'displayT':'成功',
-        'displayF':'失敗',
-        'Ttag':'climb-success',
-        'Ftag':'climb-fail'
+      'climb': {
+        'type': 'boolean',
+        'mode': 'teleop',
+        'displayName': '爬升',
+        'displayT': '成功',
+        'displayF': '失敗',
+        'Ttag': 'climb-success',
+        'Ftag': 'climb-fail'
       },
-      'drive-tech':{
-        'type':'int',
-        'mode':'teleop',
-        'displayName':'駕車技術'
+      'drive-tech': {
+        'type': 'int',
+        'mode': 'teleop',
+        'displayName': '駕車技術'
       },
-      'specialThing':{
-        'type':'textarea',
-        'mode':'summary',
-        'displayName':'特殊表現',
-        'row':4
+      'specialThing': {
+        'type': 'textarea',
+        'mode': 'summary',
+        'displayName': '特殊表現',
+        'row': 4
       }
     }
   }
 };
-
-$("#tfc_drop").append('<a class="dropdown-item tfcdropdown" selectYear="'+2018+'">'+2018+'</a>');
