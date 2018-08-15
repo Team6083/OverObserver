@@ -12,12 +12,14 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once
     $("#teamsTbody").append(addMatchList(matchId, teamData, 1));
 
     for (var i = 0; i < 3; i++) {
-      $("#red" + (i + 1).toString() + "_tbody").attr("name", teamData.red[i.toString()]);
-      $("#blue" + (i + 1).toString() + "_tbody").attr("name", teamData.blue[i.toString()]);
-      $("#red" + (i + 1).toString() + "_title").html(teamData.red[i.toString()]);
-      $("#blue" + (i + 1).toString() + "_title").html(teamData.blue[i.toString()]);
-      $("#red" + (i + 1).toString() + "_editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.red[i.toString()] + "&match=" + matchId);
-      $("#blue" + (i + 1).toString() + "_editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.blue[i.toString()] + "&match=" + matchId);
+      $("#red" + (i + 1).toString() + " .tbody").attr("name", teamData.red[i.toString()]);
+      $("#blue" + (i + 1).toString() + " .tbody").attr("name", teamData.blue[i.toString()]);
+      $("#red" + (i + 1).toString() + " .title").html(teamData.red[i.toString()]);
+      $("#blue" + (i + 1).toString() + " .title").html(teamData.blue[i.toString()]);
+      $("#red" + (i + 1).toString() + " .editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.red[i.toString()] + "&match=" + matchId);
+      $("#blue" + (i + 1).toString() + " .editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.blue[i.toString()] + "&match=" + matchId);
+      $("#red" + (i + 1).toString()).attr("name", teamData.red[i.toString()]);
+      $("#blue" + (i + 1).toString()).attr("name", teamData.blue[i.toString()]);
     }
     firebase.database().ref("users/" + firebase.auth().currentUser.uid + "/level").once('value').then(function(snapshot) {
       if (snapshot.val() >= 4) {
@@ -29,7 +31,7 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once
     });
   }
 
-})
+});
 
 function ajaxMatch() {
   return $.ajax({
@@ -57,132 +59,63 @@ function addMatchResult(red, title, blue) {
 }
 
 $.when(ajaxMatch()).done(function(match) {
-  for(var k in match.score_breakdown.red){
+  for (var k in match.score_breakdown.red) {
     var tr = "<tr>";
-    tr+="<td class='table-danger'>"
-    tr+=match.score_breakdown.red[k];
-    tr+="</td><td>";
-    tr+=k;
-    tr+="</td><td class='table-primary'>";
-    tr+=match.score_breakdown.blue[k];
-    tr+="</td>";
-    tr+="</tr>";
+    tr += "<td class='table-danger'>"
+    tr += match.score_breakdown.red[k];
+    tr += "</td><td>";
+    tr += k;
+    tr += "</td><td class='table-primary'>";
+    tr += match.score_breakdown.blue[k];
+    tr += "</td>";
+    tr += "</tr>";
     $("#matchResultTbody").append(tr);
   }
   $("#plateAssign").html(match.score_breakdown.red.tba_gameData);
 });
 
+getteamform(eventId, function(data) {
+  firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").once('value').then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        $("[name=\"" + childSnapshot.key + "\"] .recorder").html(childSnapshot.child('recorder').val());
+        if (childSnapshot.child("notShow").val()) {
+          console.log(childSnapshot.key);
+          $("[name=\"" + childSnapshot.key + "\"] .notShow").removeClass("d-none");
+        } else {
+          function addTr(title, value) {
+            return "<tr><td>" + title + "</td><td>" + value + "</td></tr>";
+          }
 
-firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").once('value').then(function(snapshot) {
-  snapshot.forEach(function(childSnapshot) {
+          var auto = "";
+          var teleop = "";
+          var summary = "";
+          for (var k in data.fields) {
+            var f = data.fields[k];
+            var tr = "";
+            if(f.type == "boolean"){
+              tr = addTr(f.displayName, childSnapshot.child(k).val() ? f.displayT : f.displayF);
+            }
+            else if(f.type == "int") {
+              tr = addTr(f.displayName, childSnapshot.child(k).val());
+            }
+            else if (f.type == "textarea") {
+              tr = "<strong>" + childSnapshot.child(k).val() + "</strong><br>";
+            }
 
-    if (childSnapshot.child("notShow").val()) {
-      var front = "<div class=\"row\"><div class=\"col-12\">";
-      front += "紀錄者: <span class=\"badge badge-pill badge-info\" name=\"recorder\">" + childSnapshot.child("recorder").val() +"</span></div></div>";
-      $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().html(front + "<h1><span class=\"badge badge-secondary\">未上場</span></h1>");
-    } else {
-      function addTr(title, value) {
-        return "<tr><td>" + title + "</td><td>" + value + "</td></tr>";
-      }
-      var tr = "";
-      tr += addTr("Auto line", childSnapshot.child("auto-success").val() ? "成功" : "失敗");
-      tr += addTr("Auto Scale 成功次數", childSnapshot.child("auto-scale").val());
-      tr += addTr("Auto Scale 嘗試次數", childSnapshot.child("auto-scale-try").val());
-      tr += addTr("Auto Switch 成功次數", childSnapshot.child("auto-switch").val());
-      tr += addTr("Auto Switch 嘗試次數", childSnapshot.child("auto-switch-try").val());
-      tr += addTr("Scale 成功次數", childSnapshot.child("tele-scale").val());
-      tr += addTr("Scale 嘗試次數", childSnapshot.child("tele-scale-try").val());
-      tr += addTr("Switch 成功次數", childSnapshot.child("tele-switch").val());
-      tr += addTr("Switch 嘗試次數", childSnapshot.child("tele-switch-try").val());
-      tr += addTr("Exchange 成功次數", childSnapshot.child("tele-exchange").val());
-      tr += addTr("Exchange 嘗試次數", childSnapshot.child("tele-exchange-try").val());
-      tr += addTr("爬升", childSnapshot.child("climb-success").val() ? "成功" : "失敗");
-      tr += addTr("駕車技術", childSnapshot.child("drive-tech").val());
-      $("tbody[name=\"" + childSnapshot.key + "\"]").append(tr);
-      $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().append("<strong>" + childSnapshot.child("specialThing").val() + "</strong>");
-
-      var recorderEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=recorder]");
-      var autoScaleEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=auto-scale]");
-      var autoSwitchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=auto-switch]");
-      var teleScaleEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-scale]");
-      var teleSwitchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-switch]");
-      var teleExchEle = $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().find("span[name=tele-exchange]");
-
-      //Success percent
-      var autoScaleRate = childSnapshot.child("auto-scale-try").val() == 0 ? (childSnapshot.child("auto-scale").val() == 0 ? 0 : -1) : (childSnapshot.child("auto-scale").val() / childSnapshot.child("auto-scale-try").val() * 100);
-      autoScaleEle.html(autoScaleRate.toString() + "%");
-      var autoSwitchRate = childSnapshot.child("auto-switch-try").val() == 0 ? (childSnapshot.child("auto-switch").val() == 0 ? 0 : -1) : (childSnapshot.child("auto-switch").val() / childSnapshot.child("auto-switch-try").val() * 100);
-      autoSwitchEle.html(autoSwitchRate.toString() + "%");
-      var teleScaleRate = childSnapshot.child("tele-scale-try").val() == 0 ? (childSnapshot.child("tele-scale").val() == 0 ? 0 : -1) : (childSnapshot.child("tele-scale").val() / childSnapshot.child("tele-scale-try").val() * 100);
-      teleScaleEle.html(teleScaleRate.toString() + "%");
-      var teleSwitchRate = childSnapshot.child("tele-switch-try").val() == 0 ? (childSnapshot.child("tele-switch").val() == 0 ? 0 : -1) : (childSnapshot.child("tele-switch").val() / childSnapshot.child("tele-switch-try").val() * 100);
-      teleSwitchEle.html(teleSwitchRate.toString() + "%");
-      var teleExchRate = childSnapshot.child("tele-exchange-try").val() == 0 ? (childSnapshot.child("tele-exchange").val() == 0 ? 0 : -1) : (childSnapshot.child("tele-exchange").val() / childSnapshot.child("tele-exchange-try").val() * 100);
-      teleExchEle.html(teleExchRate.toString() + "%");
-
-      recorderEle.html(childSnapshot.child("recorder").val());
-      //Color
-      //autoScaleRate
-      if (autoScaleRate > 50) {
-        autoScaleEle.removeClass("badge-light");
-        autoScaleEle.addClass("badge-success");
-      } else if (autoScaleRate < 0) {
-        autoScaleEle.removeClass("badge-light");
-        autoScaleEle.addClass("badge-danger");
-      } else {
-        autoScaleEle.removeClass("badge-light");
-        autoScaleEle.addClass("badge-warning");
-      }
-
-      //autoSwitchRate
-      if (autoSwitchRate > 50) {
-        autoSwitchEle.removeClass("badge-light");
-        autoSwitchEle.addClass("badge-success");
-      } else if (autoSwitchRate < 0) {
-        autoSwitchEle.removeClass("badge-light");
-        autoSwitchEle.addClass("badge-danger");
-      } else {
-        autoSwitchEle.removeClass("badge-light");
-        autoSwitchEle.addClass("badge-warning");
-      }
-
-      //teleScaleRate
-      if (teleScaleRate > 50) {
-        teleScaleEle.removeClass("badge-light");
-        teleScaleEle.addClass("badge-success");
-      } else if (teleScaleRate < 0) {
-        teleScaleEle.removeClass("badge-light");
-        teleScaleEle.addClass("badge-danger");
-      } else {
-        teleScaleEle.removeClass("badge-light");
-        teleScaleEle.addClass("badge-warning");
-      }
-
-      //teleSwitchRate
-      if (teleSwitchRate > 50) {
-        teleSwitchEle.removeClass("badge-light");
-        teleSwitchEle.addClass("badge-success");
-      } else if (teleSwitchRate < 0) {
-        teleSwitchEle.removeClass("badge-light");
-        teleSwitchEle.addClass("badge-danger");
-      } else {
-        teleSwitchEle.removeClass("badge-light");
-        teleSwitchEle.addClass("badge-warning");
-      }
-
-      //teleExchRate
-      if (teleExchRate > 50) {
-        teleExchEle.removeClass("badge-light");
-        teleExchEle.addClass("badge-success");
-      } else if (teleExchRate < 0) {
-        teleExchEle.removeClass("badge-light");
-        teleExchEle.addClass("badge-danger");
-      } else {
-        teleExchEle.removeClass("badge-light");
-        teleExchEle.addClass("badge-warning");
-      }
-    }
-
-
+            if(f.mode == "auto"){
+              auto += tr;
+            }
+            else if(f.mode == "teleop"){
+              teleop += tr;
+            }
+            else if(f.mode == "summary"){
+              summary += tr;
+            }
+          }
+          $("tbody[name=\"" + childSnapshot.key + "\"]").append(auto);
+          $("tbody[name=\"" + childSnapshot.key + "\"]").append(teleop);
+          $("tbody[name=\"" + childSnapshot.key + "\"]").parent().parent().append(summary);
+        }
+    });
   });
 });
