@@ -15,6 +15,7 @@
 </head>
 
 <body>
+  <script src="js/teamform_config.js"></script>
   <div id="navBarContainer">
   </div>
 
@@ -152,39 +153,26 @@
     if (editing == 'true') {
       $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
     }
-    var year = 0;
-    for(var c in eventId){
-      if(isNaN(eventId[c])){
-        year = eventId.slice(0,c);
-        break;
-      }
-    }
   </script>
   <script src="js/teamform_genefield.js"></script>
-  <script src="js/teamform_config/load.js"></script>
   <script>
     //Load form
-    var yearData = ffield['frc_'+year].fields;
-    for (var k in yearData) {
-      var f = yearData[k];
-      var target;
-      if(f.mode == 'auto'){
-        target = $("#autoForm");
+    getteamform(eventId, function(data) {
+      for (var k in data.fields) {
+        var f = data.fields[k];
+        var target;
+        if(f.mode == 'auto'){
+          target = $("#autoForm");
+        }
+        else if(f.mode == 'teleop'){
+          target = $("#teleopForm");
+        }
+        else{
+          target = $("#summaryForm");
+        }
+        target.append(genetfform(k, f));
       }
-      else if(f.mode == 'teleop'){
-        target = $("#teleopForm");
-      }
-      else{
-        target = $("#summaryForm");
-      }
-      target.append(genetfform(k, f));
-    }
-  </script>
-  <script>
-    $(".numInput").bootstrapNumber({
-      upClass: 'primary',
-      downClass: 'danger',
-      center: true
+      reloadNumberBtn();
     });
   </script>
   <script src="js/teamform.js"></script>

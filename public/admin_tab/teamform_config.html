@@ -12,13 +12,6 @@
   </div>
 </div>
 
-<script src="js/teamform_config.js"></script>
-<script>
-  for(var k in ffield){
-    $("#tfc_drop").append('<a class="dropdown-item tfcdropdown" selectYear="'+k+'">'+k+'</a>');
-  }
-</script>
-
 <table class="table table-hover">
   <thead>
     <tr>
@@ -34,6 +27,8 @@
   </tbody>
 </table>
 
+
+<!-- New teamform config modal -->
 <div class="modal fade" id="newtfcmodal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -76,8 +71,8 @@
       tr += '</label></div>';
     } else if (v.type == 'int') {
       tr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>';
-    }else if(v.type == 'textarea'){
-      tr+='<textarea class="form-control" rows="'+v.row+'"></textarea>';
+    } else if (v.type == 'textarea') {
+      tr += '<textarea class="form-control" rows="' + v.row + '"></textarea>';
     }
     tr += "</td>";
     tr += "</tr>";
@@ -85,29 +80,36 @@
   }
 </script>
 
-<script>
-  $('.tfcdropdown').click(function() {
-    $("#tfctable").html("");
-    var year = $(this).attr('selectYear');
-    $("#tfc_drop_dis").text(year);
-    var yearData = ffield[year];
 
-    for (var k in yearData.fields){
-      var f = yearData.fields[k];
-      $("#tfctable").append(genetfctable(k, f));
+<script src="js/teamform_config.js"></script>
+<script>
+  firebase.database().ref('events').on('value', function(snapshot) {
+    var events = snapshot.val();
+    for (var k in events) {
+      $("#tfc_drop").append('<a class="dropdown-item tfcdropdown" selectEvent="' + k + '">' + k + '</a>');
     }
 
-    $(".numInput").bootstrapNumber({
-      upClass: 'primary',
-      downClass: 'danger',
-      center: true
+    //load click event after dropdown load.
+    $('.tfcdropdown').click(function() {
+      $("#tfctable").html("");
+      var eventId = $(this).attr('selectEvent');
+
+      $("#tfc_drop_dis").text(eventId);
+      getteamform(eventId, function(data) {
+        for (var k in data.fields) {
+          var f = data.fields[k];
+          $("#tfctable").append(genetfctable(k, f));
+        }
+        reloadNumberBtn();
+      });
     });
   });
-
-  $('#tfc_gene_btn').click(function(){
-
-  });
-
 </script>
 
 <script src="js/lib/bootstrap-number-input.js"></script>
+
+<script>
+  $('#tfc_gene_btn').click(function() {
+
+  });
+</script>
