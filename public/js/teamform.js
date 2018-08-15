@@ -37,24 +37,27 @@ function writeTeamForm(event, match, team, data) {
   });
 }
 
-$("#sendConfBtn").click(function() {
-  var data = {};
-  for (var k in yearData) {
-    var f = yearData[k];
-    data = writeTeamFormData(k, f, data);
-  }
+getteamform(eventId,function(data){
+  var yearData = data.fields;
+  $("#sendConfBtn").click(function() {
+    var data = {};
+    for (var k in yearData) {
+      var f = yearData[k];
+      data = writeTeamFormData(k, f, data);
+    }
 
-  data["notShow"] = false;
-  if (editing != 'true') {
-    data["recorder"] = firebase.auth().currentUser.displayName;
-  }
-  writeTeamForm(eventId, matchId, teamId, data);
-  if (editing != 'true') {
-    window.location = "/";
-  } else {
-    window.location = '/showMatchData.html?match=' + matchId;
-  }
-});
+    data["notShow"] = false;
+    if (editing != 'true') {
+      data["recorder"] = firebase.auth().currentUser.displayName;
+    }
+    writeTeamForm(eventId, matchId, teamId, data);
+    if (editing != 'true') {
+      window.location = "/";
+    } else {
+      window.location = '/showMatchData.html?match=' + matchId;
+    }
+  })
+})
 
 $("#notShowBtn").click(function() {
   var data = {};
