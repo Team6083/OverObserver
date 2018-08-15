@@ -13,11 +13,10 @@
 
 ### 安裝 Firebase CLI
 
-注意: 安裝Firebase CLI之前，需要先安裝 Node.js 與 npm
+注意: Firebase CLI 需要 Node.js 5.10.0 以上版本.
 ```
 npm install -g firebase-tools
 ```
-這樣就準備好啦
 
 ### 剩下的動作
 
@@ -36,6 +35,17 @@ npm install
 firebase login
 ```
 接著會跳出一個瀏覽器視窗，在裡面登入即可
+
+## 部署頁面
+
+部署全部內容
+```
+firebase deploy -m <更新內容>
+```
+只部署Hosting內容
+```
+firebase deploy --only hosting -m <更新內容>
+```
 
 ## 目前完成進度
 
