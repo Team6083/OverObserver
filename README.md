@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/db81bdaa90cc4b0491d6fcd4f4e7600b)](https://www.codacy.com/app/Team6083/OverObserver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Team6083/OverObserver&amp;utm_campaign=Badge_Grade)
 # OverObserver
 提供團隊在FRC比賽時調查各隊資料
 使用Google Firebase 架設
