@@ -130,11 +130,10 @@
   <script>
     $("#navBarContainer").load("/navBar.html")
   </script>
-  <script src="js/firebase_auth.js"></script>
   <script src="js/afterBody.js"></script>
   <script src="js/showTeamMatchs.js"></script>
   <script>
-    var teamId = "frc"+findGetParameter("team");
+    var teamId = findGetParameter("team");
     $("#thisTeam").html(teamId);
     database.ref("settings").once('value').then(function(snapshot) {
       var eventId = snapshot.child("currentEvent").val();
