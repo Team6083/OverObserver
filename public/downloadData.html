@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OverObserver</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
   <script src="js/firebase_main.js"></script>
 </head>
@@ -24,7 +27,7 @@
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-8 col-sm-12">
-        
+        <span id="out"></span>
       </div>
     </div>
   </div>
@@ -33,6 +36,34 @@
 
   <script>
     $("#navBarContainer").load("/navBar.html");
+  </script>
+
+  <script src="js/exportTeamData.js"></script>
+  <script src="js/teamform_config.js"></script>
+  <script src="js/afterBody.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
+  <script>
+    var teamId = findGetParameter("team");
+    $("#thisTeam").html(teamId);
+    database.ref("settings").once('value').then(function (snapshot) {
+      var eventId = snapshot.child("currentEvent").val();
+      $("#thisEvent").html(eventId);
+
+      const teamData = getTeamsData(eventId, teamId);
+      console.log(teamData);
+
+      getteamform(eventId, function (data) {
+        console.log(data);
+        const fields = [];
+        for (var k in data.fields) {
+          fields.push(k);
+        }
+        const json2csvParser = new json2csv.Parser({ fields });
+        const csv = json2csvParser.parse(teamData);
+        
+        $("#out").html(csv);
+      });
+    });
   </script>
 
 </body>

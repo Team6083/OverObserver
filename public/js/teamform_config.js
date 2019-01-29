@@ -14,9 +14,3 @@ function reloadNumberBtn() {
     center: true
   });
 }
-
-
-function writeToDB(){
-
-  
-}
