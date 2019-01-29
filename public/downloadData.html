@@ -41,7 +41,6 @@
   <script src="js/exportTeamData.js"></script>
   <script src="js/teamform_config.js"></script>
   <script src="js/afterBody.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
   <script>
     var teamId = findGetParameter("team");
     $("#thisTeam").html(teamId);
@@ -49,19 +48,9 @@
       var eventId = snapshot.child("currentEvent").val();
       $("#thisEvent").html(eventId);
 
-      const teamData = getTeamsData(eventId, teamId);
-      console.log(teamData);
-
-      getteamform(eventId, function (data) {
-        console.log(data);
-        const fields = [];
-        for (var k in data.fields) {
-          fields.push(k);
-        }
-        const json2csvParser = new json2csv.Parser({ fields });
-        const csv = json2csvParser.parse(teamData);
-        
-        $("#out").html(csv);
+      const teamData = getTeamsData(eventId, teamId, (teamData) => {
+        console.log(teamData);
+        $("#out").html(JSON.stringify(teamData));
       });
     });
   </script>

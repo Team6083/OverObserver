@@ -1,4 +1,4 @@
-function getTeamsData(eventId, teamId) {
+function getTeamsData(eventId, teamId, callBack) {
     var outData = [];
     firebase.database().ref("matchs/" + eventId).orderByChild('time').once('value', function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
@@ -8,6 +8,6 @@ function getTeamsData(eventId, teamId) {
                 }
             }
         });
+        callBack(outData);
     });
-    return outData;
 }
