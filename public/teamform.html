@@ -15,7 +15,6 @@
 </head>
 
 <body>
-  <script src="js/teamform_config.js"></script>
   <div id="navBarContainer">
   </div>
 
@@ -126,8 +125,8 @@
   <script src="js/lib/bootstrap-number-input.js"></script>
   <script src="js/util.js"></script>
   <script>
-    const teamId = findGetParameter("team");
-    const matchId = findGetParameter("match");
+    var teamId = findGetParameter("team");
+    var matchId = findGetParameter("match");
     if (teamId != null) {
       $("#teamId").html(findGetParameter("team"));
     }
@@ -135,18 +134,18 @@
     if (matchId != null) {
       $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
     }
-    const eventId = findGetParameter("match").split("_")[0];
-    const editing = findGetParameter("edit");
+    var eventId = findGetParameter("match").split("_")[0];
+    var editing = findGetParameter("edit");
     // Fetching GET data
 
     if (editing === 'true') {
       $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
     }
   </script>
-  <script src="js/teamform_genefield.js"></script>
+  <script src="js/teamform_util.js"></script>
   <script>
     //Load form
-    getTeamform(eventId, function(data) {
+    getTeamformWithEventId(eventId, function(data) {
       for (const key in data.fields) {
         let formItem = data.fields[key];
         console.log(formItem);
