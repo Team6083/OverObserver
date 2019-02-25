@@ -39,18 +39,7 @@
             </div>
             <div class="card-body">
               <form id="scoreForm">
-                <h3><span class="badge badge-secondary">自動時間</span></h3>
-                <div id="autoForm">
-                </div>
-
-
-                <!-- Teleop -->
-                <h3><span class="badge badge-secondary">手動時間</span></h3>
-                <div id="teleopForm">
-                </div>
-
-                <div id="summaryForm">
-                </div>
+                <div id="formContent"></div>
 
                 <!-- EndBtn -->
                 <div class="row">
@@ -58,7 +47,7 @@
                     <button type="button" class="btn btn-warning btn-lg btn-block" id="backBtn" data-toggle="modal" data-target="#leaveConfirmModal">回列表</button>
                   </div>
                   <div class="col-6">
-                    <button type="button" class="btn btn-danger btn-lg btn-block" id="notshowBtn" data-toggle="modal" data-target="#notShowConfirmModal">標記未上場</button>
+                    <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#notShowConfirmModal">標記未上場</button>
                   </div>
                   <div class="col-12">
                     <button type="button" class="btn btn-success btn-lg btn-block mt-2" id="sendBtn" data-toggle="modal" data-target="#sendConfirmModal">確認送出</button>
@@ -97,7 +86,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                          <button type="button" class="btn btn-success" id="sendConfBtn">確定</a>
+                          <button type="button" class="btn btn-success" id="sendConfBtn">確定</button>
                         </div>
                       </div>
                     </div>
@@ -114,7 +103,7 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                          <button type="button" class="btn btn-danger" id="notShowBtn">確定</a>
+                          <button type="button" class="btn btn-danger" id="notShowBtn">確定</button>
                         </div>
                       </div>
                     </div>
@@ -135,10 +124,10 @@
     $("#navBarContainer").load("/navBar.html");
   </script>
   <script src="js/lib/bootstrap-number-input.js"></script>
-  <script src="js/afterBody.js"></script>
+  <script src="js/util.js"></script>
   <script>
-    var teamId = findGetParameter("team");
-    var matchId = findGetParameter("match");
+    const teamId = findGetParameter("team");
+    const matchId = findGetParameter("match");
     if (teamId != null) {
       $("#teamId").html(findGetParameter("team"));
     }
@@ -146,36 +135,27 @@
     if (matchId != null) {
       $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
     }
-    var eventId = findGetParameter("match").split("_")[0];
-    var editing = findGetParameter("edit");
+    const eventId = findGetParameter("match").split("_")[0];
+    const editing = findGetParameter("edit");
     // Fetching GET data
 
-    if (editing == 'true') {
+    if (editing === 'true') {
       $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
     }
   </script>
   <script src="js/teamform_genefield.js"></script>
   <script>
     //Load form
-    getteamform(eventId, function(data) {
-      for (var k in data.fields) {
-        var f = data.fields[k];
-        var target;
-        if(f.mode == 'auto'){
-          target = $("#autoForm");
-        }
-        else if(f.mode == 'teleop'){
-          target = $("#teleopForm");
-        }
-        else{
-          target = $("#summaryForm");
-        }
-        target.append(genetfform(k, f));
+    getTeamform(eventId, function(data) {
+      for (const key in data.fields) {
+        let formItem = data.fields[key];
+        console.log(formItem);
+        $("#formContent").append(renderTeamformItem(formItem));
       }
       reloadNumberBtn();
     });
   </script>
-  <script src="js/teamform.js"></script>
+  <script src="js/pages/teamform.js"></script>
 </body>
 
 </html>

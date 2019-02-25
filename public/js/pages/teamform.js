@@ -37,7 +37,7 @@ function writeTeamForm(event, match, team, data) {
   });
 }
 
-getteamform(eventId,function(data){
+getTeamform(eventId,function(data){
   var yearData = data.fields;
   $("#sendConfBtn").click(function() {
     var data = {};

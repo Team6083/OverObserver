@@ -1,7 +1,7 @@
-function getteamform(eventId, callback){
+function getTeamform(eventId, callback){
   firebase.database().ref("events/" + eventId + "/teamform").once('value').then(function(snapshot) {
     if (snapshot.exists()) {
-      var data = snapshot.val();
+      const data = snapshot.val();
       callback(data);
     }
   });

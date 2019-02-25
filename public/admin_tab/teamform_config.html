@@ -95,7 +95,7 @@
       var eventId = $(this).attr('selectEvent');
 
       $("#tfc_drop_dis").text(eventId);
-      getteamform(eventId, function(data) {
+      getTeamform(eventId, function(data) {
         for (var k in data.fields) {
           var f = data.fields[k];
           $("#tfctable").append(genetfctable(k, f));

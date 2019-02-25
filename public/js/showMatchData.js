@@ -74,7 +74,7 @@ $.when(ajaxMatch()).done(function(match) {
   $("#plateAssign").html(match.score_breakdown.red.tba_gameData);
 });
 
-getteamform(eventId, function(data) {
+getTeamform(eventId, function(data) {
   firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").once('value').then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         $("[name=\"" + childSnapshot.key + "\"] .recorder").html(childSnapshot.child('recorder').val());
