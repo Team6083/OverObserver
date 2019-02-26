@@ -2,92 +2,99 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OverObserver</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OverObserver</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
-  <script src="js/firebase_main.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="js/firebase_main.js"></script>
 </head>
 
 <body>
-  <div id="navBarContainer">
+<div id="navBarContainer">
 
-  </div>
+</div>
 
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row mt-5">
-      <div class="col">
-        <div class="alert alert-warning d-none" role="alert" id="writeErrorAlert">
+        <div class="col">
+            <div class="alert alert-warning d-none" role="alert" id="writeErrorAlert">
+            </div>
         </div>
-      </div>
     </div>
     <div class="row">
-      <div class="col-lg-2">
-        <div class="card bg-light mb-3">
-          <div class="card-header">
-            <h4 class="align-middle text-center mb-0">Admin Panel</h4>
-          </div>
-          <div class="card-body">
-            <ul class="nav nav-pills mb-3 flex-column" id="admin-pills-tab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="pills-esettings-tab" data-toggle="pill" href="#pills-esettings" role="tab">Event Settings</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="pills-users-tab" data-toggle="pill" href="#pills-users" role="tab">Users</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="pills-tfconfig-tab" data-toggle="pill" href="#pills-tfconfig" role="tab">Teamform Config</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8 col-sm-12">
-        <div class="card-deck">
-          <div class="card bg-light mb-3">
-            <div class="card-header">
-              <h4 class="align-middle mb-0" id="admin-header">N/A</h4>
+        <div class="col-lg-2">
+            <div class="card bg-light mb-3">
+                <div class="card-header">
+                    <h4 class="align-middle text-center mb-0">Admin Panel</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills mb-3 flex-column" id="admin-pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-esettings-tab" data-toggle="pill"
+                               href="#pills-esettings" role="tab">Event Settings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-users-tab" data-toggle="pill" href="#pills-users" role="tab">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-tfconfig-tab" data-toggle="pill" href="#pills-tfconfig"
+                               role="tab">Teamform Config</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-body">
-              <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-esettings" role="tabpanel"></div>
-                <div class="tab-pane fade" id="pills-users" role="tabpanel"></div>
-                <div class="tab-pane fade" id="pills-tfconfig" role="tabpanel"></div>
-                <script>
-                  $("#pills-esettings").load("/admin_tab/event_settings.html");
-                  $("#pills-users").load("/admin_tab/users.html");
-                  $("#pills-tfconfig").load("/admin_tab/teamform_config.html");
-                </script>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+        <div class="col-lg-8 col-sm-12">
+            <div class="card-deck">
+                <div class="card bg-light mb-3">
+                    <div class="card-header">
+                        <h4 class="align-middle mb-0" id="admin-header">N/A</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-esettings" role="tabpanel"></div>
+                            <div class="tab-pane fade" id="pills-users" role="tabpanel"></div>
+                            <div class="tab-pane fade" id="pills-tfconfig" role="tabpanel"></div>
+                            <script>
+                                $("#pills-esettings").load("/admin_tab/event_settings.html");
+                                $("#pills-users").load("/admin_tab/users.html");
+                                $("#pills-tfconfig").load("/admin_tab/teamform_config.html");
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
 
-  <div id="loginContainer"></div>
-  <script>
+<div id="loginContainer"></div>
+<script>
     $("#loginContainer").load("/loginPanel.html");
-  </script>
+</script>
 
-  <script>
+<script>
     $("#navBarContainer").load("/navBar.html");
-  </script>
-  <script src="js/admin.js"></script>
-  <script>
+</script>
+<script src="js/admin.js"></script>
+<script>
     $(window.location.hash).tab('show');
     $('#admin-header').text($('#admin-pills-tab .active').text());
-    $('#admin-pills-tab a').on('click', function(e) {
-      window.location.replace("admin.html"+"#"+$(this).attr('id'));
-      $('#admin-header').text($(this).text());
+    $('#admin-pills-tab a').on('click', function (e) {
+        window.location.replace("admin.html" + "#" + $(this).attr('id'));
+        $('#admin-header').text($(this).text());
     });
-  </script>
+</script>
 </body>
 
 </html>

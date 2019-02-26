@@ -1,5 +1,5 @@
-var matchId = findGetParameter("match");
-var eventId = findGetParameter("match").split("_")[0];
+const matchId = findGetParameter("match");
+const eventId = findGetParameter("match").split("_")[0];
 $("#matchId").html(matchId.split("_")[1]);
 $("#eventId").html(eventId);
 firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once('value').then(function (snapshot) {
@@ -45,8 +45,8 @@ function ajaxMatch() {
 }
 
 $.when(ajaxMatch()).done(function (match) {
-    for (var k in match.score_breakdown.red) {
-        var tr = "<tr>";
+    for (let k in match.score_breakdown.red) {
+        let tr = "<tr>";
         tr += "<td class='table-danger'>"
         tr += match.score_breakdown.red[k];
         tr += "</td><td>";
