@@ -1,4 +1,4 @@
-function renderTeamformItem(v) {
+function renderTeamformDisplay(v) {
     let field = '';
     if (v.type === 'title') {
         field += v.displayName;
@@ -25,7 +25,7 @@ function renderTeamformItem(v) {
     return field;
 }
 
-function writeTeamFormData(f, data) {
+function encodeTeamformData(f, data) {
     if (f.type === 'title') return data;
     if (f.type === 'boolean') {
         data[f.name] = $("#" + f.Ttag).parent().hasClass("active");
