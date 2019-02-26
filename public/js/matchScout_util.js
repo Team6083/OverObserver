@@ -1,4 +1,4 @@
-function renderTeamformDisplay(v) {
+function renderTeamformItem(v) {
     let field = '';
     if (v.type === 'title') {
         field += v.displayName;

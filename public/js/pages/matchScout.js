@@ -1,7 +1,34 @@
+const teamId = findGetParameter("team");
+const matchId = findGetParameter("match");
+if (teamId != null) {
+    $("#teamId").html(findGetParameter("team"));
+}
+
+if (matchId != null) {
+    $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
+}
+const eventId = findGetParameter("match").split("_")[0];
+const editing = findGetParameter("edit");
+// Fetching GET data
+
+if (editing === 'true') {
+    $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
+}
+
+//Load form
+getTeamformWithEventId(eventId, function(data) {
+    for (const key in data.fields) {
+        let formItem = data.fields[key];
+        console.log(formItem);
+        $("#formContent").append(renderTeamformItem(formItem));
+    }
+    reloadNumberBtn();
+});
+
 //fetch data for edit mode
 firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + teamId).once('value').then(function (snapshot) {
     if (snapshot.exists()) {
-        if (data["notShow"]) {
+        if (snapshot.val()["notShow"]) {
             return;
         }
         getTeamformWithEventId(eventId, (fieldData) => {
@@ -23,7 +50,7 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + 
     }
 });
 
-function writeTeamFormToDB(event, match, team, data) {
+function writeScoutResultToDB(event, match, team, data) {
     firebase.database().ref("matchs/" + event + "/" + match + "/teamCollect/" + team).update(data, function (error) {
         if (error != null) {
             alert(error.code);
@@ -37,14 +64,14 @@ getTeamformWithEventId(eventId, function (data) {
         let data = {};
         for (const k in yearData) {
             const f = yearData[k];
-            data = writeTeamFormData(f, data);
+            data = encodeTeamformData(f, data);
         }
 
         data["notShow"] = false;
         if (editing !== 'true') {
             data["recorder"] = firebase.auth().currentUser.displayName;
         }
-        writeTeamFormToDB(eventId, matchId, teamId, data);
+        writeScoutResultToDB(eventId, matchId, teamId, data);
         if (editing !== 'true') {
             window.location = "/";
         } else {
@@ -59,7 +86,7 @@ $("#notShowBtn").click(function () {
         data["recorder"] = firebase.auth().currentUser.displayName;
     }
     data["notShow"] = true;
-    writeTeamFormToDB(eventId, matchId, teamId, data);
+    writeScoutResultToDB(eventId, matchId, teamId, data);
     if (editing !== 'true') {
         window.location = "/";
     } else {

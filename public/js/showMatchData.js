@@ -16,8 +16,8 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once
       $("#blue" + (i + 1).toString() + " .tbody").attr("name", teamData.blue[i.toString()]);
       $("#red" + (i + 1).toString() + " .title").html(teamData.red[i.toString()]);
       $("#blue" + (i + 1).toString() + " .title").html(teamData.blue[i.toString()]);
-      $("#red" + (i + 1).toString() + " .editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.red[i.toString()] + "&match=" + matchId);
-      $("#blue" + (i + 1).toString() + " .editBtn").attr("href", "/teamform.html?edit=true&team=" + teamData.blue[i.toString()] + "&match=" + matchId);
+      $("#red" + (i + 1).toString() + " .editBtn").attr("href", "/matchScout.html?edit=true&team=" + teamData.red[i.toString()] + "&match=" + matchId);
+      $("#blue" + (i + 1).toString() + " .editBtn").attr("href", "/matchScout.html?edit=true&team=" + teamData.blue[i.toString()] + "&match=" + matchId);
       $("#red" + (i + 1).toString()).attr("name", teamData.red[i.toString()]);
       $("#blue" + (i + 1).toString()).attr("name", teamData.blue[i.toString()]);
     }
