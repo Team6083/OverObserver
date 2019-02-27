@@ -57,8 +57,8 @@ if (typeof brutusin === "undefined") {
         };
     }
 
-    var BrutusinForms = new Object();
-    BrutusinForms.messages = {
+    var ScoutForms = new Object();
+    ScoutForms.messages = {
         "validationError": "Validation error",
         "required": "This field is **required**",
         "invalidValue": "Invalid field value",
@@ -86,19 +86,19 @@ if (typeof brutusin === "undefined") {
      * Callback functions to be notified after an HTML element has been rendered (passed as parameter).
      * @type type
      */
-    BrutusinForms.decorators = new Array();
+    ScoutForms.decorators = new Array();
 
-    BrutusinForms.addDecorator = function (f) {
-        BrutusinForms.decorators[BrutusinForms.decorators.length] = f;
+    ScoutForms.addDecorator = function (f) {
+        ScoutForms.decorators[ScoutForms.decorators.length] = f;
     };
 
-    BrutusinForms.onResolutionStarted = function (element) {
+    ScoutForms.onResolutionStarted = function (element) {
     };
 
-    BrutusinForms.onResolutionFinished = function (element) {
+    ScoutForms.onResolutionFinished = function (element) {
     };
 
-    BrutusinForms.onValidationError = function (element, message) {
+    ScoutForms.onValidationError = function (element, message) {
         element.focus();
         if (!element.className.includes(" error")) {
             element.className += " error";
@@ -106,7 +106,7 @@ if (typeof brutusin === "undefined") {
         alert(message);
     };
 
-    BrutusinForms.onValidationSuccess = function (element) {
+    ScoutForms.onValidationSuccess = function (element) {
         element.className = element.className.replace(" error", "");
     };
 
@@ -114,18 +114,18 @@ if (typeof brutusin === "undefined") {
      * Callback function to be notified after a form has been rendered (passed as parameter).
      * @type type
      */
-    BrutusinForms.postRender = null;
+    ScoutForms.postRender = null;
     /**
      * BrutusinForms instances created in the document
      * @type Array
      */
-    BrutusinForms.instances = new Array();
+    ScoutForms.instances = new Array();
     /**
      * BrutusinForms factory method
      * @param {type} schema schema object
-     * @returns {BrutusinForms.create.obj|Object|Object.create.obj}
+     * @returns {ScoutForms.create.obj|Object|Object.create.obj}
      */
-    BrutusinForms.create = function (schema) {
+    ScoutForms.create = function (schema) {
         var SCHEMA_ANY = {"type": "any"};
         var obj = new Object();
 
@@ -138,7 +138,7 @@ if (typeof brutusin === "undefined") {
         var initialValue;
         var inputCounter = 0;
         var root = schema;
-        var formId = "BrutusinForms#" + BrutusinForms.instances.length;
+        var formId = "BrutusinForms#" + ScoutForms.instances.length;
 
         renameRequiredPropeties(schema); // required v4 (array) -> requiredProperties
         populateSchemaMap("$", schema);
@@ -160,7 +160,6 @@ if (typeof brutusin === "undefined") {
         };
 
         renderers["string"] = function (container, id, parentObject, propertyProvider, value) {
-            /// TODO change the handler for when there is a 'media'
             /// specifier so it becomes a file element.
             var schemaId = getSchemaId(id);
             var parentId = getParentSchemaId(schemaId);
@@ -174,10 +173,6 @@ if (typeof brutusin === "undefined") {
                     if (s.readOnly)
                         input.disabled = true;
                 }
-            } else if (s.media) {
-                input = document.createElement("input");
-                input.type = "file";
-                // XXX TODO, encode the SOB properly.
             } else if (s.enum) {
                 input = document.createElement("select");
                 if (!s.required) {
@@ -210,16 +205,18 @@ if (typeof brutusin === "undefined") {
             } else {
                 input = document.createElement("input");
                 if (s.type === "integer" || s.type === "number") {
-                    input.type = "number";
-                    input.step = s.step?""+s.step:"any";
+                    input.step = s.step ? "" + s.step : "any";
+                    input.classList.add("text-center");
                     if (typeof value !== "number") {
                         value = null;
+                    }
+                    if (s.type === "integer") {
+                       input.classList.add("integer-input");
                     }
                 } else if (s.format === "date-time") {
                     try {
                         input.type = "datetime-local";
                     } catch (err) {
-                        // #46, problem in IE11. TODO polyfill?
                         input.type = "text";
                     }
                 } else if (s.format === "date") {
@@ -251,54 +248,54 @@ if (typeof brutusin === "undefined") {
                         if (s.required) {
                             if (parentSchema && parentSchema.type === "object") {
                                 if (parentSchema.required) {
-                                    return BrutusinForms.messages["required"];
+                                    return ScoutForms.messages["required"];
                                 } else {
                                     for (var prop in parentObject) {
                                         if (parentObject[prop] !== null) {
-                                            return BrutusinForms.messages["required"];
+                                            return ScoutForms.messages["required"];
                                         }
                                     }
                                 }
                             } else {
-                                return BrutusinForms.messages["required"];
+                                return ScoutForms.messages["required"];
                             }
                         }
                     } else {
                         if (s.pattern && !s.pattern.test(value)) {
-                            return BrutusinForms.messages["pattern"].format(s.pattern.source);
+                            return ScoutForms.messages["pattern"].format(s.pattern.source);
                         }
                         if (s.minLength) {
                             if (!value || s.minLength > value.length) {
-                                return BrutusinForms.messages["minLength"].format(s.minLength);
+                                return ScoutForms.messages["minLength"].format(s.minLength);
                             }
                         }
                         if (s.maxLength) {
                             if (value && s.maxLength < value.length) {
-                                return BrutusinForms.messages["maxLength"].format(s.maxLength);
+                                return ScoutForms.messages["maxLength"].format(s.maxLength);
                             }
                         }
                     }
                     if (value !== null && !isNaN(value)) {
                         if (s.multipleOf && value % s.multipleOf !== 0) {
-                            return BrutusinForms.messages["multipleOf"].format(s.multipleOf);
+                            return ScoutForms.messages["multipleOf"].format(s.multipleOf);
                         }
                         if (s.hasOwnProperty("maximum")) {
                             if (s.exclusiveMaximum && value >= s.maximum) {
-                                return BrutusinForms.messages["exclusiveMaximum"].format(s.maximum);
+                                return ScoutForms.messages["exclusiveMaximum"].format(s.maximum);
                             } else if (!s.exclusiveMaximum && value > s.maximum) {
-                                return BrutusinForms.messages["maximum"].format(s.maximum);
+                                return ScoutForms.messages["maximum"].format(s.maximum);
                             }
                         }
                         if (s.hasOwnProperty("minimum")) {
                             if (s.exclusiveMinimum && value <= s.minimum) {
-                                return BrutusinForms.messages["exclusiveMinimum"].format(s.minimum);
+                                return ScoutForms.messages["exclusiveMinimum"].format(s.minimum);
                             } else if (!s.exclusiveMinimum && value < s.minimum) {
-                                return BrutusinForms.messages["minimum"].format(s.minimum);
+                                return ScoutForms.messages["minimum"].format(s.minimum);
                             }
                         }
                     }
                 } catch (error) {
-                    return BrutusinForms.messages["invalidValue"];
+                    return ScoutForms.messages["invalidValue"];
                 }
             };
 
@@ -360,13 +357,13 @@ if (typeof brutusin === "undefined") {
                 appendChild(input, emptyOption, s);
 
                 var optionTrue = document.createElement("option");
-                var textTrue = document.createTextNode(BrutusinForms.messages["true"]);
+                var textTrue = document.createTextNode(ScoutForms.messages["true"]);
                 optionTrue.value = "true";
                 appendChild(optionTrue, textTrue, s);
                 appendChild(input, optionTrue, s);
 
                 var optionFalse = document.createElement("option");
-                var textFalse = document.createTextNode(BrutusinForms.messages["false"]);
+                var textFalse = document.createTextNode(ScoutForms.messages["false"]);
                 optionFalse.value = "false";
                 appendChild(optionFalse, textFalse, s);
                 appendChild(input, optionFalse, s);
@@ -393,49 +390,6 @@ if (typeof brutusin === "undefined") {
             }
             input.onchange();
             appendChild(container, input, s);
-        };
-
-        renderers["oneOf"] = function (container, id, parentObject, propertyProvider, value) {
-            var schemaId = getSchemaId(id);
-            var s = getSchema(schemaId);
-            var input = document.createElement("select");
-            var display = document.createElement("div");
-            display.innerHTML = "";
-            input.type = "select";
-            input.schema = schemaId;
-            var noption = document.createElement("option");
-            noption.value = null;
-            appendChild(input, noption, s);
-            for (var i = 0; i < s.oneOf.length; i++) {
-                var option = document.createElement("option");
-                var propId = schemaId + "." + i;
-                var ss = getSchema(propId);
-                var textNode = document.createTextNode(ss.title);
-                option.value = s.oneOf[i];
-                appendChild(option, textNode, s);
-                appendChild(input, option, s);
-                if (value === undefined || value === null)
-                    continue;
-                if (s.readOnly)
-                    input.disabled = true;
-                if (value.hasOwnProperty("type")) {
-                    if (ss.hasOwnProperty("properties")) {
-                        if (ss.properties.hasOwnProperty("type")) {
-                            var tryit = getSchema(ss.properties.type);
-                            if (value.type === tryit.enum[0]) {
-                                input.selectedIndex = i + 1;
-                                render(null, display, id + "." + (input.selectedIndex - 1), parentObject, propertyProvider, value);
-                            }
-                        }
-                    }
-                }
-            }
-            input.onchange = function () {
-                render(null, display, id + "." + (input.selectedIndex - 1), parentObject, propertyProvider, value);
-            };
-            appendChild(container, input, s);
-            appendChild(container, display, s);
-
         };
 
         renderers["object"] = function (container, id, parentObject, propertyProvider, value) {
@@ -473,11 +427,11 @@ if (typeof brutusin === "undefined") {
                 nameInput.getValidationError = function () {
                     if (nameInput.previousValue !== nameInput.value) {
                         if (current.hasOwnProperty(nameInput.value)) {
-                            return BrutusinForms.messages["addpropNameExistent"];
+                            return ScoutForms.messages["addpropNameExistent"];
                         }
                     }
                     if (!nameInput.value) {
-                        return BrutusinForms.messages["addpropNameRequired"];
+                        return ScoutForms.messages["addpropNameRequired"];
                     }
                 };
                 var pp = createPropertyProvider(
@@ -563,37 +517,35 @@ if (typeof brutusin === "undefined") {
                     parentObject[propertyProvider.getValue()] = current;
                 }
             }
-            var table = document.createElement("table");
-            table.className = "object";
-            var tbody = document.createElement("tbody");
-            appendChild(table, tbody, s);
+            var outContainer = document.createElement("div");
             var propNum = 0;
             if (s.hasOwnProperty("properties")) {
                 propNum = s.properties.length;
                 for (var prop in s.properties) {
-                    var tr = document.createElement("tr");
-                    var td1 = document.createElement("td");
-                    td1.className = "prop-name";
+                    var row = document.createElement("div");
+                    row.className = "row form-group";
+                    var colTitle = document.createElement("div");
+                    colTitle.className = "col-6 prop-title";
                     var propId = id + "." + prop;
                     var propSchema = getSchema(getSchemaId(propId));
-                    var td2 = document.createElement("td");
-                    td2.className = "prop-value";
+                    var colValue = document.createElement("div");
+                    colValue.className = "col-6 prop-value";
 
-                    appendChild(tbody, tr, propSchema);
-                    appendChild(tr, td1, propSchema);
-                    appendChild(tr, td2, propSchema);
+                    appendChild(outContainer, row, propSchema);
+                    appendChild(row, colTitle, propSchema);
+                    appendChild(row, colValue, propSchema);
                     var pp = createStaticPropertyProvider(prop);
                     var propInitialValue = null;
                     if (value) {
                         propInitialValue = value[prop];
                     }
-                    render(td1, td2, propId, current, pp, propInitialValue);
+                    render(colTitle, colValue, propId, current, pp, propInitialValue);
                 }
             }
             var usedProps = [];
             if (s.patternProperties || s.additionalProperties) {
                 var div = document.createElement("div");
-                appendChild(div, table, s);
+                appendChild(div, outContainer, s);
                 if (s.patternProperties) {
                     for (var pattern in s.patternProperties) {
                         var patProps = s.patternProperties[pattern];
@@ -604,15 +556,15 @@ if (typeof brutusin === "undefined") {
                         addButton.pattern = pattern;
                         addButton.id = id + "[" + pattern + "]";
                         addButton.onclick = function () {
-                            addAdditionalProperty(current, table, this.id, undefined, undefined, this.pattern);
+                            addAdditionalProperty(current, outContainer, this.id, undefined, undefined, this.pattern);
                         };
                         if (s.maxProperties || s.minProperties) {
                             addButton.getValidationError = function () {
-                                if (s.minProperties && propNum + table.rows.length < s.minProperties) {
-                                    return BrutusinForms.messages["minProperties"].format(s.minProperties);
+                                if (s.minProperties && propNum + outContainer.rows.length < s.minProperties) {
+                                    return ScoutForms.messages["minProperties"].format(s.minProperties);
                                 }
-                                if (s.maxProperties && propNum + table.rows.length > s.maxProperties) {
-                                    return BrutusinForms.messages["maxProperties"].format(s.maxProperties);
+                                if (s.maxProperties && propNum + outContainer.rows.length > s.maxProperties) {
+                                    return ScoutForms.messages["maxProperties"].format(s.maxProperties);
                                 }
                             };
                         }
@@ -633,7 +585,7 @@ if (typeof brutusin === "undefined") {
                                 if (usedProps.indexOf(p) !== -1) {
                                     continue;
                                 }
-                                addAdditionalProperty(current, table, id + "[" + pattern + "]", p, value[p], pattern);
+                                addAdditionalProperty(current, outContainer, id + "[" + pattern + "]", p, value[p], pattern);
                                 usedProps.push(p);
                             }
                         }
@@ -645,15 +597,15 @@ if (typeof brutusin === "undefined") {
                     var addButton = document.createElement("button");
                     addButton.setAttribute('type', 'button');
                     addButton.onclick = function () {
-                        addAdditionalProperty(current, table, id + "[*]", undefined);
+                        addAdditionalProperty(current, outContainer, id + "[*]", undefined);
                     };
                     if (s.maxProperties || s.minProperties) {
                         addButton.getValidationError = function () {
-                            if (s.minProperties && propNum + table.rows.length < s.minProperties) {
-                                return BrutusinForms.messages["minProperties"].format(s.minProperties);
+                            if (s.minProperties && propNum + outContainer.rows.length < s.minProperties) {
+                                return ScoutForms.messages["minProperties"].format(s.minProperties);
                             }
-                            if (s.maxProperties && propNum + table.rows.length > s.maxProperties) {
-                                return BrutusinForms.messages["maxProperties"].format(s.maxProperties);
+                            if (s.maxProperties && propNum + outContainer.rows.length > s.maxProperties) {
+                                return ScoutForms.messages["maxProperties"].format(s.maxProperties);
                             }
                         };
                     }
@@ -670,121 +622,16 @@ if (typeof brutusin === "undefined") {
                             if (usedProps.indexOf(p) !== -1) {
                                 continue;
                             }
-                            addAdditionalProperty(current, table, id + "[\"" + prop + "\"]", p, value[p]);
+                            addAdditionalProperty(current, outContainer, id + "[\"" + prop + "\"]", p, value[p]);
                         }
                     }
                 }
                 appendChild(container, div, s);
             } else {
-                appendChild(container, table, s);
+                appendChild(container, outContainer, s);
             }
         };
         // end of object renderer
-        renderers["array"] = function (container, id, parentObject, propertyProvider, value) {
-            function addItem(current, table, id, value, readOnly) {
-                var schemaId = getSchemaId(id);
-                var s = getSchema(schemaId);
-                var tbody = document.createElement("tbody");
-                var tr = document.createElement("tr");
-                tr.className = "item";
-                var td1 = document.createElement("td");
-                td1.className = "item-index";
-                var td2 = document.createElement("td");
-                td2.className = "item-action";
-                var td3 = document.createElement("td");
-                td3.className = "item-value";
-                var removeButton = document.createElement("button");
-                removeButton.setAttribute('type', 'button');
-                removeButton.className = "remove";
-                if (readOnly === true)
-                    removeButton.disabled = true;
-                appendChild(removeButton, document.createTextNode("x"), s);
-                var computRowCount = function () {
-                    for (var i = 0; i < table.rows.length; i++) {
-                        var row = table.rows[i];
-                        row.cells[0].innerHTML = i + 1;
-                    }
-                };
-                removeButton.onclick = function () {
-                    current.splice(tr.rowIndex, 1);
-                    table.deleteRow(tr.rowIndex);
-                    computRowCount();
-                };
-                appendChild(td2, removeButton, s);
-                var number = document.createTextNode(table.rows.length + 1);
-                appendChild(td1, number, s);
-                appendChild(tr, td1, s);
-                appendChild(tr, td2, s);
-                appendChild(tr, td3, s);
-                appendChild(tbody, tr, s);
-                appendChild(table, tbody, s);
-                var pp = createPropertyProvider(function () {
-                    return tr.rowIndex;
-                });
-                render(null, td3, id, current, pp, value);
-            }
-
-            var schemaId = getSchemaId(id);
-            var s = getSchema(schemaId);
-            var itemS = getSchema(s.items);
-            var current = new Array();
-            if (!parentObject) {
-                data = current;
-            } else {
-                if (propertyProvider.getValue() || propertyProvider.getValue() === 0) {
-                    parentObject[propertyProvider.getValue()] = current;
-                }
-            }
-            if (propertyProvider) {
-                propertyProvider.onchange = function (oldPropertyName) {
-                    delete parentObject[oldPropertyName];
-                    parentObject[propertyProvider.getValue()] = current;
-                };
-            }
-            var div = document.createElement("div");
-            var table = document.createElement("table");
-            table.className = "array";
-            appendChild(div, table, s);
-            appendChild(container, div, s);
-            var addButton = document.createElement("button");
-            if (s.readOnly)
-                addButton.disabled = true;
-            addButton.setAttribute('type', 'button');
-            addButton.className = "addItem";
-            addButton.getValidationError = function () {
-                if (s.minItems && s.minItems > table.rows.length) {
-                    return BrutusinForms.messages["minItems"].format(s.minItems);
-                }
-                if (s.maxItems && s.maxItems < table.rows.length) {
-                    return BrutusinForms.messages["maxItems"].format(s.maxItems);
-                }
-                if (s.uniqueItems) {
-                    for (var i = 0; i < current.length; i++) {
-                        for (var j = i + 1; j < current.length; j++) {
-                            if (JSON.stringify(current[i]) === JSON.stringify(current[j])) {
-                                return BrutusinForms.messages["uniqueItems"];
-                            }
-                        }
-                    }
-                }
-            };
-            addButton.onclick = function () {
-                addItem(current, table, id + "[#]", null);
-            };
-            if (itemS.description) {
-                addButton.title = itemS.description;
-            }
-            appendChild(addButton, document.createTextNode(BrutusinForms.messages["addItem"]), s);
-            appendChild(div, table, s);
-            appendChild(div, addButton, s);
-            if (value && value instanceof Array) {
-                for (var i = 0; i < value.length; i++) {
-                    addItem(current, table, id + "[" + i + "]", value[i], s.readOnly);
-                }
-            }
-            appendChild(container, div, s);
-        };
-        // end of array render
         /**
          * Renders the form inside the the container, with the specified data preloaded
          * @param {type} c container
@@ -794,7 +641,7 @@ if (typeof brutusin === "undefined") {
         obj.render = function (c, data) {
             container = c;
             initialValue = data;
-            var form = document.createElement("form");
+            var form = document.createElement("div");
             form.className = "brutusin-form";
             form.onsubmit = function (event) {
                 return false;
@@ -816,8 +663,8 @@ if (typeof brutusin === "undefined") {
             if (dependencyMap.hasOwnProperty("$")) {
                 onDependencyChanged("$");
             }
-            if (BrutusinForms.postRender) {
-                BrutusinForms.postRender(obj);
+            if (ScoutForms.postRender) {
+                ScoutForms.postRender(obj);
             }
         };
 
@@ -888,6 +735,7 @@ if (typeof brutusin === "undefined") {
                     return object;
                 }
             }
+
             if (!container) {
                 return null;
             } else {
@@ -895,7 +743,7 @@ if (typeof brutusin === "undefined") {
             }
         };
 
-        BrutusinForms.instances[BrutusinForms.instances.length] = obj;
+        ScoutForms.instances[ScoutForms.instances.length] = obj;
 
         return obj;
 
@@ -918,6 +766,7 @@ if (typeof brutusin === "undefined") {
                 }
                 delete stack[id];
             }
+
             var visitInfo = new Object();
             for (var id in dependencyMap) {
                 if (visitInfo.hasOwnProperty(id)) {
@@ -929,8 +778,8 @@ if (typeof brutusin === "undefined") {
 
         function appendChild(parent, child, schema) {
             parent.appendChild(child);
-            for (var i = 0; i < BrutusinForms.decorators.length; i++) {
-                BrutusinForms.decorators[i](child, schema);
+            for (var i = 0; i < ScoutForms.decorators.length; i++) {
+                ScoutForms.decorators[i](child, schema);
             }
         }
 
@@ -1153,10 +1002,10 @@ if (typeof brutusin === "undefined") {
             if (element.hasOwnProperty("getValidationError")) {
                 var error = element.getValidationError();
                 if (error) {
-                    BrutusinForms.onValidationError(element, error);
+                    ScoutForms.onValidationError(element, error);
                     ret = false;
                 } else {
-                    BrutusinForms.onValidationSuccess(element);
+                    ScoutForms.onValidationSuccess(element);
                 }
             }
             if (element.childNodes) {
@@ -1189,7 +1038,7 @@ if (typeof brutusin === "undefined") {
             renderInfoMap[schemaId].value = value;
             clear(titleContainer);
             clear(container);
-            //console.log(id,s,value);
+            // console.log(id,s,value);
             var r = renderers[s.type];
             if (r && !s.dependsOn) {
                 if (s.title) {
@@ -1219,9 +1068,9 @@ if (typeof brutusin === "undefined") {
                                 }
                             }
                         }
-                        BrutusinForms.onResolutionFinished(parentObject);
+                        ScoutForms.onResolutionFinished(parentObject);
                     };
-                    BrutusinForms.onResolutionStarted(parentObject);
+                    ScoutForms.onResolutionStarted(parentObject);
                     obj.schemaResolver([id], obj.getData(), cb);
                 }
             }
@@ -1316,6 +1165,7 @@ if (typeof brutusin === "undefined") {
                 }
             }
         }
+
         function cleanData(schemaId) {
             var expression = new Expression(schemaId);
             expression.visit(data, function (data, parent, property) {
@@ -1343,9 +1193,9 @@ if (typeof brutusin === "undefined") {
                         }
                     }
                 }
-                BrutusinForms.onResolutionFinished(source);
+                ScoutForms.onResolutionFinished(source);
             };
-            BrutusinForms.onResolutionStarted(source);
+            ScoutForms.onResolutionStarted(source);
             obj.schemaResolver(arr, obj.getData(), cb);
 
 
@@ -1469,6 +1319,7 @@ if (typeof brutusin === "undefined") {
                         throw ("Node type '" + typeof data + "' not supported for index field '" + name + "'");
                     }
                 }
+
                 visit(this.exp, this.queue, data);
             };
 
@@ -1527,5 +1378,5 @@ if (typeof brutusin === "undefined") {
             }
         }
     };
-    brutusin["json-forms"] = BrutusinForms;
+    brutusin["json-forms"] = ScoutForms;
 }());
