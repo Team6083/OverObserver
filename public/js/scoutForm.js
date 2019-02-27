@@ -139,6 +139,7 @@ if (typeof scoutForm === "undefined") {
                 trueRadio.type = "radio";
                 trueRadio.id = id + "-true";
                 trueRadio.setAttribute("autocomplete", "off");
+                trueRadio.setAttribute("name", id);
                 appendChild(trueLabel, trueRadio);
                 appendChild(trueLabel, document.createTextNode((s.trueBtnLabel) ? s.trueBtnLabel : "true"));
                 appendChild(input, trueLabel);
@@ -149,6 +150,7 @@ if (typeof scoutForm === "undefined") {
                 falseRadio.type = "radio";
                 falseRadio.id = id + "-false";
                 falseRadio.setAttribute("autocomplete", "off");
+                falseRadio.setAttribute("name", id);
                 appendChild(falseLabel, falseRadio);
                 appendChild(falseLabel, document.createTextNode((s.falseBtnLabel) ? s.falseBtnLabel : "false"));
                 appendChild(input, falseLabel);
@@ -175,6 +177,35 @@ if (typeof scoutForm === "undefined") {
             }
 
             render(div);
+        };
+
+        obj.getData = function () {
+            let data = {};
+
+            for (const id in root.fields) {
+                const s = root.fields[id];
+                switch (s.type) {
+                    case "integer":
+                        data[id] = parseInt(document.getElementById(id).value);
+                        break;
+                    case "number":
+                        data[id] = parseFloat(document.getElementById(id).value);
+                        break;
+                    case "any":
+                    case "string":
+                        data[id] = document.getElementById(id).value;
+                        break;
+                    case "checkbox":
+
+                        break;
+                    case "boolean":
+                        let radio = document.getElementById(id).childNodes[0].childNodes[0];
+                        data[id] = radio.checked;
+                        break;
+                }
+            }
+
+            return data;
         };
 
         return obj;
