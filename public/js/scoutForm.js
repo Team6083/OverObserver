@@ -78,8 +78,8 @@ if (typeof scoutForm === "undefined") {
                     }
                     if (s.type === "integer") {
                         input.classList.add("integer-input");
-                        if (s.min) input.setAttribute("min", s.min.toString());
-                        if (s.max) input.setAttribute("max", s.max.toString());
+                        if (s.min || s.min === 0) input.setAttribute("min", s.min);
+                        if (s.max) input.setAttribute("max", s.max);
                     }
                 } else if (s.format === "date-time") {
                     try {
@@ -237,7 +237,7 @@ if (typeof scoutForm === "undefined") {
             let col2 = document.createElement("div");
             col2.className = "col-6";
             col1.innerHTML = para.title;
-            if(para.type === "title"){
+            if (para.type === "title") {
                 col1.className = "col-12";
                 col2.className = "col-0"
             } else {
