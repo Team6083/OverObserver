@@ -1,0 +1,112 @@
+{
+  "fields": {
+    "startingLocation": {
+      "type": "string",
+      "title": "Starting location",
+      "enum": [
+        "Unknown",
+        "HAB Level 1",
+        "HAB Level 2"
+      ],
+      "required": true
+    },
+    "crossHabLine":{
+      "type": "boolean",
+      "title": "Cross Hab Line",
+      "trueBtnLabel": "Success",
+      "falseBtnLabel": "Fail"
+    },
+    "autoShipPanel":{
+      "type": "integer",
+      "title": "Panels on Ship",
+      "min": 0,
+      "default": 0
+    },
+    "autoRocketPanel1": {
+      "type": "integer",
+      "title": "Panels on Low Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "autoRocketPanel2": {
+      "type": "integer",
+      "title": "Panels on Middle/High Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "autoShipCargo":{
+      "type": "integer",
+      "title": "Cargo on Ship",
+      "min": 0,
+      "default": 0
+    },
+    "autoRocketCargo1": {
+      "type": "integer",
+      "title": "Cargo on Low Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "autoRocketCargo2": {
+      "type": "integer",
+      "title": "Cargo on Middle/High Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "teleopShipPanel":{
+      "type": "integer",
+      "title": "Panels on Ship",
+      "min": 0,
+      "default": 0
+    },
+    "teleopRocketPanel1": {
+      "type": "integer",
+      "title": "Panels on Low Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "teleopRocketPanel2": {
+      "type": "integer",
+      "title": "Panels on Middle/High Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "teleopShipCargo":{
+      "type": "integer",
+      "title": "Cargo on Ship",
+      "min": 0,
+      "default": 0
+    },
+    "teleopRocketCargo1": {
+      "type": "integer",
+      "title": "Cargo on Low Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "teleopRocketCargo2": {
+      "type": "integer",
+      "title": "Cargo on Middle/High Rocket",
+      "min": 0,
+      "default": 0
+    },
+    "endLocation": {
+      "type": "string",
+      "title": "Endgame location",
+      "enum": [
+        "Not on HAB",
+        "HAB Level 1",
+        "HAB Level 2",
+        "HAB Level 3"
+      ],
+      "required": true
+    },
+    "robotBroke": {
+      "type": "checkbox",
+      "title": "Robot broken"
+    },
+    "otherNotes":{
+      "type" : "string",
+      "format": "text",
+      "title": "notes"
+    }
+  }
+}

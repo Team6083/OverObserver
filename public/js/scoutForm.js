@@ -36,20 +36,21 @@ if (typeof scoutForm === "undefined") {
                 }
             } else if (s.enum) {
                 input = document.createElement("select");
+                input.className = "form-control";
                 if (!s.required) {
                     let option = document.createElement("option");
                     let textNode = document.createTextNode("");
                     option.value = "";
-                    appendItem(option, textNode);
-                    appendItem(input, option);
+                    appendChild(option, textNode);
+                    appendChild(input, option);
                 }
                 let selectedIndex = 0;
                 for (let i = 0; i < s.enum.length; i++) {
                     let option = document.createElement("option");
                     let textNode = document.createTextNode(s.enum[i]);
                     option.value = s.enum[i];
-                    appendItem(option, textNode);
-                    appendItem(input, option);
+                    appendChild(option, textNode);
+                    appendChild(input, option);
                     if (value && s.enum[i] === value) {
                         selectedIndex = i;
                         if (!s.required) {
@@ -94,6 +95,7 @@ if (typeof scoutForm === "undefined") {
                     input.type = "email";
                 } else if (s.format === "text") {
                     input = document.createElement("textarea");
+                    input.className = "form-control";
                 } else {
                     input.type = "text";
                 }
@@ -228,7 +230,7 @@ if (typeof scoutForm === "undefined") {
             col1.className = "col-6";
             let col2 = document.createElement("div");
             col2.className = "col-6";
-            col1.appendChild(document.createTextNode(para.title));
+            col1.innerHTML = para.title;
             col2.appendChild(child);
             row.appendChild(col1);
             row.appendChild(col2);
