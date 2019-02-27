@@ -71,11 +71,14 @@ if (typeof scoutForm === "undefined") {
                 if (s.type === "integer" || s.type === "number") {
                     input.step = s.step ? "" + s.step : "any";
                     input.classList.add("text-center");
+                    input.type = "number";
                     if (typeof value !== "number") {
                         value = null;
                     }
                     if (s.type === "integer") {
                         input.classList.add("integer-input");
+                        if (s.min) input.setAttribute("min", s.min.toString());
+                        if (s.max) input.setAttribute("max", s.max.toString());
                     }
                 } else if (s.format === "date-time") {
                     try {
