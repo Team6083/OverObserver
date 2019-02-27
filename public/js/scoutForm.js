@@ -169,6 +169,12 @@ if (typeof scoutForm === "undefined") {
             appendItem(container, input, s);
         };
 
+        renderers["title"] = function (container, id, parentObject, property, value) {
+            let s = property;
+
+            appendItem(container, null, s);
+        };
+
         let obj = {};
         obj.render = function (c, data) {
             let container = c;
@@ -231,7 +237,12 @@ if (typeof scoutForm === "undefined") {
             let col2 = document.createElement("div");
             col2.className = "col-6";
             col1.innerHTML = para.title;
-            col2.appendChild(child);
+            if(para.type === "title"){
+                col1.className = "col-12";
+                col2.className = "col-0"
+            } else {
+                col2.appendChild(child);
+            }
             row.appendChild(col1);
             row.appendChild(col2);
             parent.appendChild(row);
