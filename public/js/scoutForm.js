@@ -1,5 +1,3 @@
-import * as s from "firebase-functions";
-
 if (typeof scoutForm === "undefined") {
     window.scoutForm = new Object();
 } else if (typeof scoutForm !== "object") {
@@ -7,12 +5,12 @@ if (typeof scoutForm === "undefined") {
 }
 
 (function () {
-    const ScoutForms = {};
+    const ScoutForms = new Object();
 
     ScoutForms.create = function (schema) {
         const renderers = {};
         const root = schema;
-        let initialValue;
+        let initialValue = {};
 
         renderers["integer"] = function (container, id, parentObject, property, value) {
             renderers["string"](container, id, parentObject, property, value);
@@ -42,16 +40,16 @@ if (typeof scoutForm === "undefined") {
                     let option = document.createElement("option");
                     let textNode = document.createTextNode("");
                     option.value = "";
-                    appendChild(option, textNode);
-                    appendChild(input, option);
+                    appendItem(option, textNode);
+                    appendItem(input, option);
                 }
                 let selectedIndex = 0;
                 for (let i = 0; i < s.enum.length; i++) {
                     let option = document.createElement("option");
                     let textNode = document.createTextNode(s.enum[i]);
                     option.value = s.enum[i];
-                    appendChild(option, textNode);
-                    appendChild(input, option);
+                    appendItem(option, textNode);
+                    appendItem(input, option);
                     if (value && s.enum[i] === value) {
                         selectedIndex = i;
                         if (!s.required) {
@@ -67,6 +65,9 @@ if (typeof scoutForm === "undefined") {
                     input.selectedIndex = selectedIndex;
             } else {
                 input = document.createElement("input");
+
+                input.className = "form-control";
+
                 if (s.type === "integer" || s.type === "number") {
                     input.step = s.step ? "" + s.step : "any";
                     input.classList.add("text-center");
@@ -101,7 +102,7 @@ if (typeof scoutForm === "undefined") {
 
                 }
             }
-            input.schema = schemaId;
+
             input.setAttribute("autocorrect", "off");
 
             if (s.description) {
@@ -110,7 +111,8 @@ if (typeof scoutForm === "undefined") {
             }
 
             input.id = id;
-            return input;
+
+            appendItem(container, input, s);
         };
 
         renderers["checkbox"] = function (container, id, parentObject, property, value) {
@@ -137,18 +139,18 @@ if (typeof scoutForm === "undefined") {
                 trueRadio.type = "radio";
                 trueRadio.id = id + "-true";
                 trueRadio.setAttribute("autocomplete", "off");
-                appendChild(trueRadio, (s.trueBtnLabel) ? document.createTextNode(s.trueBtnLabel) : "true");
                 appendChild(trueLabel, trueRadio);
+                appendChild(trueLabel, document.createTextNode((s.trueBtnLabel) ? s.trueBtnLabel : "true"));
                 appendChild(input, trueLabel);
 
                 let falseLabel = document.createElement("label");
-                falseLabel.className = "btn btn-outline-success";
+                falseLabel.className = "btn btn-outline-warning";
                 let falseRadio = document.createElement("input");
                 falseRadio.type = "radio";
                 falseRadio.id = id + "-false";
                 falseRadio.setAttribute("autocomplete", "off");
-                appendChild(falseRadio, (s.falseBtnLabel) ? document.createTextNode(s.falseBtnLabel) : "false");
                 appendChild(falseLabel, falseRadio);
+                appendChild(falseLabel, document.createTextNode((s.falseBtnLabel) ? s.falseBtnLabel : "false"));
                 appendChild(input, falseLabel);
             }
 
@@ -156,28 +158,43 @@ if (typeof scoutForm === "undefined") {
             if (s.description) {
                 input.title = s.description;
             }
-            return input;
+
+            appendItem(container, input, s);
         };
 
         let obj = {};
         obj.render = function (c, data) {
             let container = c;
             initialValue = data;
-            const form = document.createElement("form");
-            form.id = "scoreForm";
+            const div = document.createElement("div");
+            div.id = "scoreFormDiv";
             if (container) {
-                appendChild(container, form);
+                container.appendChild(div);
             } else {
-                appendChild(document.body, form);
+                document.body.appendChild(div);
             }
 
-            render(form);
+            render(div);
         };
 
         return obj;
 
         function appendChild(parent, child) {
             parent.appendChild(child);
+        }
+
+        function appendItem(parent, child, para) {
+            let row = document.createElement("div");
+            row.className = "row form-group";
+            let col1 = document.createElement("div");
+            col1.className = "col-6";
+            let col2 = document.createElement("div");
+            col2.className = "col-6";
+            col1.appendChild(document.createTextNode(para.title));
+            col2.appendChild(child);
+            row.appendChild(col1);
+            row.appendChild(col2);
+            parent.appendChild(row);
         }
 
         function clear(container) {
@@ -191,16 +208,23 @@ if (typeof scoutForm === "undefined") {
         function render(container) {
             clear(container);
 
-            for(const id in root.fields){
+            for (const id in root.fields) {
                 const s = root.fields[id];
                 const r = renderers[s.type];
 
-                if(r){
-                    r(container, id, null, s, initialValue[id]);
+                if (r) {
+                    let value;
+                    if (typeof initialValue !== "undefined" && initialValue !== null) {
+                        value = initialValue[id];
+                    } else {
+                        value = s.default;
+                    }
+
+                    r(container, id, null, s, value);
                 }
             }
         }
     };
 
-    document.scoutForm = ScoutForms;
+    scoutForm["scout-form"] = ScoutForms;
 }());

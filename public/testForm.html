@@ -12,12 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="js/firebase_main.js"></script>
-
-    <link rel="stylesheet"
-          href='https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/css/brutusin-json-forms.min.css'/>
-    <script src="js/lib/scout-json-forms.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/brutusin/json-forms@1.6.3/dist/js/brutusin-json-forms-bootstrap.min.js"></script>
-    <script src="js/lib/bootstrap-number-input.js"></script>
+    <script src="js/scoutForm.js"></script>
 </head>
 
 <body>
@@ -133,8 +128,7 @@
 <script src="js/matchScout_util.js"></script>
 <script>
     var schema = {
-        "type": "object",
-        "properties": {
+        "fields": {
             "pageNum": {
                 "type": "number",
                 "title": "Page number",
@@ -156,8 +150,8 @@
             }
         }
     };
-    var BrutusinForms = brutusin["json-forms"];
-    var bf = BrutusinForms.create(schema);
+
+    var bf = scoutForm["scout-form"].create(schema);
 
     var container = document.getElementById('container');
     bf.render(container);
