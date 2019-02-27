@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OverObserver</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
     <script src="js/firebase_main.js"></script>
     <script src="js/scoutForm.js"></script>
@@ -29,7 +34,8 @@
                     <div class="card-header">
                         <div class="row font-weight-bold">
                             <div class="col">
-                                <h4 class="mb-lg-0 mb-2">Match: <span class="badge badge-info" id="matchId">N/A</span></h4>
+                                <h4 class="mb-lg-0 mb-2">Match: <span class="badge badge-info" id="matchId">N/A</span>
+                                </h4>
                             </div>
                             <div class="w-100 d-lg-none"></div>
                             <div class="col">
@@ -44,20 +50,27 @@
                             <!-- EndBtn -->
                             <div class="row">
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-warning btn-lg btn-block" id="backBtn" data-toggle="modal" data-target="#leaveConfirmModal">回列表</button>
+                                    <button type="button" class="btn btn-warning btn-lg btn-block" id="backBtn"
+                                            data-toggle="modal" data-target="#leaveConfirmModal">回列表
+                                    </button>
                                 </div>
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#notShowConfirmModal">標記未上場</button>
+                                    <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal"
+                                            data-target="#notShowConfirmModal">標記未上場
+                                    </button>
                                 </div>
                                 <div class="col-12">
-                                    <button type="button" class="btn btn-success btn-lg btn-block mt-2" id="sendBtn" data-toggle="modal" data-target="#sendConfirmModal">確認送出</button>
+                                    <button type="button" class="btn btn-success btn-lg btn-block mt-2" id="sendBtn"
+                                            data-toggle="modal" data-target="#sendConfirmModal">確認送出
+                                    </button>
                                 </div>
                                 <div class="modal fade" id="leaveConfirmModal" tabindex="-1" role="dialog">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">確認離開</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -65,8 +78,11 @@
                                                 確定要離開嗎? 輸入的資料將會消失歐!
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                                <a id="backToListBtn" href="/" role="button" class="btn btn-danger">確定</a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    取消
+                                                </button>
+                                                <a id="backToListBtn" href="/" role="button"
+                                                   class="btn btn-danger">確定</a>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +93,8 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">確認送出</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -85,8 +102,11 @@
                                                 確定資料無誤嗎?
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                                                <button type="button" class="btn btn-success" id="sendConfBtn">確定</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    取消
+                                                </button>
+                                                <button type="button" class="btn btn-success" id="sendConfBtn">確定
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -97,12 +117,15 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">確認未上場?</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    取消
+                                                </button>
                                                 <button type="button" class="btn btn-danger" id="notShowBtn">確定</button>
                                             </div>
                                         </div>
@@ -127,42 +150,24 @@
 <script src="js/util.js"></script>
 <script src="js/matchScout_util.js"></script>
 <script>
-    var schema = {
-        "fields": {
-            "pageNum": {
-                "type": "number",
-                "title": "Page number",
-                "description": "Page number to be queried, `1-based`. See [Pagination](https://en.wikipedia.org/wiki/Pagination) for more details",
-                "default": 1,
-                "required": true
-            },
-            "pageSize": {
-                "type": "integer",
-                "title": "Page size",
-                "description": "Number of records per page",
-                "required": true,
-                "default": 10,
-                "max": 11,
-                "min": "0"
-            },
-            "box": {
-                "type": "boolean",
-                "title": "Check box",
-                "required": true
-            }
-        }
-    };
 
-    var bf = scoutForm["scout-form"].create(schema);
+    let request = new XMLHttpRequest();
+    request.open('GET', "/forms/2019.json");
+    request.responseType = 'json';
+    request.send();
+    var bf;
+    request.onload = function () {
+        bf = scoutForm["scout-form"].create(request.response);
+        var container = document.getElementById('container');
+        bf.render(container);
 
-    var container = document.getElementById('container');
-    bf.render(container);
+        $(".integer-input").bootstrapNumber({
+            upClass: 'primary',
+            downClass: 'danger',
+            center: true
+        });
+    }
 
-    $(".integer-input").bootstrapNumber({
-        upClass: 'primary',
-        downClass: 'danger',
-        center: true
-    });
 </script>
 </body>
 
