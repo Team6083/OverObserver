@@ -196,7 +196,11 @@ if (typeof scoutForm === "undefined") {
                         break;
                     case "any":
                     case "string":
-                        data[id] = document.getElementById(id).value;
+                        if (s.enum) {
+
+                        } else {
+                            data[id] = document.getElementById(id).value;
+                        }
                         break;
                     case "checkbox":
 
