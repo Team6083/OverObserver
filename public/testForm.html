@@ -150,14 +150,10 @@
 <script src="js/util.js"></script>
 <script src="js/matchScout_util.js"></script>
 <script>
-
-    let request = new XMLHttpRequest();
-    request.open('GET', "/forms/2019.json");
-    request.responseType = 'json';
-    request.send();
     var bf;
-    request.onload = function () {
+    scoutForm["scout-template"].connect("/forms/2019.json", (request) => {
         bf = scoutForm["scout-form"].create(request.response);
+        console.log(request.response);
         var container = document.getElementById('container');
         bf.render(container);
 
@@ -166,8 +162,7 @@
             downClass: 'danger',
             center: true
         });
-    }
-
+    });
 </script>
 </body>
 

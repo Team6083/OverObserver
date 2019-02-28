@@ -278,4 +278,16 @@ if (typeof scoutForm === "undefined") {
     };
 
     scoutForm["scout-form"] = ScoutForms;
+
+    const ScoutTemplate = new Object();
+    ScoutTemplate.connect = function (url, callback) {
+        const request = new XMLHttpRequest();
+        request.open('GET', url);
+        request.responseType = 'json';
+        request.send();
+        request.onload = () => {
+            callback(request);
+        };
+    }
+    scoutForm["scout-template"] = ScoutTemplate;
 }());
