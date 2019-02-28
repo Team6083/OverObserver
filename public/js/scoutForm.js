@@ -156,6 +156,15 @@ if (typeof scoutForm === "undefined") {
                 falseRadio.id = id + "-false";
                 falseRadio.setAttribute("autocomplete", "off");
                 falseRadio.setAttribute("name", id);
+
+                if (value === true || value !== false && s.default) {
+                    trueRadio.checked = true;
+                    trueLabel.classList.add("active");
+                } else if (value !== undefined || (s.default !== undefined && !s.default)) {
+                    falseRadio.checked = true;
+                    falseLabel.classList.add("active");
+                }
+
                 appendChild(falseLabel, falseRadio);
                 appendChild(falseLabel, document.createTextNode((s.falseBtnLabel) ? s.falseBtnLabel : "false"));
                 appendChild(input, falseLabel);
@@ -204,14 +213,10 @@ if (typeof scoutForm === "undefined") {
                         break;
                     case "any":
                     case "string":
-                        if (s.enum) {
-
-                        } else {
-                            data[id] = document.getElementById(id).value;
-                        }
+                        data[id] = document.getElementById(id).value;
                         break;
                     case "checkbox":
-
+                        data[id] = document.getElementById(id).checked;
                         break;
                     case "boolean":
                         let radio = document.getElementById(id).childNodes[0].childNodes[0];
