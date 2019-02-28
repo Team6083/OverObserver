@@ -100,39 +100,3 @@ getScoutFormPathWithEventId(eventId, (scoutFormPath) => {
         });
     });
 });
-
-getTeamformWithEventId(eventId, function (data) {
-    firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").once('value').then(function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-            $("[name=\"" + childSnapshot.key + "\"] .recorder").html(childSnapshot.child('recorder').val());
-            if (childSnapshot.child("notShow").val()) {
-                $("[name=\"" + childSnapshot.key + "\"] .notShow").removeClass("d-none");
-            } else {
-                function addTr(title, value) {
-                    return "<tr><td>" + title + "</td><td>" + value + "</td></tr>";
-                }
-
-                let out = '';
-                for (const k in data.fields) {
-                    const f = data.fields[k];
-                    let tr = "";
-
-                    switch (f.type) {
-                        case "boolean":
-                            tr = addTr(f.displayName, childSnapshot.child(f.name).val() ? f.displayT : f.displayF);
-                            break;
-                        case "int":
-                        case "textarea":
-                            tr = addTr(f.displayName, childSnapshot.child(f.name).val());
-                            break;
-                        case "title":
-                            tr = addTr(f.displayName, "");
-                            break;
-                    }
-                    out += tr;
-                }
-                $("tbody[name=\"" + childSnapshot.key + "\"]").append(out);
-            }
-        });
-    });
-});
