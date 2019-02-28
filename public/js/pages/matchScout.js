@@ -8,46 +8,37 @@ if (matchId != null) {
     $("#matchId").html(findGetParameter("match").split("_")[1].toUpperCase());
 }
 const eventId = findGetParameter("match").split("_")[0];
-const editing = findGetParameter("edit");
+const editing = findGetParameter("edit") === 'true';
 // Fetching GET data
 
-if (editing === 'true') {
+if (editing) {
     $("#backToListBtn").attr('href', '/showMatchData.html?match=' + matchId);
 }
 
-//Load form
-getTeamformWithEventId(eventId, function(data) {
-    for (const key in data.fields) {
-        let formItem = data.fields[key];
-        console.log(formItem);
-        $("#formContent").append(renderTeamformItem(formItem));
-    }
-    reloadNumberBtn();
-});
+//render form
+let form;
 
-//fetch data for edit mode
-firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + teamId).once('value').then(function (snapshot) {
-    if (snapshot.exists()) {
-        if (snapshot.val()["notShow"]) {
-            return;
-        }
-        getTeamformWithEventId(eventId, (fieldData) => {
-            const data = snapshot.val();
-            for (const key in fieldData.fields) {
-                const field = fieldData.fields[key];
+getScoutFormPathWithEventId(eventId, (path) => {
+    scoutForm["scout-template"].connect("/forms/2019.json", (request) => {
+        form = scoutForm["scout-form"].create(request.response);
+        console.log(request.response);
+        const container = document.getElementById('formContent');
 
-                if (field.type === 'boolean') {
-                    if (data[field.name]) {
-                        $("#" + field.Ttag).parent().addClass("active");
-                    } else {
-                        $("#" + field.Ftag).parent().addClass("active");
-                    }
-                } else {
-                    $("#" + field.name).val(data[field.name]);
-                }
+        firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect/" + teamId).once('value').then(function (snapshot) {
+            if (snapshot.exists() && !snapshot.val()["notShow"]) {
+                const data = snapshot.val();
+                form.render(container, data);
+            } else {
+                form.render(container);
             }
+
+            $(".integer-input").bootstrapNumber({
+                upClass: 'primary',
+                downClass: 'danger',
+                center: true
+            });
         });
-    }
+    });
 });
 
 function writeScoutResultToDB(event, match, team, data) {
@@ -58,39 +49,31 @@ function writeScoutResultToDB(event, match, team, data) {
     });
 }
 
-getTeamformWithEventId(eventId, function (data) {
-    const yearData = data.fields;
-    $("#sendConfBtn").click(function () {
-        let data = {};
-        for (const k in yearData) {
-            const f = yearData[k];
-            data = encodeTeamformData(f, data);
-        }
+$("#sendConfBtn").click(function () {
+    let data = form.getData();
 
-        data["notShow"] = false;
-        if (editing !== 'true') {
-            data["recorder"] = firebase.auth().currentUser.displayName;
-        }
-        writeScoutResultToDB(eventId, matchId, teamId, data);
-        if (editing !== 'true') {
-            window.location = "/";
-        } else {
-            window.location = '/showMatchData.html?match=' + matchId;
-        }
-    })
-});
-
-$("#notShowBtn").click(function () {
-    var data = {};
-    if (editing !== 'true') {
+    data["notShow"] = false;
+    if (!editing) {
         data["recorder"] = firebase.auth().currentUser.displayName;
     }
-    data["notShow"] = true;
     writeScoutResultToDB(eventId, matchId, teamId, data);
-    if (editing !== 'true') {
+    if (!editing) {
         window.location = "/";
     } else {
         window.location = '/showMatchData.html?match=' + matchId;
     }
+})
 
+$("#notShowBtn").click(function () {
+    let data = {};
+    if (!editing) {
+        data["recorder"] = firebase.auth().currentUser.displayName;
+    }
+    data["notShow"] = true;
+    writeScoutResultToDB(eventId, matchId, teamId, data);
+    if (!editing) {
+        window.location = "/";
+    } else {
+        window.location = '/showMatchData.html?match=' + matchId;
+    }
 });

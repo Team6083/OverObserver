@@ -37,6 +37,15 @@ function encodeTeamformData(f, data) {
     return data;
 }
 
+function getScoutFormPathWithEventId(eventId, callback) {
+    firebase.database().ref("events/" + eventId + "/scoutForm").once('value').then(function (snapshot) {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            callback(data);
+        }
+    });
+}
+
 function getTeamformWithEventId(eventId, callback) {
     firebase.database().ref("events/" + eventId + "/teamform").once('value').then(function (snapshot) {
         if (snapshot.exists()) {
