@@ -61,8 +61,6 @@ database.ref("settings").once('value').then(function (snapshot) {
 
         });
     });
-
-    // teamStat(eventId, teamId);
 });
 
 function setTextColor(target, val) {
