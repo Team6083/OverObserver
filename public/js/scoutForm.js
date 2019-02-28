@@ -293,6 +293,6 @@ if (typeof scoutForm === "undefined") {
         request.onload = () => {
             callback(request);
         };
-    }
+    };
     scoutForm["scout-template"] = ScoutTemplate;
 }());

@@ -39,84 +39,7 @@
                 <th scope="col">Avg</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Auto Scale 成功次數</th>
-                <td id="auto-scale-max">N/A</td>
-                <td id="auto-scale-min">N/A</td>
-                <td id="auto-scale-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Auto Scale 嘗試次數</th>
-                <td id="auto-scale-try-max">N/A</td>
-                <td id="auto-scale-try-min">N/A</td>
-                <td id="auto-scale-try-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Auto Switch 成功次數</th>
-                <td id="auto-switch-max">N/A</td>
-                <td id="auto-switch-min">N/A</td>
-                <td id="auto-switch-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Auto Switch 嘗試次數</th>
-                <td id="auto-switch-try-max">N/A</td>
-                <td id="auto-switch-try-min">N/A</td>
-                <td id="auto-switch-try-avg">N/A</td>
-              </tr>
-
-              <tr class="bg-info">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-
-              <!-- Tele -->
-              <tr>
-                <th scope="row">Tele Scale 成功次數</th>
-                <td id="tele-scale-max">N/A</td>
-                <td id="tele-scale-min">N/A</td>
-                <td id="tele-scale-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Tele Scale 嘗試次數</th>
-                <td id="tele-scale-try-max">N/A</td>
-                <td id="tele-scale-try-min">N/A</td>
-                <td id="tele-scale-try-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Tele Switch 成功次數</th>
-                <td id="tele-switch-max">N/A</td>
-                <td id="tele-switch-min">N/A</td>
-                <td id="tele-switch-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Tele Switch 嘗試次數</th>
-                <td id="tele-switch-try-max">N/A</td>
-                <td id="tele-switch-try-min">N/A</td>
-                <td id="tele-switch-try-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Tele Exchange 成功次數</th>
-                <td id="tele-exchange-max">N/A</td>
-                <td id="tele-exchange-min">N/A</td>
-                <td id="tele-exchange-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Tele Exchange 嘗試次數</th>
-                <td id="tele-exchange-try-max">N/A</td>
-                <td id="tele-exchange-try-min">N/A</td>
-                <td id="tele-exchange-try-avg">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">Auto Line次數</th>
-                <td id="auto-success">N/A</td>
-              </tr>
-              <tr>
-                <th scope="row">上升次數</th>
-                <td id="climb-success">N/A</td>
-              </tr>
+            <tbody id="container">
             </tbody>
           </table>
         </div>
@@ -132,15 +55,8 @@
   </script>
   <script src="js/util.js"></script>
   <script src="js/showTeamMatchs.js"></script>
-  <script>
-    var teamId = findGetParameter("team");
-    $("#thisTeam").html(teamId);
-    database.ref("settings").once('value').then(function(snapshot) {
-      var eventId = snapshot.child("currentEvent").val();
-      $("#thisEvent").html(eventId);
-      teamStat(eventId, teamId);
-    });
-  </script>
+  <script src="js/scoutForm.js"></script>
+  <script src="js/pages/teams.js"></script>
 </body>
 
 </html>
