@@ -2,7 +2,8 @@
   "fields": {
     "sandStormTitle": {
       "type": "title",
-      "title": "<h3><span class=\"badge badge-secondary\">Sandstorm</span></h3>"
+      "title": "<h3><span class=\"badge badge-secondary\">Sandstorm</span></h3>",
+      "shortenTitle": "<strong>Sandstorm</strong>"
     },
     "startingLocation": {
       "type": "string",
@@ -94,7 +95,8 @@
     },
     "teleopTitle": {
       "type": "title",
-      "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>"
+      "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
+      "shortenTitle": "<strong>手動時間</strong>"
     },
     "teleopShipPanel": {
       "type": "integer",
@@ -164,7 +166,7 @@
     },
     "teleopRocketCargo2Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-secondary\">火箭中/高</span> Cargo 失敗",
       "min": 0,
       "default": 0
     },
@@ -181,7 +183,8 @@
     },
     "summaryTitle": {
       "type": "title",
-      "title": "<h3><span class=\"badge badge-secondary\">Others</span></h3>"
+      "title": "<h3><span class=\"badge badge-secondary\">Others</span></h3>",
+      "shortenTitle": "<strong>Others</strong>"
     },
     "driverSkill": {
       "type": "integer",

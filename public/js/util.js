@@ -10,12 +10,3 @@ function findGetParameter(parameterName) {
         });
     return result;
 }
-
-
-function reloadNumberBtn() {
-    $(".numInput").bootstrapNumber({
-        upClass: 'primary',
-        downClass: 'danger',
-        center: true
-    });
-}
