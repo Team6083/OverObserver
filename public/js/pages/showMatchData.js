@@ -10,7 +10,7 @@ firebase.database().ref("matchs/" + eventId + "/" + matchId + "/alliances").once
         teamData["blue"] = snapshot.child("blue/team_keys").val();
         teamData["red"].score = snapshot.child("red/score").val();
         teamData["blue"].score = snapshot.child("blue/score").val();
-        $("#teamsTbody").append(addMatchList(matchId, teamData, 1));
+        renderMatchList(document.getElementById("teamsTbody"),matchId, teamData, 1)
 
         for (let i = 0; i < 3; i++) {
             $("#red" + (i + 1).toString() + " .tbody").attr("name", teamData.red[i.toString()]);
