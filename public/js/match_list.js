@@ -1,107 +1,145 @@
 /*
  *  Generate a row of match list with given data
  */
-function addMatchList(match, teams, mode) {
-  var tr = "<tr>";
-  if (mode == 0) {
-    tr += "<th id=\""+match+"-small\" scope=\"row\" rowspan=\"2\">" + "<a class=\"text-dark\" href=\"showMatchData.html?match="+match+"\">" + match.split("_")[1] + "</a></th>";
-    for (var i = 0; i < 3; i++) {
+
+function renderMatchList(container, match, teams, mode) {
+  let tr = document.createElement("tr");
+  let th = document.createElement("th");
+
+  th.id = match;
+  let matchAnchor = document.createElement("a");
+  matchAnchor.className = "text-dark";
+  matchAnchor.href = "showMatchData.html?match=" + match;
+  matchAnchor.innerText = match.split("_")[1];
+  th.appendChild(matchAnchor);
+
+  if (mode === 0) {
+    th.id = match + "-small";
+    th.setAttribute("scope", "row");
+    th.setAttribute("rowspan", 2);
+    tr.appendChild(th);
+
+    for (let i = 0; i < 3; i++) {
+      let td = document.createElement("td");
       if (teams.red[i.toString()].finish) {
-        tr += "<td class=\"table-danger\">";
-        tr += teams.red[i.toString()].num;
-        tr += "</td>";
+        td.className = "table-danger";
+        td.innerText = teams.red[i.toString()].num;
+        tr.appendChild(td);
       } else {
-        tr += "<td class=\"table-danger font-weight-bold\">";
-        tr += "<a href=\"/matchScout.html?team=" + teams.red[i.toString()].num + "&match=" + match + "\" class=\"text-dark\">";
-        tr += teams.red[i.toString()].num;
-        tr += "</a>"
-        tr += "</td>";
+        td.className = "table-danger";
+        let a = document.createElement("a");
+        a.className = "text-dark";
+        a.href = "matchScout.html?team=" + teams.red[i.toString()].num + "&match=" + match;
+        a.innerText = teams.red[i.toString()].num;
+        td.appendChild(a);
+        tr.appendChild(td);
       }
     }
-    tr += "</tr><tr>";
-    for (var i = 0; i < 3; i++) {
+    container.appendChild(tr);
+
+    tr = document.createElement("tr");
+    for (let i = 0; i < 3; i++) {
+      let td = document.createElement("td");
       if (teams.blue[i.toString()].finish) {
-        tr += "<td class=\"table-primary\">";
-        tr += teams.blue[i.toString()].num;
-        tr += "</td>";
+        td.className = "table-primary";
+        td.innerText = teams.blue[i.toString()].num;
+        tr.appendChild(td);
       } else {
-        tr += "<td class=\"table-primary font-weight-bold\">";
-        tr += "<a href=\"/matchScout.html?team=" + teams.blue[i.toString()].num + "&match=" + match + "\" class=\"text-dark\">";
-        tr += teams.blue[i.toString()].num;
-        tr += "</a>"
-        tr += "</td>";
+        td.className = "table-primary";
+        let a = document.createElement("a");
+        a.className = "text-dark";
+        a.href = "matchScout.html?team=" + teams.blue[i.toString()].num + "&match=" + match;
+        a.innerText = teams.blue[i.toString()].num;
+        td.appendChild(a);
+        tr.appendChild(td);
       }
     }
-  } else if (mode == 1) {
-    tr = "";
-    if(teams.red.score > teams.blue.score){
-      tr += "<tr class=\"font-weight-bold\">";
-    }else {
-      tr += "<tr>";
+    container.appendChild(tr);
+  } else if (mode === 1) {
+    if (teams.red.score > teams.blue.score) {
+      tr.className = "font-weight-bold";
     }
 
     for (var i = 0; i < 3; i++) {
-      tr += "<td class=\"table-danger\">";
-      tr += teams.red[i.toString()];
-      tr += "</td>";
+      let td = document.createElement("td");
+      td.className = "table-danger";
+      td.innerText = teams.red[i.toString()];
+      tr.appendChild(td);
     }
-    tr += "<td class=\"table-danger\">";
-    tr += teams.red.score;
-    if(teams.red.score > teams.blue.score){
-      tr += "  <span class=\"badge badge-pill badge-success\">Win</span>";
-    }
-    tr += "</td>";
-    tr += "</tr>";
 
-    if(teams.red.score < teams.blue.score){
-      tr += "<tr class=\"font-weight-bold\">";
-    }else {
-      tr += "<tr>";
+    let redScoreTd = document.createElement("td");
+    redScoreTd.className = "table-danger";
+    redScoreTd.innerText = teams.red.score;
+    if (teams.red.score > teams.blue.score) {
+      let span = document.createElement("span");
+      span.className = "badge badge-pill badge-success";
+      redScoreTd.appendChild(span);
+    }
+    tr.appendChild(redScoreTd);
+    container.appendChild(tr);
+
+    tr = document.createElement("tr");
+    if (teams.red.score < teams.blue.score) {
+      tr.className = "font-weight-bold";
     }
 
     for (var i = 0; i < 3; i++) {
-      tr += "<td class=\"table-primary\">";
-      tr += teams.blue[i.toString()];
-      tr += "</td>";
+      let td = document.createElement("td");
+      td.className = "table-primary";
+      td.innerText = teams.blue[i.toString()];
+      tr.appendChild(td);
     }
-    tr += "<td class=\"table-primary\">";
-    tr += teams.blue.score;
-    if(teams.red.score < teams.blue.score){
-      tr += "  <span class=\"badge badge-pill badge-success\">Win</span>";
+
+
+    let blueScoreTd = document.createElement("td");
+    blueScoreTd.className = "table-primary";
+    blueScoreTd.innerText = teams.blue.score;
+    if (teams.red.score < teams.blue.score) {
+      let span = document.createElement("span");
+      span.className = "badge badge-pill badge-success";
+      blueScoreTd.appendChild(span);
     }
-    tr += "</td>";
+    tr.appendChild(blueScoreTd);
+    container.appendChild(tr);
   } else {
-    tr += "<th id=\""+match+"-big\" scope=\"row\">";
-    tr += "<a class=\"text-dark\" href=\"showMatchData.html?match="+ match + "\">";
-    tr += match.split("_")[1];
-    tr += "</a></th>"
-    for (var i = 0; i < 3; i++) {
+    th.id = match + "-big";
+    tr.appendChild(th);
+
+    for (let i = 0; i < 3; i++) {
       if (teams.red[i.toString()].finish) {
-        tr += "<td class=\"table-danger\">";
-        tr += teams.red[i.toString()].num;
-        tr += "</td>";
+        let td = document.createElement("td");
+        td.className = "table-danger";
+        td.innerText = teams.red[i.toString()].num;
+        tr.appendChild(td);
       } else {
-        tr += "<td class=\"table-danger font-weight-bold\">";
-        tr += "<a href=\"/matchScout.html?team=" + teams.red[i.toString()].num + "&match=" + match + "\" class=\"text-dark\">";
-        tr += teams.red[i.toString()].num;
-        tr += "</a>"
-        tr += "</td>";
+        let td = document.createElement("td");
+        td.className = "table-danger font-weight-bold";
+        let a = document.createElement("a");
+        a.className = "text-dark";
+        a.href = "/matchScout.html?team=" + teams.red[i.toString()].num + "&match=" + match;
+        a.innerText = teams.red[i.toString()].num;
+        td.appendChild(a);
+        tr.appendChild(td);
       }
     }
-    for (var i = 0; i < 3; i++) {
+
+    for (let i = 0; i < 3; i++) {
       if (teams.blue[i.toString()].finish) {
-        tr += "<td class=\"table-primary\">";
-        tr += teams.blue[i.toString()].num;
-        tr += "</td>";
+        let td = document.createElement("td");
+        td.className = "table-primary";
+        td.innerText = teams.blue[i.toString()].num;
+        tr.appendChild(td);
       } else {
-        tr += "<td class=\"table-primary font-weight-bold\">";
-        tr += "<a href=\"/matchScout.html?team=" + teams.blue[i.toString()].num + "&match=" + match + "\" class=\"text-dark\">";
-        tr += teams.blue[i.toString()].num;
-        tr += "</a>"
-        tr += "</td>";
+        let td = document.createElement("td");
+        td.className = "table-primary font-weight-bold";
+        let a = document.createElement("a");
+        a.className = "text-dark";
+        a.href = "/matchScout.html?team=" + teams.blue[i.toString()].num + "&match=" + match;
+        a.innerText = teams.blue[i.toString()].num;
+        td.appendChild(a);
+        tr.appendChild(td);
       }
     }
+    container.appendChild(tr);
   }
-  tr += "</tr>";
-  return tr;
 }
