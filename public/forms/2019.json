@@ -29,7 +29,7 @@
     },
     "autoShipPanelFail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">貨船</span> Panel 失敗",
+      "title": "<span class=\"badge badge-pill badge-dark\">貨船</span> Panel <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
@@ -41,7 +41,7 @@
     },
     "autoRocketPanel1Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Panel 失敗",
+      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Panel <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
@@ -53,43 +53,43 @@
     },
     "autoRocketPanel2Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Panel 失敗",
+      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Panel <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
     "autoShipCargo": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">飛船</span> Cargo 成功",
+      "title": "<span class=\"badge badge-pill badge-primary\">貨船</span> Cargo 成功",
       "min": 0,
       "default": 0
     },
     "autoShipCargoFail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">飛船</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-primary\">貨船</span> Cargo <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
     "autoRocketCargo1": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Cargo 成功",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭低</span> Cargo 成功",
       "min": 0,
       "default": 0
     },
     "autoRocketCargo1Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭低</span> Cargo <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
     "autoRocketCargo2": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Cargo 成功",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭中/高</span> Cargo 成功",
       "min": 0,
       "default": 0
     },
     "autoRocketCargo2Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭中/高</span> Cargo <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
@@ -106,7 +106,7 @@
     },
     "teleopShipPanelFail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">貨船</span> Panel 失敗",
+      "title": "<span class=\"badge badge-pill badge-dark\">貨船</span> Panel <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
@@ -118,7 +118,7 @@
     },
     "teleopRocketPanel1Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Panel 失敗",
+      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Panel <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
@@ -130,43 +130,43 @@
     },
     "teleopRocketPanel2Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Panel 失敗",
+      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Panel <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
     "teleopShipCargo": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">飛船</span> Cargo 成功",
+      "title": "<span class=\"badge badge-pill badge-primary\">貨船</span> Cargo 成功",
       "min": 0,
       "default": 0
     },
     "teleopShipCargoFail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">飛船</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-primary\">貨船</span> Cargo <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
     "teleopRocketCargo1": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Cargo 成功",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭低</span> Cargo 成功",
       "min": 0,
       "default": 0
     },
     "teleopRocketCargo1Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭低</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭低</span> Cargo <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
     "teleopRocketCargo2": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-dark\">火箭中/高</span> Cargo 成功",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭中/高</span> Cargo 成功",
       "min": 0,
       "default": 0
     },
     "teleopRocketCargo2Fail": {
       "type": "integer",
-      "title": "<span class=\"badge badge-pill badge-secondary\">火箭中/高</span> Cargo 失敗",
+      "title": "<span class=\"badge badge-pill badge-primary\">火箭中/高</span> Cargo <span class=\"text-warning\">失敗</span>",
       "min": 0,
       "default": 0
     },
