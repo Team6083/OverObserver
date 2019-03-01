@@ -53,11 +53,12 @@ database.ref("settings").once('value').then(function (snapshot) {
                         case "integer":
                             let res = calculateMinAvgMax(id, teamCollect);
                             tdMin.innerText = res.min;
-                            tdAvg.innerText = res.avg + " (total: " + res.count + ")";
+                            tdAvg.innerText = res.avg;
                             tdMax.innerText = res.max;
                             setTextColor(tdMax, 0);
                             setTextColor(tdMin, 0);
                             setTextColor(tdAvg, 0);
+                            tdAvg.innerText = res.avg + " (total: " + res.count + ")";
                             break;
                         case "successRate":
                             let successRateRes = calculateSuccessRate(s.successId, s.failId, teamCollect);
@@ -80,8 +81,7 @@ database.ref("settings").once('value').then(function (snapshot) {
                                 let d = teamCollect[i];
                                 if (typeof d === 'boolean' && d) {
                                     count++;
-                                }
-                                else if(typeof d === 'number'){
+                                } else if (typeof d === 'number') {
                                     count += d;
                                 }
                             }
