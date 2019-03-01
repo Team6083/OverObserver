@@ -202,5 +202,96 @@
       "format": "text",
       "title": "其他"
     }
+  },
+  "statistics": {
+  },
+  "teamStat": {
+    "dataSet": {
+      "sandStormTitle": {"type": "default"},
+      "autoShipPanelRate": {
+        "title": "<span class=\"badge badge-pill badge-secondary\">S</span>Ship Panel 成功率",
+        "type": "successRate",
+        "successId": "autoShipPanel",
+        "failId": "autoShipPanelFail"
+      },
+      "autoRocketPanel1Rate": {
+        "title": "<span class=\"badge badge-pill badge-secondary\">S</span>Rocket Panel 1 成功率",
+        "type": "successRate",
+        "successId": "autoRocketPanel1",
+        "failId": "autoRocketPanel1Fail"
+      },
+      "autoRocketPanel2Rate": {
+        "title": "<span class=\"badge badge-pill badge-secondary\">S</span>Rocket Panel 2 成功率",
+        "type": "successRate",
+        "successId": "autoRocketPanel2",
+        "failId": "autoRocketPanel2Fail"
+      },
+      "autoShipCargoRate": {
+        "title": "<span class=\"badge badge-pill badge-secondary\">S</span>Ship Cargo 成功率",
+        "type": "successRate",
+        "successId": "autoShipCargo",
+        "failId": "autoShipCargoFail"
+      },
+      "autoRocketCargo1Rate": {
+        "title": "<span class=\"badge badge-pill badge-secondary\">S</span>Rocket Cargo 1 成功率",
+        "type": "successRate",
+        "successId": "autoRocketCargo1",
+        "failId": "autoRocketCargo1Fail"
+      },
+      "autoRocketCargo2Rate": {
+        "title": "<span class=\"badge badge-pill badge-secondary\">S</span>Rocket Cargo 2 成功率",
+        "type": "successRate",
+        "successId": "autoRocketCargo2",
+        "failId": "autoRocketCargo2Fail"
+      },
+      "teleopTitle": {"type": "default"},
+      "teleopShipPanelRate": {
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Ship Panel 成功率",
+        "type": "successRate",
+        "successId": "teleopShipPanel",
+        "failId": "teleopShipPanelFail"
+      },
+      "teleopRocketPanel1Rate": {
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Panel 1 成功率",
+        "type": "successRate",
+        "successId": "teleopRocketPanel1",
+        "failId": "teleopRocketPanel1Fail"
+      },
+      "teleopRocketPanel2Rate": {
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Panel 2 成功率",
+        "type": "successRate",
+        "successId": "teleopRocketPanel2",
+        "failId": "teleopRocketPanel2Fail"
+      },
+      "teleopShipCargoRate": {
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Ship Cargo 成功率",
+        "type": "successRate",
+        "successId": "teleopShipCargo",
+        "failId": "teleopShipCargoFail"
+      },
+      "teleopRocketCargo1Rate": {
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Cargo 1 成功率",
+        "type": "successRate",
+        "successId": "teleopRocketCargo1",
+        "failId": "teleopRocketCargo1Fail"
+      },
+      "teleopRocketCargo2Rate": {
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Cargo 2 成功率",
+        "type": "successRate",
+        "successId": "teleopRocketCargo2",
+        "failId": "teleopRocketCargo2Fail"
+      },
+      "crossHabLine": {
+        "title": "crossHabLine",
+        "type": "count",
+        "targetId": "crossHabLine"
+      },
+      "endLocation": {
+        "title": "Endgame location",
+        "type": "countEnum",
+        "targetId": "endLocation"
+      }
+    },
+    "robotBrokeId": "robotBroke"
   }
 }

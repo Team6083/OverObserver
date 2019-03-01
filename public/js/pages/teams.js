@@ -6,13 +6,23 @@ database.ref("settings").once('value').then(function (snapshot) {
     $("#thisEvent").html(eventId);
 
     scoutForm["scout-template"].connect("/forms/2019.json", (request) => {
-        const formTemplate = request.response;
+        const formTemplate = request.response.fields;
+        const teamStatTemplate = request.response.teamStat;
         let container = document.getElementById("container");
 
         findMatchWithTeam(eventId, teamId, (matches) => {
             getAllTeamCollect(matches, teamId, (teamCollect) => {
-                for (let id in formTemplate.fields) {
-                    let s = formTemplate.fields[id];
+
+                // remove broken match
+                for (let i in teamCollect) {
+                    let s = teamCollect[i];
+                    if (s[teamStatTemplate.robotBrokeId]) {
+                        teamCollect.pop(s);
+                    }
+                }
+
+                for (let id in teamStatTemplate.dataSet) {
+                    let s = teamStatTemplate.dataSet[id];
 
                     let tr = document.createElement("tr");
                     let th = document.createElement("th");
@@ -20,6 +30,10 @@ database.ref("settings").once('value').then(function (snapshot) {
                     let tdMin = document.createElement("td");
                     let tdAvg = document.createElement("td");
                     let tdMax = document.createElement("td");
+
+                    if (s.type === "default") {
+                        s = formTemplate[id];
+                    }
 
                     if (s.shortenTitle) {
                         th.innerHTML = s.shortenTitle;
@@ -41,9 +55,25 @@ database.ref("settings").once('value').then(function (snapshot) {
                             tdMin.innerText = res.min;
                             tdAvg.innerText = res.avg + " (total: " + res.count + ")";
                             tdMax.innerText = res.max;
-                            setTextColor(tdMax, res.max);
-                            setTextColor(tdMin, res.min);
-                            setTextColor(tdAvg, res.avg);
+                            setTextColor(tdMax, 0);
+                            setTextColor(tdMin, 0);
+                            setTextColor(tdAvg, 0);
+                            break;
+                        case "successRate":
+                            let successRateRes = calculateSuccessRate(s.successId, s.failId, teamCollect);
+                            let maxMinAvg = calculateMinAvgMax(s.successId, teamCollect);
+                            console.log(successRateRes);
+                            tdMin.innerText = maxMinAvg.min;
+                            tdMax.innerText = maxMinAvg.max;
+                            tdAvg.innerText = successRateRes.successRate;
+                            setTextColor(tdMax, 0);
+                            setTextColor(tdMin, 0);
+                            setTextColor(tdAvg, 1);
+                            tdMin.innerText = tdMin.innerText + "/" + successRateRes.count;
+                            tdMax.innerText = tdMax.innerText + "/" + successRateRes.count;
+                            break;
+                        case "count":
+
                             break;
                         case "boolean":
                         case "checkbox":
@@ -63,12 +93,22 @@ database.ref("settings").once('value').then(function (snapshot) {
     });
 });
 
-function setTextColor(target, val) {
-    if (val >= 4) {
+function setTextColor(target, mode) {
+    let val = parseFloat(target.innerText);
+
+    let successLimit = 4;
+    let warningLimit = 2;
+
+    if(mode === 1){
+        successLimit = 0.7;
+        warningLimit = 0.3;
+    }
+
+    if (val >= successLimit) {
         target.classList.add("text-success");
-    } else if (val < 4 && val > 1) {
+    } else if (val < successLimit && val >= warningLimit) {
         target.classList.add("text-warning");
-    } else if (val <= 2 && val >= 0) {
+    } else if (val < warningLimit) {
         target.classList.add("text-danger");
     }
 }
@@ -88,7 +128,7 @@ function calculateMinAvgMax(targetId, data) {
                 max = d[targetId];
             }
 
-            if (d[targetId] < min) {
+            if (d[targetId] < min || data[0][targetId] === 0) {
                 min = d[targetId];
             }
 
@@ -101,6 +141,20 @@ function calculateMinAvgMax(targetId, data) {
     }
 
     return {"max": max, "min": min, "avg": avg, "count": count};
+}
+
+function calculateSuccessRate(successId, failId, data) {
+    let totalCount = 0;
+    let successCount = 0;
+    let failCount = 0;
+    for (let i in data) {
+        let d = data[i];
+        totalCount += d[successId] + d[failId];
+        successCount += d[successId];
+        failCount += d[failId];
+    }
+
+    return {"successRate": successCount / totalCount, "count": totalCount, "failCount": failCount, "successCount": successCount};
 }
 
 
