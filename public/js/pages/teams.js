@@ -73,11 +73,19 @@ database.ref("settings").once('value').then(function (snapshot) {
                             tdMax.innerText = tdMax.innerText + "/" + successRateRes.count;
                             break;
                         case "count":
-
-                            break;
                         case "boolean":
                         case "checkbox":
-
+                            let count = 0;
+                            for (let i in teamCollect) {
+                                let d = teamCollect[i];
+                                if (typeof d === 'boolean' && d) {
+                                    count++;
+                                }
+                                else if(typeof d === 'number'){
+                                    count += d;
+                                }
+                            }
+                            tdAvg.innerText = count;
                             break;
                     }
 
@@ -99,7 +107,7 @@ function setTextColor(target, mode) {
     let successLimit = 4;
     let warningLimit = 2;
 
-    if(mode === 1){
+    if (mode === 1) {
         successLimit = 0.7;
         warningLimit = 0.3;
     }
@@ -154,7 +162,12 @@ function calculateSuccessRate(successId, failId, data) {
         failCount += d[failId];
     }
 
-    return {"successRate": successCount / totalCount, "count": totalCount, "failCount": failCount, "successCount": successCount};
+    return {
+        "successRate": successCount / totalCount,
+        "count": totalCount,
+        "failCount": failCount,
+        "successCount": successCount
+    };
 }
 
 
