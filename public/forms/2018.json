@@ -1,0 +1,75 @@
+{
+  "fields": {
+    "autoTitle": {
+      "type": "title",
+      "title": "<h3><span class=\"badge badge-secondary\">自動時間</span></h3>",
+      "shortenTitle": "<strong>Auto</strong>"
+    },
+    "auto-scale": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Scale</span>成功次數",
+      "min": 0,
+      "type": "integer"
+    },
+    "auto-scale-try": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Scale</span>嘗試次數",
+      "type": "integer"
+    },
+    "auto-success": {
+      "falseBtnLabel": "失敗",
+      "title": "Auto line",
+      "trueBtnLabel": "成功",
+      "type": "boolean"
+    },
+    "auto-switch": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Switch</span>成功次數",
+      "type": "integer"
+    },
+    "auto-switch-try": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Switch</span>嘗試次數",
+      "type": "integer"
+    },
+    "teleTitle":{
+      "type": "title",
+      "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
+      "shortenTitle": "<strong>Teleop</strong>"
+    },
+    "tele-exchange": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Exchange</span>成功次數",
+      "type": "integer"
+    },
+    "tele-exchange-try": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Exchange</span>嘗試次數",
+      "type": "integer"
+    },
+    "tele-scale": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Scale</span>成功次數",
+      "type": "integer"
+    },
+    "tele-scale-try": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Scale</span>嘗試次數",
+      "type": "integer"
+    },
+    "tele-switch": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Switch</span>成功次數",
+      "type": "integer"
+    },
+    "tele-switch-try": {
+      "title": "<span class=\"badge badge-pill badge-dark\">Switch</span>嘗試次數",
+      "type": "integer"
+    },
+    "climb-success": {
+      "falseBtnLabel": "失敗",
+      "title": "爬升",
+      "trueBtnLabel": "成功",
+      "type": "boolean"
+    },
+    "drive-tech": {
+      "title": "駕車技術",
+      "type": "integer"
+    },
+    "specialThing": {
+      "title": "特殊表現",
+      "type": "textarea"
+    }
+  }
+}

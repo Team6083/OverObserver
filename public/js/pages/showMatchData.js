@@ -65,7 +65,7 @@ $.when(ajaxFetchMatch()).done(function (match) {
 });
 
 getScoutFormPathWithEventId(eventId, (scoutFormPath) => {
-    scoutForm["scout-template"].connect("/forms/2019.json", (request) => {
+    scoutForm["scout-template"].connect(scoutFormPath, (request) => {
         let formTemplate = request.response;
         firebase.database().ref("matchs/" + eventId + "/" + matchId + "/teamCollect").once('value').then(function (teamCollectSnapshot) {
             teamCollectSnapshot.forEach(function (teamSnapshot) {
