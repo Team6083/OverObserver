@@ -68,19 +68,20 @@ database.ref("settings").once('value').then(function (snapshot) {
                                 setTextColor(tdMax, 0);
                                 setTextColor(tdMin, 0);
                                 setTextColor(tdAvg, 0);
-                                tdAvg.innerText = res.avg + " (total: " + res.countMatch + ")";
+                                tdAvg.innerText = res.avg + " (match count: " + res.countMatch + ")";
                                 break;
                             case "successRate":
                                 let successRateRes = calculateSuccessRate(s.successId, s.failId, teamCollect);
                                 let maxMinAvg = calculateMinAvgMax(s.successId, teamCollect);
                                 tdMin.innerText = maxMinAvg.min;
                                 tdMax.innerText = maxMinAvg.max;
-                                tdAvg.innerText = successRateRes.successRate;
+                                tdAvg.innerText = successRateRes.rate;
                                 setTextColor(tdMax, 0);
                                 setTextColor(tdMin, 0);
                                 setTextColor(tdAvg, 1);
-                                tdMin.innerText = tdMin.innerText + "/" + successRateRes.count;
-                                tdMax.innerText = tdMax.innerText + "/" + successRateRes.count;
+                                if (successRateRes.count !== 0) {
+                                    tdAvg.innerText = tdAvg.innerText + " (count: " + successRateRes.count + ")";
+                                }
                                 break;
                             case "count":
                             case "boolean":
@@ -172,7 +173,7 @@ function calculateSuccessRate(successId, failId, data) {
     }
 
     return {
-        "successRate": successCount / totalCount,
+        "rate": successCount / totalCount,
         "count": totalCount,
         "failCount": failCount,
         "successCount": successCount
