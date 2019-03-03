@@ -19,7 +19,7 @@ if (editing) {
 let form;
 
 getScoutFormPathWithEventId(eventId, (path) => {
-    scoutForm["scout-template"].connect("/forms/2019.json", (request) => {
+    scoutForm["scout-template"].connect(path, (request) => {
         form = scoutForm["scout-form"].create(request.response);
         console.log(request.response);
         const container = document.getElementById('formContent');
