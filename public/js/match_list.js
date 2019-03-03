@@ -26,7 +26,7 @@ function renderMatchList(container, match, teams, mode) {
                 td.innerText = teams.red[i.toString()].num;
                 tr.appendChild(td);
             } else {
-                td.className = "table-danger";
+                td.className = "table-danger font-weight-bold";
                 let a = document.createElement("a");
                 a.className = "text-dark";
                 a.href = "matchScout.html?team=" + teams.red[i.toString()].num + "&match=" + match;
@@ -45,7 +45,7 @@ function renderMatchList(container, match, teams, mode) {
                 td.innerText = teams.blue[i.toString()].num;
                 tr.appendChild(td);
             } else {
-                td.className = "table-primary";
+                td.className = "table-primary font-weight-bold";
                 let a = document.createElement("a");
                 a.className = "text-dark";
                 a.href = "matchScout.html?team=" + teams.blue[i.toString()].num + "&match=" + match;
