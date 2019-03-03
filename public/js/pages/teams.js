@@ -4,99 +4,108 @@ $("#thisTeam").html(teamId);
 database.ref("settings").once('value').then(function (snapshot) {
     const eventId = snapshot.child("currentEvent").val();
     $("#thisEvent").html(eventId);
-
-    scoutForm["scout-template"].connect("/forms/2019.json", (request) => {
-        const formTemplate = request.response.fields;
-        const teamStatTemplate = request.response.teamStat;
-        let container = document.getElementById("container");
-
-        findMatchWithTeam(eventId, teamId, (matches) => {
-            getAllTeamCollect(matches, teamId, (teamCollect) => {
-
-                // remove broken match
-                for (let i in teamCollect) {
-                    let s = teamCollect[i];
-                    if (s[teamStatTemplate.robotBrokeId]) {
-                        teamCollect.pop(s);
-                    }
+    getScoutFormPathWithEventId(eventId, (scoutFormPath) => {
+        scoutForm["scout-template"].connect(scoutFormPath, (request) => {
+            const formTemplate = request.response.fields;
+            let teamStatTemplate = request.response.teamStat;
+            if (teamStatTemplate === undefined) {
+                teamStatTemplate = {};
+                teamStatTemplate.dataSet = {};
+                for (let id in formTemplate) {
+                    teamStatTemplate.dataSet[id] = {"type": "default"}
                 }
+            }
 
-                for (let id in teamStatTemplate.dataSet) {
-                    let s = teamStatTemplate.dataSet[id];
+            let container = document.getElementById("container");
 
-                    let tr = document.createElement("tr");
-                    let th = document.createElement("th");
-                    th.setAttribute("scope", "row");
-                    let tdMin = document.createElement("td");
-                    let tdAvg = document.createElement("td");
-                    let tdMax = document.createElement("td");
-
-                    if (s.type === "default") {
-                        s = formTemplate[id];
-                    }
-
-                    if (s.shortenTitle) {
-                        th.innerHTML = s.shortenTitle;
-                    } else {
-                        th.innerHTML = s.title;
-                    }
-
-                    tr.appendChild(th);
-
-                    if (s.type === "title") {
-                        container.appendChild(tr);
-                        continue;
-                    }
-
-                    switch (s.type) {
-                        case "number":
-                        case "integer":
-                            let res = calculateMinAvgMax(id, teamCollect);
-                            tdMin.innerText = res.min;
-                            tdAvg.innerText = res.avg;
-                            tdMax.innerText = res.max;
-                            setTextColor(tdMax, 0);
-                            setTextColor(tdMin, 0);
-                            setTextColor(tdAvg, 0);
-                            tdAvg.innerText = res.avg + " (total: " + res.count + ")";
-                            break;
-                        case "successRate":
-                            let successRateRes = calculateSuccessRate(s.successId, s.failId, teamCollect);
-                            let maxMinAvg = calculateMinAvgMax(s.successId, teamCollect);
-                            console.log(successRateRes);
-                            tdMin.innerText = maxMinAvg.min;
-                            tdMax.innerText = maxMinAvg.max;
-                            tdAvg.innerText = successRateRes.successRate;
-                            setTextColor(tdMax, 0);
-                            setTextColor(tdMin, 0);
-                            setTextColor(tdAvg, 1);
-                            tdMin.innerText = tdMin.innerText + "/" + successRateRes.count;
-                            tdMax.innerText = tdMax.innerText + "/" + successRateRes.count;
-                            break;
-                        case "count":
-                        case "boolean":
-                        case "checkbox":
-                            let count = 0;
-                            for (let i in teamCollect) {
-                                let d = teamCollect[i];
-                                if (typeof d === 'boolean' && d) {
-                                    count++;
-                                } else if (typeof d === 'number') {
-                                    count += d;
-                                }
+            findMatchWithTeam(eventId, teamId, (matches) => {
+                getAllTeamCollect(matches, teamId, (teamCollect) => {
+                    // remove broken match
+                    for (let i in teamCollect) {
+                        let s = teamCollect[i];
+                        if (teamStatTemplate.robotBrokeId !== undefined) {
+                            if (s[teamStatTemplate.robotBrokeId]) {
+                                teamCollect.pop(s);
                             }
-                            tdAvg.innerText = count;
-                            break;
+                        }
                     }
 
-                    tr.appendChild(tdMax);
-                    tr.appendChild(tdMin);
-                    tr.appendChild(tdAvg);
+                    for (let id in teamStatTemplate.dataSet) {
+                        let s = teamStatTemplate.dataSet[id];
 
-                    container.appendChild(tr);
-                }
+                        let tr = document.createElement("tr");
+                        let th = document.createElement("th");
+                        th.setAttribute("scope", "row");
+                        let tdMin = document.createElement("td");
+                        let tdAvg = document.createElement("td");
+                        let tdMax = document.createElement("td");
+
+                        if (s.type === "default") {
+                            s = formTemplate[id];
+                        }
+
+                        if (s.shortenTitle) {
+                            th.innerHTML = s.shortenTitle;
+                        } else {
+                            th.innerHTML = s.title;
+                        }
+
+                        tr.appendChild(th);
+
+                        if (s.type === "title") {
+                            container.appendChild(tr);
+                            continue;
+                        }
+
+                        switch (s.type) {
+                            case "number":
+                            case "integer":
+                            case "average":
+                                let res = calculateMinAvgMax(id, teamCollect);
+                                tdMin.innerText = res.min;
+                                tdAvg.innerText = res.avg;
+                                tdMax.innerText = res.max;
+                                setTextColor(tdMax, 0);
+                                setTextColor(tdMin, 0);
+                                setTextColor(tdAvg, 0);
+                                tdAvg.innerText = res.avg + " (total: " + res.countMatch + ")";
+                                break;
+                            case "successRate":
+                                let successRateRes = calculateSuccessRate(s.successId, s.failId, teamCollect);
+                                let maxMinAvg = calculateMinAvgMax(s.successId, teamCollect);
+                                tdMin.innerText = maxMinAvg.min;
+                                tdMax.innerText = maxMinAvg.max;
+                                tdAvg.innerText = successRateRes.successRate;
+                                setTextColor(tdMax, 0);
+                                setTextColor(tdMin, 0);
+                                setTextColor(tdAvg, 1);
+                                tdMin.innerText = tdMin.innerText + "/" + successRateRes.count;
+                                tdMax.innerText = tdMax.innerText + "/" + successRateRes.count;
+                                break;
+                            case "count":
+                            case "boolean":
+                            case "checkbox":
+                                let count = 0;
+                                for (let i in teamCollect) {
+                                    let d = teamCollect[i];
+                                    if (typeof d === 'boolean' && d) {
+                                        count++;
+                                    } else if (typeof d === 'number') {
+                                        count += d;
+                                    }
+                                }
+                                tdAvg.innerText = count;
+                                break;
+                        }
+
+                        tr.appendChild(tdMax);
+                        tr.appendChild(tdMin);
+                        tr.appendChild(tdAvg);
+
+                        container.appendChild(tr);
+                    }
+                });
             });
-
         });
     });
 });
@@ -125,11 +134,11 @@ function calculateMinAvgMax(targetId, data) {
     let max = data[0][targetId];
     let min = data[0][targetId];
     let sum = 0;
-    let count = 0;
+    let countMatch = 0;
     for (let i in data) {
         let d = data[i];
         if (d[targetId] !== 0) {
-            count++;
+            countMatch++;
             sum += d[targetId];
 
             if (d[targetId] > max) {
@@ -144,11 +153,11 @@ function calculateMinAvgMax(targetId, data) {
     }
 
     let avg = 0;
-    if (count > 0) {
-        avg = sum / count;
+    if (countMatch > 0) {
+        avg = sum / countMatch;
     }
 
-    return {"max": max, "min": min, "avg": avg, "count": count};
+    return {"max": max, "min": min, "avg": avg, "countMatch": countMatch};
 }
 
 function calculateSuccessRate(successId, failId, data) {
