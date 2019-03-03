@@ -29,6 +29,7 @@ if (typeof scoutForm === "undefined") {
             let input;
             if (s.type === "any") {
                 input = document.createElement("textarea");
+                input.className = "form-control";
                 if (value) {
                     input.value = JSON.stringify(value, null, 4);
                     if (s.readOnly)
@@ -93,7 +94,7 @@ if (typeof scoutForm === "undefined") {
                     input.type = "time";
                 } else if (s.format === "email") {
                     input.type = "email";
-                } else if (s.format === "text") {
+                } else if (s.format === "textarea") {
                     input = document.createElement("textarea");
                     input.className = "form-control";
                 } else {

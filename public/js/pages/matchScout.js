@@ -37,6 +37,8 @@ getScoutFormPathWithEventId(eventId, (path) => {
                 downClass: 'danger',
                 center: true
             });
+
+            $(".integer-input").attr("disabled", true);
         });
     });
 });
