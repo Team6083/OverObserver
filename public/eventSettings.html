@@ -22,12 +22,28 @@
 
 <div class="container-fluid">
     <div class="row mt-5">
-
     </div>
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Event: <span class="badge badge-info" id="eventId">n/a</span> </h3>
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title" id="eventName">n/a</h2>
+                    <div class="row">
+                        <div class="col">
+                            Location: <span id="eventLocation"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
@@ -43,9 +59,20 @@
 </script>
 
 <script src="js/util.js"></script>
-<script src="js/scoutForm.js"></script>
-<script src="js/matchScout_util.js"></script>
-<script src="js/pages/teams.js"></script>
+<script>
+    let eventId = findGetParameter("event");
+    $("#eventId").html(eventId);
+
+    database.ref("events/" + eventId).once('value').then(function (snapshot) {
+        const data = snapshot.val();
+        console.log(data);
+
+        $("#eventName").html(data.name + " " + data.year);
+        $("#eventLocation").html(data.city + " in " + data.state_prov + ", " + data.country);
+
+    });
+</script>
+
 </body>
 
 </html>
