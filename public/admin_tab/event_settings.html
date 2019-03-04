@@ -29,7 +29,7 @@
   });
 
   $("#setBtn").click(function() {
-    var updates = {};
+    let updates = {};
     updates['currentEvent'] = $("#currentEvent").val();
     updates['matchLevel'] = $("#matchLevel").val();
     firebase.database().ref('events/' + $("#currentEvent").val()).once('value').then(function(snapshot) {
