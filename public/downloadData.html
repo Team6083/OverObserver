@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 </head>
 
 <body>
@@ -87,7 +88,9 @@
                 </div>
                 <div class="collapse" id="collapseExport">
                     <div class="card-body">
-                        <textarea disabled class="form-control" id="container"></textarea>
+                        <button class="btn btn-lg btn-block btn-warning mb-3" id="backBtn">Back</button>
+                        <textarea readonly class="form-control" id="container" rows="10"></textarea>
+                        <button class="btn btn-lg btn-block btn-secondary mt-3" data-clipboard-target="#container">Copy</button>
                     </div>
                 </div>
             </div>
@@ -106,10 +109,21 @@
 <script src="js/util.js"></script>
 <script src="js/tba_util.js"></script>
 <script>
-    $('.collapse').collapse();
+    new ClipboardJS('.btn');
+
     $('#collapseOptions').collapse('show');
+    $('#collapseExport').collapse('hide');
 
     $('#teamSelect').multiSelect({});
+
+    $("#teamSelectAll").click(function () {
+        $('#teamSelect').multiSelect("select_all");
+    });
+    $("#teamDeselectAll").click(function () {
+        $('#teamSelect').multiSelect("deselect_all");
+    });
+
+
 </script>
 <script src="js/pages/downloadData.js"></script>
 
