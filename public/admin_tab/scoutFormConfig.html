@@ -16,10 +16,10 @@
     <thead>
     <tr>
         <th scope="col">id</th>
-        <th scope="col">Mode</th>
         <th scope="col">type</th>
         <th scope="col">displayName</th>
         <th scope="col">disp</th>
+        <th scope="col">JSON</th>
     </tr>
     </thead>
     <tbody id="tfctable">
@@ -50,38 +50,44 @@
 </div>
 
 <script>
-    function genetfctable(k, v) {
-        var tr = "<tr>";
-        tr += "<th scope='row'>";
-        tr += k;
-        tr += "</th><td>";
-        tr += v.mode;
-        tr += "</td><td>";
-        tr += v.type;
-        tr += "</td><td>";
-        tr += v.displayName;
-        tr += "</td><td>";
-        if (v.type === 'boolean') {
-            tr += '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-outline-success">';
-            tr += '<input type="radio" autocomplete="off">';
-            tr += v.displayT;
-            tr += '</label><label class="btn btn-outline-warning">';
-            tr += '<input type="radio" autocomplete="off">';
-            tr += v.displayF;
-            tr += '</label></div>';
-        } else if (v.type == 'int') {
-            tr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>';
-        } else if (v.type == 'textarea') {
-            tr += '<textarea class="form-control" rows="' + v.row + '"></textarea>';
-        }
-        tr += "</td>";
-        tr += "</tr>";
-        return tr;
-    }
+
+
+    // function renderScoutFormTable(k, v) {
+    //     let tr = document.createElement("tr");
+    //     let th = document.createElement("th");
+    //
+    //     var trr = "<tr>";
+    //     trr += "<th scope='row'>";
+    //     trr += k;
+    //     trr += "</th><td>";
+    //     trr += v.mode;
+    //     trr += "</td><td>";
+    //     trr += v.type;
+    //     trr += "</td><td>";
+    //     trr += v.displayName;
+    //     trr += "</td><td>";
+    //     if (v.type === 'boolean') {
+    //         trr += '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-outline-success">';
+    //         trr += '<input type="radio" autocomplete="off">';
+    //         trr += v.displayT;
+    //         trr += '</label><label class="btn btn-outline-warning">';
+    //         trr += '<input type="radio" autocomplete="off">';
+    //         trr += v.displayF;
+    //         trr += '</label></div>';
+    //     } else if (v.type == 'int') {
+    //         trr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>';
+    //     } else if (v.type == 'textarea') {
+    //         trr += '<textarea class="form-control" rows="' + v.row + '"></textarea>';
+    //     }
+    //     trr += "</td>";
+    //     trr += "</tr>";
+    //     return trr;
+    // }
 </script>
 
 <script src="../js/util.js"></script>
 <script src="../js/matchScout_util.js"></script>
+<script src="../js/scoutForm.js"></script>
 <script>
     firebase.database().ref('events').on('value', function (snapshot) {
         var events = snapshot.val();
@@ -95,12 +101,48 @@
             var eventId = $(this).attr('selectEvent');
 
             $("#tfc_drop_dis").text(eventId);
-            getTeamformWithEventId(eventId, function (data) {
-                for (var k in data.fields) {
-                    var f = data.fields[k];
-                    $("#tfctable").append(genetfctable(k, f));
-                }
-                reloadNumberBtn();
+            getScoutFormPathWithEventId(eventId, (path) => {
+                scoutForm["scout-template"].connect(path, (request) => {
+                    form = scoutForm["scout-form"].create(request.response);
+                    const container = document.getElementById('formContent');
+
+                    const fields = request.response.fields;
+
+                    for(let id in fields){
+                        let s = fields[id];
+                        let tr = document.createElement("tr");
+                        let th = document.createElement("th");
+                        th.setAttribute("scope", "row");
+                        th.innerText = id;
+
+                        let tdType = document.createElement("td");
+                        tdType.innerText = s.type;
+                        let tdTitle = document.createElement("td");
+                        tdTitle.innerHTML = s.title;
+                        let tdDisplay = document.createElement("td");
+                        form.renderOne(tdDisplay, id);
+                        let tdJSON = document.createElement("td");
+                        // tdJSON.innerText = JSON.stringify(s);
+
+                        tr.appendChild(th);
+                        tr.appendChild(tdType);
+                        tr.appendChild(tdTitle);
+                        tr.appendChild(tdDisplay);
+                        tr.appendChild(tdJSON);
+
+                        document.getElementById("tfctable").appendChild(tr);
+                    }
+
+
+
+                    $(".integer-input").bootstrapNumber({
+                        upClass: 'primary',
+                        downClass: 'danger',
+                        center: true
+                    });
+
+                    $(".integer-input").attr("disabled", true);
+                });
             });
         });
     });

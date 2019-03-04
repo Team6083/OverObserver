@@ -118,7 +118,13 @@ if (typeof scoutForm === "undefined") {
 
             input.id = id;
 
-            appendItem(container, input, s);
+            if (parentObject !== null) {
+                parentObject.appendChild(input);
+            }
+
+            if (container !== null) {
+                appendItem(container, input, s);
+            }
         };
 
         renderers["checkbox"] = function (container, id, parentObject, property, value) {
@@ -176,13 +182,21 @@ if (typeof scoutForm === "undefined") {
                 input.title = s.description;
             }
 
-            appendItem(container, input, s);
+            if (parentObject !== null) {
+                parentObject.appendChild(input);
+            }
+
+            if (container !== null) {
+                appendItem(container, input, s);
+            }
         };
 
         renderers["title"] = function (container, id, parentObject, property, value) {
             let s = property;
 
-            appendItem(container, null, s);
+            if (container !== null) {
+                appendItem(container, null, s);
+            }
         };
 
         let obj = {};
@@ -198,6 +212,17 @@ if (typeof scoutForm === "undefined") {
             }
 
             render(div);
+        };
+
+        obj.renderOne = function (c, target) {
+            clear(c);
+
+            const s = root.fields[target];
+            const r = renderers[s.type];
+
+            if (r) {
+                r(null, target, c, s, undefined);
+            }
         };
 
         obj.getData = function () {
