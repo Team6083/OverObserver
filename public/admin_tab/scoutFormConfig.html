@@ -1,11 +1,10 @@
 <div class="row mb-3">
     <div class="col-lg-6 col-sm-12 mb-sm-3 mb-lg-0">
         <div class="btn-group dropright">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="tfc_drop_dis">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="scoutFormConfig_drop_dis">
                 Select Config
             </button>
-            <div class="dropdown-menu" id="tfc_drop">
-                <a class="dropdown-item" data-toggle="modal" data-target="#newtfcmodal">Generate New</a>
+            <div class="dropdown-menu" id="scoutFormConfig_drop">
                 <div class="dropdown-divider"></div>
             </div>
         </div>
@@ -22,85 +21,29 @@
         <th scope="col">JSON</th>
     </tr>
     </thead>
-    <tbody id="tfctable">
+    <tbody id="scoutFormTable">
     <th scope="row">Select year first</th>
     </tbody>
 </table>
 
 
-<!-- New teamform config modal -->
-<div class="modal fade" id="newtfcmodal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">New Teamform Config</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="tfc_gene_btn">Generate</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-
-
-    // function renderScoutFormTable(k, v) {
-    //     let tr = document.createElement("tr");
-    //     let th = document.createElement("th");
-    //
-    //     var trr = "<tr>";
-    //     trr += "<th scope='row'>";
-    //     trr += k;
-    //     trr += "</th><td>";
-    //     trr += v.mode;
-    //     trr += "</td><td>";
-    //     trr += v.type;
-    //     trr += "</td><td>";
-    //     trr += v.displayName;
-    //     trr += "</td><td>";
-    //     if (v.type === 'boolean') {
-    //         trr += '<div class="btn-group btn-group-toggle" data-toggle="buttons"><label class="btn btn-outline-success">';
-    //         trr += '<input type="radio" autocomplete="off">';
-    //         trr += v.displayT;
-    //         trr += '</label><label class="btn btn-outline-warning">';
-    //         trr += '<input type="radio" autocomplete="off">';
-    //         trr += v.displayF;
-    //         trr += '</label></div>';
-    //     } else if (v.type == 'int') {
-    //         trr += '<input type="number" class="form-control numInput" value="0" min="0" disabled>';
-    //     } else if (v.type == 'textarea') {
-    //         trr += '<textarea class="form-control" rows="' + v.row + '"></textarea>';
-    //     }
-    //     trr += "</td>";
-    //     trr += "</tr>";
-    //     return trr;
-    // }
-</script>
-
 <script src="../js/util.js"></script>
 <script src="../js/matchScout_util.js"></script>
 <script src="../js/scoutForm.js"></script>
+<script src="../js/lib/bootstrap-number-input.js"></script>
 <script>
     firebase.database().ref('events').on('value', function (snapshot) {
         var events = snapshot.val();
         for (var k in events) {
-            $("#tfc_drop").append('<a class="dropdown-item tfcdropdown" selectEvent="' + k + '">' + k + '</a>');
+            $("#scoutFormConfig_drop").append('<a class="dropdown-item scoutFormDropdown" selectEvent="' + k + '">' + k + '</a>');
         }
 
         //load click event after dropdown load.
-        $('.tfcdropdown').click(function () {
-            $("#tfctable").html("");
+        $('.scoutFormDropdown').click(function () {
+            $("#scoutFormTable").html("");
             var eventId = $(this).attr('selectEvent');
 
-            $("#tfc_drop_dis").text(eventId);
+            $("#scoutFormConfig_drop_dis").text(eventId);
             getScoutFormPathWithEventId(eventId, (path) => {
                 scoutForm["scout-template"].connect(path, (request) => {
                     form = scoutForm["scout-form"].create(request.response);
@@ -130,7 +73,7 @@
                         tr.appendChild(tdDisplay);
                         tr.appendChild(tdJSON);
 
-                        document.getElementById("tfctable").appendChild(tr);
+                        document.getElementById("scoutFormTable").appendChild(tr);
                     }
 
 
@@ -145,13 +88,5 @@
                 });
             });
         });
-    });
-</script>
-
-<script src="../js/lib/bootstrap-number-input.js"></script>
-
-<script>
-    $('#tfc_gene_btn').click(function () {
-
     });
 </script>
