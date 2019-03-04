@@ -12,6 +12,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
     <script src="js/firebase_main.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.min.js"></script>
 </head>
 
 <body>
@@ -24,37 +27,68 @@
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8 col-sm-12">
+
             <div class="card border-primary bg-light">
-                <h5 class="card-header">Export data</h5>
-                <div class="card-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="dataExportFormat">Export Format</label>
-                                    <select class="form-control" id="dataExportFormat">
-                                        <option>json</option>
-                                        <option>csv</option>
-                                        <option>table</option>
-                                    </select>
+                <h5 class="card-header">
+                    Export data
+                </h5>
+                <div class="collapse" id="collapseOptions">
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="dataExportFormat">Export Format</label>
+                                        <select class="form-control" id="dataExportFormat">
+                                            <option>json</option>
+                                            <option>csv</option>
+                                            <option>table</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="dataExportType">Export Event</label>
+                                        <select class="form-control" id="exportEvents" disabled>
+                                            <option value="notSelect">please select one...</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="dataExportType">Export Type</label>
-                                    <select class="form-control" id="dataExportType">
-                                        <option>all teams</option>
-                                        <option>single team</option>
-                                        <option>...</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="dataExportType">Export Type</label>
+                                        <select class="form-control" id="dataExportType">
+                                            <option>all teams</option>
+                                            <option>single team</option>
+                                            <option>...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <a href='#' id='teamSelectAll' class="badge badge-secondary">select all</a>
+                                    <a href='#' id='teamDeselectAll' class="badge badge-secondary">deselect all</a>
+                                    <div class="mt-2" style="overflow-y: auto">
+                                        <select class="disabled" multiple="multiple" id="teamSelect"
+                                                name="teamSelect[]">
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Example textarea</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <button class="btn btn-lg btn-success btn-block" type="button" id="downloadBtn">Download
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="collapse" id="collapseExport">
+                    <div class="card-body">
+                        <textarea disabled class="form-control" id="container"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,22 +101,17 @@
     $("#navBarContainer").load("/navBar.html");
 </script>
 
-<script src="js/exportTeamData.js"></script>
-<script src="js/teamform_config.js"></script>
-<script src="js/util.js"></script>
-<script>
-    var teamId = findGetParameter("team");
-    $("#thisTeam").html(teamId);
-    database.ref("settings").once('value').then(function (snapshot) {
-        var eventId = snapshot.child("currentEvent").val();
-        $("#thisEvent").html(eventId);
 
-        const teamData = getTeamsData(eventId, teamId, (teamData) => {
-            console.log(teamData);
-            $("#out").html(JSON.stringify(teamData));
-        });
-    });
+<script src="js/matchScout_util.js"></script>
+<script src="js/util.js"></script>
+<script src="js/tba_util.js"></script>
+<script>
+    $('.collapse').collapse();
+    $('#collapseOptions').collapse('show');
+
+    $('#teamSelect').multiSelect({});
 </script>
+<script src="js/pages/downloadData.js"></script>
 
 </body>
 
