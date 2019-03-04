@@ -221,7 +221,7 @@ if (typeof scoutForm === "undefined") {
             const r = renderers[s.type];
 
             if (r) {
-                r(null, target, c, s, undefined);
+                r(null, target, c, s, s.default);
             }
         };
 

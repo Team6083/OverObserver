@@ -65,7 +65,18 @@
                         let tdDisplay = document.createElement("td");
                         form.renderOne(tdDisplay, id);
                         let tdJSON = document.createElement("td");
-                        // tdJSON.innerText = JSON.stringify(s);
+                        let jsonA = document.createElement("a");
+                        jsonA.setAttribute("tabindex", 0);
+                        jsonA.className = "btn btn-sm btn-secondary popover-dismiss";
+                        jsonA.setAttribute("role", "button");
+                        jsonA.setAttribute("data-toggle", "popover");
+                        jsonA.setAttribute("data-trigger", "focus");
+                        let jsonString = " ";
+                        jsonString += JSON.stringify(s);
+                        jsonString += "";
+                        jsonA.setAttribute("data-content", jsonString);
+                        jsonA.innerText = "Show";
+                        tdJSON.appendChild(jsonA);
 
                         tr.appendChild(th);
                         tr.appendChild(tdType);
@@ -76,6 +87,9 @@
                         document.getElementById("scoutFormTable").appendChild(tr);
                     }
 
+                    $('.popover-dismiss').popover({
+                        trigger: 'focus'
+                    });
 
 
                     $(".integer-input").bootstrapNumber({
