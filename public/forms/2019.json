@@ -251,11 +251,19 @@
         "successId": "teleopShipPanel",
         "failId": "teleopShipPanelFail"
       },
+      "teleopShipPanel": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Ship Panel 平均"
+      },
       "teleopRocketPanel1Rate": {
         "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Panel 1 成功率",
         "type": "successRate",
         "successId": "teleopRocketPanel1",
         "failId": "teleopRocketPanel1Fail"
+      },
+      "teleopRocketPanel1": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Panel 1 平均"
       },
       "teleopRocketPanel2Rate": {
         "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Panel 2 成功率",
@@ -263,11 +271,19 @@
         "successId": "teleopRocketPanel2",
         "failId": "teleopRocketPanel2Fail"
       },
+      "teleopRocketPanel2": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Panel 2 平均"
+      },
       "teleopShipCargoRate": {
         "title": "<span class=\"badge badge-pill badge-primary\">T</span>Ship Cargo 成功率",
         "type": "successRate",
         "successId": "teleopShipCargo",
         "failId": "teleopShipCargoFail"
+      },
+      "teleopShipCargo": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Ship Cargo 平均"
       },
       "teleopRocketCargo1Rate": {
         "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Cargo 1 成功率",
@@ -275,11 +291,19 @@
         "successId": "teleopRocketCargo1",
         "failId": "teleopRocketCargo1Fail"
       },
+      "teleopRocketCargo1": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Cargo 1 平均"
+      },
       "teleopRocketCargo2Rate": {
         "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Cargo 2 成功率",
         "type": "successRate",
         "successId": "teleopRocketCargo2",
         "failId": "teleopRocketCargo2Fail"
+      },
+      "teleopRocketCargo2": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">T</span>Rocket Cargo 2 平均"
       },
       "crossHabLine": {
         "title": "crossHabLine",
