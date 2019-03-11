@@ -286,10 +286,22 @@
         "type": "count",
         "targetId": "crossHabLine"
       },
-      "endLocation": {
-        "title": "Endgame location",
+      "endLocationLevel2": {
+        "title": "Endgame level 2",
         "type": "countEnum",
-        "targetId": "endLocation"
+        "targetId": "endLocation",
+        "targetEnum": "HAB Level 2"
+      },
+      "endLocationLevel3": {
+        "title": "Endgame level 3",
+        "type": "countEnum",
+        "targetId": "endLocation",
+        "targetEnum": "HAB Level 3"
+      },
+      "notes": {
+        "title": "Notes",
+        "type": "dumpAll",
+        "targetId": "otherNotes"
       }
     },
     "robotBrokeId": "robotBroke"

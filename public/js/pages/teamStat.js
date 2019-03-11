@@ -20,6 +20,7 @@ database.ref("settings").once('value').then(function (snapshot) {
 
             findMatchWithTeam(eventId, teamId, (matches) => {
                 getAllTeamCollect(matches, teamId, (teamCollect) => {
+
                     // remove broken match
                     for (let i in teamCollect) {
                         let s = teamCollect[i];
@@ -88,7 +89,7 @@ database.ref("settings").once('value').then(function (snapshot) {
                             case "checkbox":
                                 let count = 0;
                                 for (let i in teamCollect) {
-                                    let d = teamCollect[i];
+                                    let d = teamCollect[i][s.targetId];
                                     if (typeof d === 'boolean' && d) {
                                         count++;
                                     } else if (typeof d === 'number') {
@@ -96,6 +97,27 @@ database.ref("settings").once('value').then(function (snapshot) {
                                     }
                                 }
                                 tdAvg.innerText = count;
+                                break;
+                            case "countEnum":
+                                let countEnum = 0;
+
+                                for (let i in teamCollect) {
+                                    let d = teamCollect[i][s.targetId];
+                                    if (d === s.targetEnum) {
+                                        countEnum++;
+                                    }
+                                }
+                                tdAvg.innerText = countEnum;
+                                break;
+                            case "dumpAll":
+                                for (let i in teamCollect) {
+                                    console.log(teamCollect[i]);
+                                    let d = teamCollect[i][s.targetId];
+                                    // console.log(d);
+                                    if(d !== ""){
+                                        tdAvg.innerHTML = tdAvg.innerHTML + d + "<br>";
+                                    }
+                                }
                                 break;
                         }
 
