@@ -7,18 +7,24 @@ admin.initializeApp(functions.config().firebase);
 
 exports.TBAWebhook = functions.https.onRequest((req, res) => {
   // Push the new message into the Realtime Database using the Firebase Admin SDK.
-  var data = req.body;
-  var type = data.message_type;
+  const data = req.body;
+  const type = data.message_type;
+
+  res.status(200).end();
+
   switch (type) {
     case 'match_score':
-      var matchData = data.message_data.match;
+      let matchData = data.message_data.match;
       delete matchData["score_breakdown"];
-      delete matchData["alliances"].teams;
-      return admin.database().ref('/matchs').child(data.message_data.event_key).child(data.message_data.match.key).update(matchData);
+      delete matchData["alliances"].red.teams;
+      delete matchData["alliances"].blue.teams;
+
+      return admin.database().ref('/matchs').child(data.message_data.match.event_key).child(data.message_data.match.key).update(matchData);
     default:
       return admin.database().ref('/webhooks').push({
         type: type,
-        data: data.message_data
+        data: data.message_data,
+        time: new Date().toUTCString()
       });
   }
 });
