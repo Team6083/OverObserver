@@ -1,5 +1,11 @@
 const teamId = findGetParameter("team");
-$("#thisTeam").html(teamId);
+$("#thisTeam").html(teamId)
+
+
+
+$.when(ajaxTeamSimple(teamId)).done(function (team) {
+    $("#teamName").html(team.nickname);
+});
 
 database.ref("settings").once('value').then(function (snapshot) {
     const eventId = snapshot.child("currentEvent").val();
