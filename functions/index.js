@@ -55,21 +55,3 @@ exports.updateUserName = functions.database.ref("/users/{userId}/name").onUpdate
     console.log("Error fetching user data:", error);
   });
 });
-/*
-exports.updateNumber = functions.database.ref("/matchs/{eventId}/{matchId}/teamCollect/{teamId}").onWrite((change, event) => {
-  var sourceData = change.after.val();
-  if(!change.after.exists()) return;
-  var data = {};
-  data["auto-scale"] = parseInt(sourceData["auto-scale"]);
-  data["auto-scale-try"] = parseInt(sourceData["auto-scale-try"]);
-  data["auto-switch"] = parseInt(sourceData["auto-switch"]);
-  data["auto-switch-try"] = parseInt(sourceData["auto-switch-try"]);
-  data["tele-scale"] = parseInt(sourceData["tele-scale"]);
-  data["tele-scale-try"] = parseInt(sourceData["tele-scale-try"]);
-  data["tele-switch"] = parseInt(sourceData["tele-switch"]);
-  data["tele-switch-try"] = parseInt(sourceData["tele-switch-try"]);
-  data["tele-exchange"] = parseInt(sourceData["tele-exchange"]);
-  data["tele-exchange-try"] = parseInt(sourceData["tele-exchange-try"]);
-  data["drive-tech"] = parseInt(sourceData["drive-tech"]);
-  return admin.database().ref("/matchs/" + event.params.eventId + "/" + event.params.matchId + "/teamCollect/" + event.params.teamId).update(data);
-});*/
