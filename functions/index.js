@@ -16,6 +16,9 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
     case 'match_score':
       let matchData = data.message_data.match;
       delete matchData["score_breakdown"];
+
+      matchData["alliances"].red.team_keys = matchData["alliances"].red.teams;
+      matchData["alliances"].blue.team_keys = matchData["alliances"].blue.teams;
       delete matchData["alliances"].red.teams;
       delete matchData["alliances"].blue.teams;
 
