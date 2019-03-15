@@ -9,6 +9,14 @@ $.when(ajaxTeamSimple(teamId)).done(function (team) {
 
 database.ref("settings").once('value').then(function (snapshot) {
     const eventId = snapshot.child("currentEvent").val();
+
+    $.when(ajaxTeamEventStatus(teamId, eventId)).done(function (team) {
+        console.log(team);
+        $("#ranking").html(team.qual.ranking.rank);
+        $("#overallStatus").html(team.overall_status_str);
+        $("#playedMatch").html(team.qual.ranking.matches_played);
+    });
+
     $("#thisEvent").html(eventId);
     getScoutFormPathWithEventId(eventId, (scoutFormPath) => {
         scoutForm["scout-template"].connect(scoutFormPath, (request) => {
