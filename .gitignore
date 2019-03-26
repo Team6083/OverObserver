@@ -2,3 +2,5 @@ functions/node_modules/
 *.log
 octicons-6.0.1/
 octicons-6.0.1.zip
+.firebase/
+.idea/

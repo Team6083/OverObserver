@@ -15,9 +15,11 @@
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" id="pwd">
                 </div>
+                <div id="firebaseui-auth-container"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" id="loginSmtBtn" class="btn btn-primary">Login</button>
+                <button type="button" id="googleLoginBtn" class="btn btn-dark">Login with Google</button>
             </div>
         </div>
     </div>
@@ -28,11 +30,27 @@
         signin($("#account").val(), $("#pwd").val());
     });
 
+    $("#googleLoginBtn").click(function () {
+        signinGoogle();
+    });
+
     $("#loginPanel").modal({
         keyboard: false,
         backdrop: 'static',
         show: false
     });
+
+    function testLink() {
+        firebase.auth().currentUser.linkWithPopup(new firebase.auth.GoogleAuthProvider()).then(function (result) {
+            // Accounts successfully linked.
+            var credential = result.credential;
+            var user = result.user;
+            // ...
+        }).catch(function (error) {
+            // Handle Errors here.
+            // ...
+        });
+    }
 
     var loginUser;
     firebase.auth().onAuthStateChanged(function (user) {
@@ -52,6 +70,7 @@
         }
     });
 </script>
+
 <script>
     $("#loginAlert").addClass("d-none");
 
