@@ -26,7 +26,7 @@ database.ref("settings").once('value').then(function (snapshot) {
                 teamStatTemplate = {};
                 teamStatTemplate.dataSet = {};
                 for (let id in formTemplate) {
-                    teamStatTemplate.dataSet[id] = {"type": "default"}
+                    teamStatTemplate.dataSet[id] = { "type": "default" }
                 }
             }
 
@@ -128,10 +128,30 @@ database.ref("settings").once('value').then(function (snapshot) {
                                     console.log(teamCollect[i]);
                                     let d = teamCollect[i][s.targetId];
                                     // console.log(d);
-                                    if(d !== ""){
+                                    if (d !== "") {
                                         tdAvg.innerHTML = tdAvg.innerHTML + d + "<br>";
                                     }
                                 }
+                                break;
+                            case "countAll":
+                                let counts = {};
+                                for (let i in teamCollect) {
+                                    let d = teamCollect[i][s.targetId];
+                                    if (counts[d]) {
+                                        counts[d]++;
+                                    } else {
+                                        counts[d] = 1;
+                                    }
+                                }
+
+                                let out = "";
+                                for (let i in s.targetEnums) {
+                                    i = parseInt(i);
+                                    let field = s.targetEnums[i];
+                                    out += (i !== 0 ? " / " : "") + (counts[field] || 0);
+                                }
+
+                                tdAvg.innerHTML = out;
                                 break;
                         }
 
@@ -168,8 +188,8 @@ function setTextColor(target, mode) {
 }
 
 function calculateMinAvgMax(targetId, data) {
-    let max = data[0][targetId];
-    let min = data[0][targetId];
+    let max = data[0] ? data[0][targetId] : 0;
+    let min = data[0] ? data[0][targetId] : 0;
     let sum = 0;
     let countMatch = 0;
     for (let i in data) {
@@ -194,7 +214,7 @@ function calculateMinAvgMax(targetId, data) {
         avg = sum / countMatch;
     }
 
-    return {"max": max, "min": min, "avg": avg, "countMatch": countMatch};
+    return { "max": max, "min": min, "avg": avg, "countMatch": countMatch };
 }
 
 function calculateSuccessRate(successId, failId, data) {
