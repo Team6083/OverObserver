@@ -1,0 +1,240 @@
+{
+  "fields": {
+    "autonomousTitle": {
+      "type": "title",
+      "title": "<h3><span class=\"badge badge-secondary\">Autonomous</span></h3>",
+      "shortenTitle": "<strong>Autonomous</strong>"
+    },
+    "crossInititationLine": {
+      "type": "boolean",
+      "title": "Cross Inititation Line",
+      "trueBtnLabel": "成功",
+      "falseBtnLabel": "失敗"
+    },
+    "autoPowerCellBotton": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Botton 成功",
+      "min": 0,
+      "default": 0
+    },
+    "autoPowerCellBottonFail": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Botton <span class=\"text-warning\">失敗</span>",
+      "min": 0,
+      "default": 0
+    },
+    "autoPowerCellOuter": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Outer 成功",
+      "min": 0,
+      "default": 0
+    },
+    "autoPowerCellOuterFail": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Outer <span class=\"text-warning\">失敗</span>",
+      "min": 0,
+      "default": 0
+    },
+    "autoPowerCellInner": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Inner 成功",
+      "min": 0,
+      "default": 0
+    },
+    "autoPowerCellInnerFail": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Inner <span class=\"text-warning\">失敗</span>",
+      "min": 0,
+      "default": 0
+    },
+    "teleopTitle": {
+      "type": "title",
+      "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
+      "shortenTitle": "<strong>手動時間</strong>"
+    },
+    "teleopPowerCellBotton": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Botton 成功",
+      "min": 0,
+      "default": 0
+    },
+    "teleopPowerCellBottonFail": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Botton <span class=\"text-warning\">失敗</span>",
+      "min": 0,
+      "default": 0
+    },
+    "teleopPowerCellOuter": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Outer 成功",
+      "min": 0,
+      "default": 0
+    },
+    "teleopPowerCellOuterFail": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Outer <span class=\"text-warning\">失敗</span>",
+      "min": 0,
+      "default": 0
+    },
+    "teleopPowerCellInner": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Inner 成功",
+      "min": 0,
+      "default": 0
+    },
+    "teleopPowerCellInnerFail": {
+      "type": "integer",
+      "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Inner <span class=\"text-warning\">失敗</span>",
+      "min": 0,
+      "default": 0
+    },
+    "rotationControl": {
+      "type": "boolean",
+      "title": "Rotation Control",
+      "trueBtnLabel": "成功",
+      "falseBtnLabel": "失敗"
+    },
+    "positionControl": {
+      "type": "boolean",
+      "title": "Position Control",
+      "trueBtnLabel": "成功",
+      "falseBtnLabel": "失敗"
+    },
+    "endLocation": {
+      "type": "string",
+      "title": "結束位置",
+      "enum": [
+        "None",
+        "HANG",
+        "PARK"
+      ],
+      "required": true
+    },
+    "summaryTitle": {
+      "type": "title",
+      "title": "<h3><span class=\"badge badge-secondary\">Others</span></h3>",
+      "shortenTitle": "<strong>Others</strong>"
+    },
+    "driverSkill": {
+      "type": "string",
+      "title": "駕駛技術",
+      "enum": [
+        "好",
+        "普通",
+        "不好"
+      ],
+      "required": true
+    },
+    "robotBroke": {
+      "type": "checkbox",
+      "title": "機器人故障"
+    },
+    "otherNotes": {
+      "type": "string",
+      "format": "textarea",
+      "title": "其他"
+    }
+  },
+  "statistics": {},
+  "teamStat": {
+    "dataSet": {
+      "autonomousTitle": {
+        "type": "default"
+      },
+      "crossInititationLineCount": {
+        "title": "Cross Inititation Line",
+        "type": "count",
+        "targetId": "crossInititationLine"
+      },
+      "autoCellBottonRate": {
+        "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Botton 成功率",
+        "type": "successRate",
+        "successId": "autoPowerCellBotton",
+        "failId": "autoPowerCellBottonFail"
+      },
+      "autoCellOuterRate": {
+        "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Outer 成功率",
+        "type": "successRate",
+        "successId": "autoPowerCellOuter",
+        "failId": "autoPowerCellOuterFail"
+      },
+      "autoCellInnerRate": {
+        "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Inner 成功率",
+        "type": "successRate",
+        "successId": "autoPowerCellInner",
+        "failId": "autoPowerCellInnerFail"
+      },
+      "teleopTitle": {
+        "type": "default"
+      },
+      "teleopCellBottonRate": {
+        "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Botton 成功率",
+        "type": "successRate",
+        "successId": "teleopPowerCellBotton",
+        "failId": "teleopPowerCellBottonFail"
+      },
+      "teleopPowerCellBotton": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">Power Cell</span> Botton 平均"
+      },
+      "teleopCellOuterRate": {
+        "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Outer 成功率",
+        "type": "successRate",
+        "successId": "teleopPowerCellOuter",
+        "failId": "teleopPowerCellOuterFail"
+      },
+      "teleopPowerCellOuter": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">Power Cell</span> Outer 平均"
+      },
+      "teleopCellInnerRate": {
+        "title": "<span class=\"badge badge-pill badge-dark\">Power Cell</span> Inner 成功率",
+        "type": "successRate",
+        "successId": "teleopPowerCellInner",
+        "failId": "teleopPowerCellInnerFail"
+      },
+      "teleopPowerCellInner": {
+        "type": "average",
+        "title": "<span class=\"badge badge-pill badge-primary\">Power Cell</span> Inner 平均"
+      },
+      "rotationControlCount": {
+        "title": "Rotation Control",
+        "type": "count",
+        "targetId": "rotationControl"
+      },
+      "positionControlCount": {
+        "title": "Position Control",
+        "type": "count",
+        "targetId": "positionControl"
+      },
+      "endHang": {
+        "title": "Endgame Hang",
+        "type": "countEnum",
+        "targetId": "endLocation",
+        "targetEnum": "HANG"
+      },
+      "endPark": {
+        "title": "Endgame Park",
+        "type": "countEnum",
+        "targetId": "endLocation",
+        "targetEnum": "PARK"
+      },
+      "driverSkill": {
+        "title": "駕駛技術 (好/普通/不好)",
+        "type": "countAll",
+        "targetId": "driverSkill",
+        "targetEnums": [
+          "好",
+          "普通",
+          "不好"
+        ]
+      },
+      "notes": {
+        "title": "Notes",
+        "type": "dumpAll",
+        "targetId": "otherNotes"
+      }
+    },
+    "robotBrokeId": "robotBroke"
+  }
+}
