@@ -36,13 +36,10 @@ database.ref("settings").once('value').then(function (snapshot) {
                 getAllTeamCollect(matches, teamId, (teamCollect) => {
 
                     // remove broken match
-                    for (let i in teamCollect) {
-                        let s = teamCollect[i];
-                        if (teamStatTemplate.robotBrokeId !== undefined) {
-                            if (s[teamStatTemplate.robotBrokeId]) {
-                                teamCollect.pop(s);
-                            }
-                        }
+                    if (teamStatTemplate.robotBrokeId !== undefined) {
+                        teamCollect = teamCollect.filter((s) => {
+                            return !s[teamStatTemplate.robotBrokeId];
+                        })
                     }
 
                     for (let id in teamStatTemplate.dataSet) {
