@@ -1,0 +1,200 @@
+{
+    "fields": {
+      "autonomousTitle": {
+        "type": "title",
+        "title": "<h3><span class=\"badge badge-secondary\">Autonomous</span></h3>",
+        "shortenTitle": "<strong>Autonomous</strong>"
+      },
+      "moveOutInititationLine": {
+        "type": "boolean",
+        "title": "Move out of Inititation Line",
+        "trueBtnLabel": "成功",
+        "falseBtnLabel": "失敗"
+      },
+      "autoUpperHub": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Upper 成功",
+        "min": 0,
+        "default": 0
+      },
+      "autoUpperHubFail": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Upper <span class=\"text-warning\">失敗</span>",
+        "min": 0,
+        "default": 0
+      },
+      "autoLowerHub": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Lower 成功",
+        "min": 0,
+        "default": 0
+      },
+      "autoLowerHubFail": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Lower <span class=\"text-warning\">失敗</span>",
+        "min": 0,
+        "default": 0
+      },
+      "teleopTitle": {
+        "type": "title",
+        "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
+        "shortenTitle": "<strong>手動時間</strong>"
+      },
+      "teleopUpperHub": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Upper 成功",
+        "min": 0,
+        "default": 0
+      },
+      "teleopUpperHubFail": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Upper <span class=\"text-warning\">失敗</span>",
+        "min": 0,
+        "default": 0
+      },
+      "teleopLowerHub": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Lower 成功",
+        "min": 0,
+        "default": 0
+      },
+      "teleopLowerHubFail": {
+        "type": "integer",
+        "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Lower <span class=\"text-warning\">失敗</span>",
+        "min": 0,
+        "default": 0
+      },
+      "startLocation": {
+        "type": "string",
+        "title": "開始位置",
+        "enum": [
+          "None",
+          "FIRSTlayer",
+          "SECONDlayer"
+        ],
+        "required": true
+      },
+      "endLocation": {
+        "type": "string",
+        "title": "結束位置",
+        "enum": [
+          "None",
+          "FIRSTlayer",
+          "SECONDlayer",
+          "THIRDlayer",
+          "FOURTHlayer"
+        ],
+        "required": true
+      },
+      "summaryTitle": {
+        "type": "title",
+        "title": "<h3><span class=\"badge badge-secondary\">Others</span></h3>",
+        "shortenTitle": "<strong>Others</strong>"
+      },
+      "driverSkill": {
+        "type": "string",
+        "title": "駕駛技術",
+        "enum": [
+          "好",
+          "普通",
+          "不好"
+        ],
+        "required": true
+      },
+      "robotBroke": {
+        "type": "checkbox",
+        "title": "機器人故障"
+      },
+      "otherNotes": {
+        "type": "string",
+        "format": "textarea",
+        "title": "其他"
+      }
+    },
+    "statistics": {},
+    "teamStat": {
+      "dataSet": {
+        "autonomousTitle": {
+          "type": "default"
+        },
+        "moveOutInititationLineCount": {
+          "title": "Move out of Inititation Line",
+          "type": "count",
+          "targetId": "moveOutInititationLine"
+        },
+        "autoUpperHubRate": {
+          "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Upper 成功率",
+          "type": "successRate",
+          "successId": "autoUpperHub",
+          "failId": "autoUpperHubFail"
+        },
+        "autoLowerHubRate": {
+          "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Lower 成功率",
+          "type": "successRate",
+          "successId": "autoLowerHub",
+          "failId": "autoLowerHubFail"
+        },
+        "teleopTitle": {
+          "type": "default"
+        },
+        "teleopUpperHubRate": {
+          "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Upper 成功率",
+          "type": "successRate",
+          "successId": "teleopUpperHub",
+          "failId": "teleopUpperHubFail"
+        },
+        "teleopUpperHub": {
+          "type": "average",
+          "title": "<span class=\"badge badge-pill badge-primary\">Cargo</span> Upper 平均"
+        },
+        "teleopLowerHubRate": {
+          "title": "<span class=\"badge badge-pill badge-dark\">Cargo</span> Lower 成功率",
+          "type": "successRate",
+          "successId": "teleopLowerHub",
+          "failId": "teleopLowerHubFail"
+        },
+        "teleopLowerHub": {
+          "type": "average",
+          "title": "<span class=\"badge badge-pill badge-primary\">Cargo</span> Lower 平均"
+        },
+        "startLocation": {
+          "title": "startLocation (None/First/Second)",
+          "type": "countAll",
+          "targetId": "startLocation",
+          "targetEnum": [
+            "None",
+          "FIRSTlayer",
+          "SECONDlayer"
+          ]
+        },
+        "endLocation": {
+          "title": "endLocation",
+          "type": "countALL",
+          "targetId": "endLocation",
+          "targetEnum": [
+            "None",
+            "FIRSTlayer",
+            "SECONDlayer",
+            "THIRDlayer",
+            "FOURTHlayer"
+          ]
+        },
+        "driverSkill": {
+          "title": "駕駛技術 (好/普通/不好)",
+          "type": "countAll",
+          "targetId": "driverSkill",
+          "targetEnums": [
+            "好",
+            "普通",
+            "不好"
+          ]
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "dumpAll",
+          "targetId": "otherNotes"
+        }
+      },
+      "robotBrokeId": "robotBroke"
+    }
+  }
