@@ -13,7 +13,7 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
   res.status(200).end();
 
   switch (type) {
-    case 'match_score':
+    case 'match_score': {
       let matchData = data.message_data.match;
       delete matchData["score_breakdown"];
 
@@ -23,12 +23,14 @@ exports.TBAWebhook = functions.https.onRequest((req, res) => {
       delete matchData["alliances"].blue.teams;
 
       return admin.database().ref('/matchs').child(data.message_data.match.event_key).child(data.message_data.match.key).update(matchData);
-    default:
+    }
+    default: {
       return admin.database().ref('/webhooks').push({
         type: type,
         data: data.message_data,
         time: new Date().toUTCString()
       });
+    }
   }
 });
 

@@ -7,4 +7,4 @@ $.ajax({
   type: 'GET'
 });
 
-/events/{year}/simple
+// /events/{year}/simple
