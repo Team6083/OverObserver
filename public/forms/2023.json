@@ -1,259 +1,259 @@
 {
     "fields": {
-      "autonomousTitle": {
-        "type": "title",
-        "title": "<h3><span class=\"badge badge-secondary\">Autonomous</span></h3>",
-        "shortenTitle": "<strong>Autonomous</strong>"
-      },
-      "moveOutCommunity": {
-        "type": "boolean",
-        "title": "Move out of COMMUNITY",
-        "trueBtnLabel": "成功",
-        "falseBtnLabel": "失敗"
-      },
-      "autoTopRow": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功",
-        "min": 0,
-        "default": 0
-      },
-      "autoTopRowFail": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Top</span> <span class=\"text-warning\">失敗</span>",
-        "min": 0,
-        "default": 0
-      },
-      "autoMidRow": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功",
-        "min": 0,
-        "default": 0
-      },
-      "autoMidRowFail": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> <span class=\"text-warning\">失敗</span>",
-        "min": 0,
-        "default": 0
-      },
-      "autoLowerRow": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功",
-        "min": 0,
-        "default": 0
-      },
-      "autoLowerRowFail": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> <span class=\"text-warning\">失敗</span>",
-        "min": 0,
-        "default": 0
-      },
-      "autoChargeStation": {
-        "type": "string",
-        "title": "CHARGE STATION",
-        "enum": [
-          "NONE",
-          "ENGAGED",
-          "DOCKED"
-        ],
-        "required": true
-      },
-      "teleopTitle": {
-        "type": "title",
-        "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
-        "shortenTitle": "<strong>手動時間</strong>"
-      },
-      "teleopTopRow": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功",
-        "min": 0,
-        "default": 0
-      },
-      "teleopTopRowFail": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Top</span> <span class=\"text-warning\">失敗</span>",
-        "min": 0,
-        "default": 0
-      },
-      "teleopMidRow": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功",
-        "min": 0,
-        "default": 0
-      },
-      "teleopMidRowFail": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> <span class=\"text-warning\">失敗</span>",
-        "min": 0,
-        "default": 0
-      },
-      "teleopLowerRow": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功",
-        "min": 0,
-        "default": 0
-      },
-      "teleopLowerRowFail": {
-        "type": "integer",
-        "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> <span class=\"text-warning\">失敗</span>",
-        "min": 0,
-        "default": 0
-      },
-      "teleopChargeStation": {
-        "type": "string",
-        "title": "CHARGE STATION",
-        "enum": [
-          "NONE",
-          "ENGAGED",
-          "DOCKED"
-        ],
-        "required": true
-      },
-      "park": {
-        "falseBtnLabel": "失敗",
-        "title": "Park",
-        "trueBtnLabel": "成功",
-        "type": "boolean"
-      },
-      "summaryTitle": {
-        "type": "title",
-        "title": "<h3><span class=\"badge badge-secondary\">Others</span></h3>",
-        "shortenTitle": "<strong>Others</strong>"
-      },
-      "driverSkill": {
-        "type": "string",
-        "title": "駕駛技術",
-        "enum": [
-          "好",
-          "普通",
-          "不好"
-        ],
-        "required": true
-      },
-      "robotBroke": {
-        "type": "checkbox",
-        "title": "機器人故障"
-      },
-      "otherNotes": {
-        "type": "string",
-        "format": "textarea",
-        "title": "其他"
-      }
+        "autonomousTitle": {
+            "type": "title",
+            "title": "<h3><span class=\"badge badge-secondary\">Autonomous</span></h3>",
+            "shortenTitle": "<strong>Autonomous</strong>"
+        },
+        "moveOutCommunity": {
+            "type": "boolean",
+            "title": "Move out of COMMUNITY",
+            "trueBtnLabel": "成功",
+            "falseBtnLabel": "失敗"
+        },
+        "autoTopRow": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功",
+            "min": 0,
+            "default": 0
+        },
+        "autoTopRowFail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Top</span> <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
+        "autoMidRow": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功",
+            "min": 0,
+            "default": 0
+        },
+        "autoMidRowFail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
+        "autoLowerRow": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功",
+            "min": 0,
+            "default": 0
+        },
+        "autoLowerRowFail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
+        "autoChargeStation": {
+            "type": "string",
+            "title": "CHARGE STATION",
+            "enum": [
+                "NONE",
+                "ENGAGED",
+                "DOCKED"
+            ],
+            "required": true
+        },
+        "teleopTitle": {
+            "type": "title",
+            "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
+            "shortenTitle": "<strong>手動時間</strong>"
+        },
+        "teleopTopRow": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功",
+            "min": 0,
+            "default": 0
+        },
+        "teleopTopRowFail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Top</span> <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
+        "teleopMidRow": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功",
+            "min": 0,
+            "default": 0
+        },
+        "teleopMidRowFail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
+        "teleopLowerRow": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功",
+            "min": 0,
+            "default": 0
+        },
+        "teleopLowerRowFail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
+        "teleopChargeStation": {
+            "type": "string",
+            "title": "CHARGE STATION",
+            "enum": [
+                "NONE",
+                "ENGAGED",
+                "DOCKED"
+            ],
+            "required": true
+        },
+        "park": {
+            "falseBtnLabel": "失敗",
+            "title": "Park",
+            "trueBtnLabel": "成功",
+            "type": "boolean"
+        },
+        "summaryTitle": {
+            "type": "title",
+            "title": "<h3><span class=\"badge badge-secondary\">Others</span></h3>",
+            "shortenTitle": "<strong>Others</strong>"
+        },
+        "driverSkill": {
+            "type": "string",
+            "title": "駕駛技術",
+            "enum": [
+                "好",
+                "普通",
+                "不好"
+            ],
+            "required": true
+        },
+        "robotBroke": {
+            "type": "checkbox",
+            "title": "機器人故障"
+        },
+        "otherNotes": {
+            "type": "string",
+            "format": "textarea",
+            "title": "其他"
+        }
     },
     "statistics": {},
     "teamStat": {
-      "dataSet": {
-        "autonomousTitle": {
-          "type": "default"
+        "dataSet": {
+            "autonomousTitle": {
+                "type": "default"
+            },
+            "moveOutCommunityeCount": {
+                "title": "Move out of COMMUNITY",
+                "type": "count",
+                "targetId": "moveOutCommunity"
+            },
+            "autoTopRowRate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功率",
+                "type": "successRate",
+                "successId": "autoTopRow",
+                "failId": "autoTopRowFail"
+            },
+            "autoTopRow": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">Top</span> 平均"
+            },
+            "autoMidRowRate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功率",
+                "type": "successRate",
+                "successId": "autoMidRow",
+                "failId": "autoMidRowFail"
+            },
+            "autoMidRow": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">Mid</span> 平均"
+            },
+            "autoLowerRowRate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功率",
+                "type": "successRate",
+                "successId": "autoLowerRow",
+                "failId": "autoLowerRowFail"
+            },
+            "autoLowerRow": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">Lower</span> 平均"
+            },
+            "autoChargeStation": {
+                "title": "CHARGE STATION (NONE/ENGAGED/DOCKED)",
+                "type": "countAll",
+                "targetId": "autoChargeStation",
+                "targetEnums": [
+                    "NONE",
+                    "ENGAGED",
+                    "DOCKED"
+                ]
+            },
+            "teleopTitle": {
+                "type": "default"
+            },
+            "teleopTopRowRate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功率",
+                "type": "successRate",
+                "successId": "teleopTopRow",
+                "failId": "teleopTopRowFail"
+            },
+            "teleopTopRow": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">Top</span> 平均"
+            },
+            "teleopMidRowRate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功率",
+                "type": "successRate",
+                "successId": "teleopMidRow",
+                "failId": "teleopMidRowFail"
+            },
+            "teleopMidRow": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">Mid</span> 平均"
+            },
+            "teleopLowerRowRate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功率",
+                "type": "successRate",
+                "successId": "teleopLowerRow",
+                "failId": "teleopLowerRowFail"
+            },
+            "teleopLowerRow": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">Lower</span> 平均"
+            },
+            "teleopChargeStation": {
+                "title": "CHARGE STATION (NONE/ENGAGED/DOCKED)",
+                "type": "countAll",
+                "targetId": "teleopChargeStation",
+                "targetEnums": [
+                    "NONE",
+                    "ENGAGED",
+                    "DOCKED"
+                ]
+            },
+            "parkCount": {
+                "title": "Park",
+                "type": "count",
+                "targetId": "park"
+            },
+            "driverSkill": {
+                "title": "駕駛技術 (好/普通/不好)",
+                "type": "countAll",
+                "targetId": "driverSkill",
+                "targetEnums": [
+                    "好",
+                    "普通",
+                    "不好"
+                ]
+            },
+            "notes": {
+                "title": "Notes",
+                "type": "dumpAll",
+                "targetId": "otherNotes"
+            }
         },
-        "moveOutCommunityeCount": {
-          "title": "Move out of COMMUNITY",
-          "type": "count",
-          "targetId": "moveOutCommunity"
-        },
-        "autoTopRowRate": {
-          "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功率",
-          "type": "successRate",
-          "successId": "autoTopRow",
-          "failId": "autoTopRowFail"
-        },
-        "autoTopRow": {
-          "type": "average",
-          "title": "<span class=\"badge badge-pill badge-primary\">Top</span> 平均"
-        },
-        "autoMidRowRate": {
-          "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功率",
-          "type": "successRate",
-          "successId": "autoMidRow",
-          "failId": "autoMidRowFail"
-        },
-        "autoMidRow": {
-          "type": "average",
-          "title": "<span class=\"badge badge-pill badge-primary\">Mid</span> 平均"
-        },
-        "autoLowerRowRate": {
-          "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功率",
-          "type": "successRate",
-          "successId": "autoLowerRow",
-          "failId": "autoLowerRowFail"
-        },
-        "autoLowerRow": {
-          "type": "average",
-          "title": "<span class=\"badge badge-pill badge-primary\">Lower</span> 平均"
-        },
-        "autoChargeStation": {
-          "title": "CHARGE STATION (NONE/ENGAGED/DOCKED)",
-          "type": "countAll",
-          "targetId": "autoChargeStation",
-          "targetEnums": [
-            "NONE",
-            "ENGAGED",
-            "DOCKED"
-          ]
-        },
-        "teleopTitle": {
-          "type": "default"
-        },
-        "teleopTopRowRate": {
-          "title": "<span class=\"badge badge-pill badge-dark\">Top</span> 成功率",
-          "type": "successRate",
-          "successId": "teleopTopRow",
-          "failId": "teleopTopRowFail"
-        },
-        "teleopTopRow": {
-          "type": "average",
-          "title": "<span class=\"badge badge-pill badge-primary\">Top</span> 平均"
-        },
-        "teleopMidRowRate": {
-          "title": "<span class=\"badge badge-pill badge-dark\">Mid</span> 成功率",
-          "type": "successRate",
-          "successId": "teleopMidRow",
-          "failId": "teleopMidRowFail"
-        },
-        "teleopMidRow": {
-          "type": "average",
-          "title": "<span class=\"badge badge-pill badge-primary\">Mid</span> 平均"
-        },
-        "teleopLowerRowRate": {
-          "title": "<span class=\"badge badge-pill badge-dark\">Lower</span> 成功率",
-          "type": "successRate",
-          "successId": "teleopLowerRow",
-          "failId": "teleopLowerRowFail"
-        },
-        "teleopLowerRow": {
-          "type": "average",
-          "title": "<span class=\"badge badge-pill badge-primary\">Lower</span> 平均"
-        },
-        "teleopChargeStation": {
-          "title": "CHARGE STATION (NONE/ENGAGED/DOCKED)",
-          "type": "countAll",
-          "targetId": "teleopChargeStation",
-          "targetEnums": [
-            "NONE",
-            "ENGAGED",
-            "DOCKED"
-          ]
-        },
-        "parkCount": {
-          "title": "Park",
-          "type": "count",
-          "targetId": "park"
-        },
-        "driverSkill": {
-          "title": "駕駛技術 (好/普通/不好)",
-          "type": "countAll",
-          "targetId": "driverSkill",
-          "targetEnums": [
-            "好",
-            "普通",
-            "不好"
-          ]
-        },
-        "notes": {
-          "title": "Notes",
-          "type": "dumpAll",
-          "targetId": "otherNotes"
-        }
-      },
-      "robotBrokeId": "robotBroke"
+        "robotBrokeId": "robotBroke"
     }
-  }
+}
