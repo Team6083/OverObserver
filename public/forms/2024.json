@@ -155,7 +155,7 @@
                 "successId": "teleopSPEAKER",
                 "failId": "teleopSPEAKERFail"
             },
-            "teleopSPEAKERRow": {
+            "teleopSPEAKER": {
                 "type": "average",
                 "title": "<span class=\"badge badge-pill badge-primary\">SPEAKER</span> 平均"
             },

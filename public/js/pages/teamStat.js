@@ -10,12 +10,11 @@ $.when(ajaxTeamSimple(teamId)).done(function (team) {
 database.ref("settings").once('value').then(function (snapshot) {
     const eventId = snapshot.child("currentEvent").val();
 
-    $.when(ajaxTeamEventStatus(teamId, eventId)).done(function (team) {
-        console.log(team);
-        $("#ranking").html(team.qual.ranking.rank);
-        $("#overallStatus").html(team.overall_status_str);
-        $("#playedMatch").html(team.qual.ranking.matches_played);
-    });
+    // $.when(ajaxTeamEventStatus(teamId, eventId)).done(function (team) {
+    //     $("#ranking").html(team.qual.ranking.rank);
+    //     $("#overallStatus").html(team.overall_status_str);
+    //     $("#playedMatch").html(team.qual.ranking.matches_played);
+    // });
 
     $("#thisEvent").html(eventId);
     getScoutFormPathWithEventId(eventId, (scoutFormPath) => {
@@ -87,7 +86,7 @@ database.ref("settings").once('value').then(function (snapshot) {
                                 let maxMinAvg = calculateMinAvgMax(s.successId, teamCollect);
                                 tdMin.innerText = maxMinAvg.min;
                                 tdMax.innerText = maxMinAvg.max;
-                                tdAvg.innerText = successRateRes.rate;
+                                tdAvg.innerText = successRateRes.rate === -1 ? "n/a" : successRateRes.rate;
                                 setTextColor(tdMax, 0);
                                 setTextColor(tdMin, 0);
                                 setTextColor(tdAvg, 1);
@@ -191,6 +190,8 @@ function calculateMinAvgMax(targetId, data) {
     let countMatch = 0;
     for (let i in data) {
         let d = data[i];
+        if (d.notShow) continue;
+
         if (d[targetId] !== 0) {
             countMatch++;
             sum += d[targetId];
@@ -218,15 +219,18 @@ function calculateSuccessRate(successId, failId, data) {
     let totalCount = 0;
     let successCount = 0;
     let failCount = 0;
+
     for (let i in data) {
         let d = data[i];
+        if (d.notShow) continue;
+
         totalCount += d[successId] + d[failId];
         successCount += d[successId];
         failCount += d[failId];
     }
 
     return {
-        "rate": successCount / totalCount,
+        "rate": totalCount === 0 ? -1 : successCount / totalCount,
         "count": totalCount,
         "failCount": failCount,
         "successCount": successCount
@@ -236,6 +240,11 @@ function calculateSuccessRate(successId, failId, data) {
 
 function getAllTeamCollect(targetMatches, team, callback) {
     let data = [];
+    if (targetMatches.length === 0) {
+        callback(data);
+        return;
+    }
+
     let event = targetMatches[0].split('_')[0];
 
     firebase.database().ref("matchs/" + event).once('value', function (snapshot) {
