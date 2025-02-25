@@ -181,6 +181,16 @@
             ],
             "required": true
         },
+            "robotMove": {
+            "type": "string",
+            "title": "機器人動作流暢度",
+            "enum": [
+                "流暢",
+                "普通",
+                "卡頓"
+            ],
+            "required": true
+        },
         "robotBroke": {
             "type": "checkbox",
             "title": "機器人故障"
@@ -344,6 +354,16 @@
                     "好",
                     "普通",
                     "不好"
+                ]
+            },
+            "robotMove": {
+                "title": "機器人動作流暢度 (流暢/普通/卡頓)",
+                "type": "countAll",
+                "targetId": "robotMove",
+                "targetEnums": [
+                    "流暢",
+                    "普通",
+                    "卡頓"
                 ]
             },
             "notes": {
