@@ -11,51 +11,15 @@
             "trueBtnLabel": "成功",
             "falseBtnLabel": "失敗"
         },
-        "autoCORALLv1": {
+        "autoCORALLv.1~Lv.3": {
             "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 成功",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 成功",
             "min": 0,
             "default": 0
         },
-        "autoCORALLv1Fail": {
+        "autoCORALLv.1~Lv.3Fail": {
             "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 <span class=\"text-warning\">失敗</span>",
-            "min": 0,
-            "default": 0
-        },
-        "autoCORALLv2": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.2 成功",
-            "min": 0,
-            "default": 0
-        },
-        "autoCORALLv2Fail": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.2 <span class=\"text-warning\">失敗</span>",
-            "min": 0,
-            "default": 0
-        },
-        "autoCORALLv3": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.3 成功",
-            "min": 0,
-            "default": 0
-        },
-        "autoCORALLv3Fail": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.3 <span class=\"text-warning\">失敗</span>",
-            "min": 0,
-            "default": 0
-        },
-        "autoCORALLv4": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功",
-            "min": 0,
-            "default": 0
-        },
-        "autoCORALLv4Fail": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 <span class=\"text-warning\">失敗</span>",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 <span class=\"text-warning\">失敗</span>",
             "min": 0,
             "default": 0
         },
@@ -88,51 +52,15 @@
             "title": "<h3><span class=\"badge badge-secondary\">手動時間</span></h3>",
             "shortenTitle": "<strong>手動時間</strong>"
         },
-        "teleopCORALLv1": {
+        "teleopCORALLv1~Lv3": {
             "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 成功",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 成功",
             "min": 0,
             "default": 0
         },
-        "teleopCORALLv1Fail": {
+        "teleopCORALLv1~Lv3Fail": {
             "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 <span class=\"text-warning\">失敗</span>",
-            "min": 0,
-            "default": 0
-        },
-        "teleopCORALLv2": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.2 成功",
-            "min": 0,
-            "default": 0
-        },
-        "teleopCORALLv2Fail": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.2 <span class=\"text-warning\">失敗</span>",
-            "min": 0,
-            "default": 0
-        },
-        "teleopCORALLv3": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.3 成功",
-            "min": 0,
-            "default": 0
-        },
-        "teleopCORALLv3Fail": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.3 <span class=\"text-warning\">失敗</span>",
-            "min": 0,
-            "default": 0
-        },
-        "teleopCORALLv4": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功",
-            "min": 0,
-            "default": 0
-        },
-        "teleopCORALLv4Fail": {
-            "type": "integer",
-            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 <span class=\"text-warning\">失敗</span>",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 <span class=\"text-warning\">失敗</span>",
             "min": 0,
             "default": 0
         },
@@ -212,45 +140,15 @@
                 "type": "count",
                 "targetId": "leavetheSTARTINGZONE"
             },
-            "autoCORALLv1Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 成功率",
+            "autoCORALLv1~Lv3Rate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 成功率",
                 "type": "successRate",
                 "successId": "autoCORALLv1",
                 "failId": "autoCORALLv1Fail"
             },
-            "autoCORALLv1": {
+            "autoCORALLv1~Lv3": {
                 "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.1 平均"
-            },
-            "autoCORALLv2Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.2 成功率",
-                "type": "successRate",
-                "successId": "autoCORALLv2",
-                "failId": "autoCORALLv2Fail"
-            },
-            "autoCORALLv2": {
-                "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.2 平均"
-            },
-            "autoCORALLv3Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.3 成功率",
-                "type": "successRate",
-                "successId": "autoCORALLv3",
-                "failId": "autoCORALLv3Fail"
-            },
-            "autoCORALLv3": {
-                "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.3 平均"
-            },
-            "autoCORALLv4Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功率",
-                "type": "successRate",
-                "successId": "autoCORALLv4",
-                "failId": "autoCORALLv4Fail"
-            },
-            "autoCORALLv4": {
-                "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.4 平均"
+                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.1 ~ Lv.3 平均"
             },
             "autoALGAEPROCESSORRate": {
                 "title": "<span class=\"badge badge-pill badge-dark\">ALGAE</span> PROCESSOR 成功率",
@@ -275,45 +173,15 @@
             "teleopTitle": {
                 "type": "default"
             },
-            "teleopCORALLv1Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORALLv.1</span> 成功率",
+            "teleopCORALLv1~Lv3Rate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 成功率",
                 "type": "successRate",
                 "successId": "teleopCORALLv1",
                 "failId": "teleopCORALLv1Fail"
             },
-            "teleopCORALLv1": {
+            "teleopCORALLv1~Lv3": {
                 "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORALLv.1</span> 平均"
-            },
-            "teleopCORALLv2Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORALLv.2</span> 成功率",
-                "type": "successRate",
-                "successId": "teleopCORALLv2",
-                "failId": "teleopCORALLv2Fail"
-            },
-            "teleopCORALLv2": {
-                "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORALLv.2</span> 平均"
-            },
-            "teleopCORALLv3Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORALLv.3</span> 成功率",
-                "type": "successRate",
-                "successId": "teleopCORALLv3",
-                "failId": "teleopCORALLv3Fail"
-            },
-            "teleopCORALLv3": {
-                "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORALLv.3</span> 平均"
-            },
-            "teleopCORALLv4Rate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">CORALLv.4</span> 成功率",
-                "type": "successRate",
-                "successId": "teleopCORALLv4",
-                "failId": "teleopCORALLv4Fail"
-            },
-            "teleopCORALLv4": {
-                "type": "average",
-                "title": "<span class=\"badge badge-pill badge-primary\">CORALLv.4</span> 平均"
+                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.1 ~ Lv.3 平均"
             },
             "teleopALGAEPROCESSORRate": {
                 "title": "<span class=\"badge badge-pill badge-dark\">ALGAE</span> PROCESSOR 成功率",
