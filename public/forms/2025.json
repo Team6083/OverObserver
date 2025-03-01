@@ -11,13 +11,13 @@
             "trueBtnLabel": "成功",
             "falseBtnLabel": "失敗"
         },
-        "autoCORALLv.1~Lv.3": {
+        "autoCORALLv1~Lv3": {
             "type": "integer",
             "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 成功",
             "min": 0,
             "default": 0
         },
-        "autoCORALLv.1~Lv.3Fail": {
+        "autoCORALLv1~Lv3Fail": {
             "type": "integer",
             "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 <span class=\"text-warning\">失敗</span>",
             "min": 0,
