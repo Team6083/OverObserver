@@ -94,8 +94,8 @@
             "enum": [
                 "NONE",
                 "PARK",
-                "ShallowCage",
-                "DeepCage"
+                "ShallowCAGE",
+                "DeepCAGE"
             ],
             "required": true
         },
@@ -210,8 +210,8 @@
                 "targetEnums": [
                     "NONE",
                     "PARK",
-                    "ShallowCage",
-                    "DeepCage"
+                    "ShallowCAGE",
+                    "DeepCAGE"
                 ]
             },
             "driverSkill": {
