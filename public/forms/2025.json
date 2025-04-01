@@ -94,8 +94,8 @@
             "enum": [
                 "NONE",
                 "PARK",
-                "ShallowCAGE",
-                "DeepCAGE"
+                "ShallowCage",
+                "DeepCage"
             ],
             "required": true
         },
