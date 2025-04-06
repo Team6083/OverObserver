@@ -94,7 +94,7 @@
             "enum": [
                 "NONE",
                 "PARK",
-                "ShallowCAGE",
+                "ShallowCage",
                 "DeepCAGE"
             ],
             "required": true
@@ -204,13 +204,13 @@
                 "title": "<span class=\"badge badge-pill badge-primary\">ALGAE</span> NET 平均"
             },
             "teleopBARGE": {
-                "title": "BARGE (NONE/PARK/ShallowCAGE/DeepCAGE)",
+                "title": "BARGE (NONE/PARK/ShallowCage/DeepCAGE)",
                 "type": "countAll",
                 "targetId": "teleopBARGE",
                 "targetEnums": [
                     "NONE",
                     "PARK",
-                    "ShallowCAGE",
+                    "ShallowCage",
                     "DeepCAGE"
                 ]
             },
