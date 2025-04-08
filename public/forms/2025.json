@@ -23,6 +23,18 @@
             "min": 0,
             "default": 0
         },
+        "autoCORALLv4": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功",
+            "min": 0,
+            "default": 0
+        },
+        "autoCORALLv4Fail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
         "autoALGAEPROCESSOR": {
             "type": "integer",
             "title": "<span class=\"badge badge-pill badge-primary\">ALGAE</span> PROCESSOR 成功",
@@ -64,6 +76,18 @@
             "min": 0,
             "default": 0
         },
+        "teleopCORALLv4": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功",
+            "min": 0,
+            "default": 0
+        },
+        "teleopCORALLv4Fail": {
+            "type": "integer",
+            "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 <span class=\"text-warning\">失敗</span>",
+            "min": 0,
+            "default": 0
+        },
         "teleopALGAEPROCESSOR": {
             "type": "integer",
             "title": "<span class=\"badge badge-pill badge-primary\">ALGAE</span> PROCESSOR 成功",
@@ -94,7 +118,7 @@
             "enum": [
                 "NONE",
                 "PARK",
-                "ShallowCage",
+                "ShallowCAGE",
                 "DeepCAGE"
             ],
             "required": true
@@ -133,12 +157,22 @@
             "autoCORALLv1~Lv3Rate": {
                 "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.1 ~ Lv.3 成功率",
                 "type": "successRate",
-                "successId": "autoCORALLv1",
-                "failId": "autoCORALLv1Fail"
+                "successId": "autoCORALLv1~Lv3",
+                "failId": "autoCORALLv1~Lv3Fail"
             },
             "autoCORALLv1~Lv3": {
                 "type": "average",
                 "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.1 ~ Lv.3 平均"
+            },
+            "autoCORALLv4Rate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功率",
+                "type": "successRate",
+                "successId": "autoCORALLv4",
+                "failId": "autoCORALLv4Fail"
+            },
+            "autoCORALLv4": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.4 平均"
             },
             "autoALGAEPROCESSORRate": {
                 "title": "<span class=\"badge badge-pill badge-dark\">ALGAE</span> PROCESSOR 成功率",
@@ -173,6 +207,16 @@
                 "type": "average",
                 "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.1 ~ Lv.3 平均"
             },
+            "teleopCORALLv4Rate": {
+                "title": "<span class=\"badge badge-pill badge-dark\">CORAL</span> Lv.4 成功率",
+                "type": "successRate",
+                "successId": "teleopCORALLv4",
+                "failId": "teleopCORALLv4Fail"
+            },
+            "teleopCORALLv4": {
+                "type": "average",
+                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.4 平均"
+            },
             "teleopALGAEPROCESSORRate": {
                 "title": "<span class=\"badge badge-pill badge-dark\">ALGAE</span> PROCESSOR 成功率",
                 "type": "successRate",
@@ -194,13 +238,13 @@
                 "title": "<span class=\"badge badge-pill badge-primary\">ALGAE</span> NET 平均"
             },
             "teleopBARGE": {
-                "title": "BARGE (NONE/PARK/ShallowCage/DeepCAGE)",
+                "title": "BARGE (NONE/PARK/ShallowCAGE/DeepCAGE)",
                 "type": "countAll",
                 "targetId": "teleopBARGE",
                 "targetEnums": [
                     "NONE",
                     "PARK",
-                    "ShallowCage",
+                    "ShallowCAGE",
                     "DeepCAGE"
                 ]
             },
