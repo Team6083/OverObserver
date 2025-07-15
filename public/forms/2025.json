@@ -244,8 +244,7 @@
                 "targetEnums": [
                     "NONE",
                     "PARK",
-                    "ShallowCAGE",
-                    "DeepCAGE"
+                    "ShallowCAGE"
                 ]
             },
             "driverSkill": {
