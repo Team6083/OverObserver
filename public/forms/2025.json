@@ -113,7 +113,7 @@
             "default": 0
         },
         "teleopBARGE": {
-            "type": "select",
+            "type": "string",
             "title": "BARGE",
             "enum": [
                 "NONE",
