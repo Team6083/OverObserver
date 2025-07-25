@@ -103,7 +103,6 @@ database.ref("settings").once('value').then(function (snapshot) {
                                     }
                                 }
                                 medianValues.sort((a, b) => a - b);
-
                                 let median = "n/a";
                                 if (medianValues.length > 0) {
                                     const mid = Math.floor(medianValues.length / 2);
@@ -111,15 +110,12 @@ database.ref("settings").once('value').then(function (snapshot) {
                                         ? ((medianValues[mid - 1] + medianValues[mid]) / 2)
                                         : medianValues[mid];
                                 }
-
                                 tdAvg.innerText = median + " (match count: " + medianValues.length + ")";
                                 setTextColor(tdAvg, 0);
                                 break;
-                                
                             case "mode":
                                 const modeCounts = {};
                                 let totalForMode = 0;
-
                                 for (let i in teamCollect) {
                                     const val = teamCollect[i][s.targetId];
                                     if (!teamCollect[i].notShow && typeof val === "number") {
@@ -139,13 +135,11 @@ database.ref("settings").once('value').then(function (snapshot) {
                                         modes.push(numVal);
                                     }
                                 }
-
                                 let modeResult = "n/a";
                                 if (modes.length > 0) {
                                     const finalVal = Math.max(...modes); //取最大值
                                     modeResult = `${finalVal}（mode, 次數 ${maxCount}）`;
                                 }
-
                                 tdAvg.innerText = modeResult;
                                 setTextColor(tdAvg, 0);
                                 break;
