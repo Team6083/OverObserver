@@ -94,7 +94,7 @@ database.ref("settings").once('value').then(function (snapshot) {
                                     tdAvg.innerText = tdAvg.innerText + " (count: " + successRateRes.count + ")";
                                 }
                                 break;
-                                case "median":
+                            case "median":
                                 let medianValues = [];
                                 for (let i in teamCollect) {
                                     let val = teamCollect[i][s.targetId];
