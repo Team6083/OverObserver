@@ -142,7 +142,7 @@ database.ref("settings").once('value').then(function (snapshot) {
 
                                 let modeResult = "n/a";
                                 if (modes.length > 0) {
-                                    const finalVal = Math.max(...modes); // ⭐ 取最大值
+                                    const finalVal = Math.max(...modes); //取最大值
                                     modeResult = `${finalVal}（mode, 次數 ${maxCount}）`;
                                 }
 
