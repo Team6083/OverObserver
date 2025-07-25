@@ -94,6 +94,61 @@ database.ref("settings").once('value').then(function (snapshot) {
                                     tdAvg.innerText = tdAvg.innerText + " (count: " + successRateRes.count + ")";
                                 }
                                 break;
+                            case "median":
+                                let medianValues = [];
+                                for (let i in teamCollect) {
+                                    let val = teamCollect[i][s.targetId];
+                                    if (typeof val === 'number' && !teamCollect[i].notShow) {
+                                        medianValues.push(val);
+                                    }
+                                }
+                                medianValues.sort((a, b) => a - b);
+
+                                let median = "n/a";
+                                if (medianValues.length > 0) {
+                                    const mid = Math.floor(medianValues.length / 2);
+                                    median = medianValues.length % 2 === 0
+                                        ? ((medianValues[mid - 1] + medianValues[mid]) / 2)
+                                        : medianValues[mid];
+                                }
+
+                                tdAvg.innerText = median + " (match count: " + medianValues.length + ")";
+                                setTextColor(tdAvg, 0);
+                                break;
+                                
+                            case "mode":
+                                const modeCounts = {};
+                                let totalForMode = 0;
+
+                                for (let i in teamCollect) {
+                                    const val = teamCollect[i][s.targetId];
+                                    if (!teamCollect[i].notShow && typeof val === "number") {
+                                        modeCounts[val] = (modeCounts[val] || 0) + 1;
+                                        totalForMode++;
+                                    }
+                                }
+                                let maxCount = 0;
+                                let modes = [];
+                                for (let val in modeCounts) {
+                                    const count = modeCounts[val];
+                                    const numVal = parseFloat(val);
+                                    if (count > maxCount) {
+                                        maxCount = count;
+                                        modes = [numVal];
+                                    } else if (count === maxCount) {
+                                        modes.push(numVal);
+                                    }
+                                }
+
+                                let modeResult = "n/a";
+                                if (modes.length > 0) {
+                                    const finalVal = Math.max(...modes); // ⭐ 取最大值
+                                    modeResult = `${finalVal}（mode, 次數 ${maxCount}）`;
+                                }
+
+                                tdAvg.innerText = modeResult;
+                                setTextColor(tdAvg, 0);
+                                break;
                             case "count":
                             case "boolean":
                             case "checkbox":
