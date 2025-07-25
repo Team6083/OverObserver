@@ -98,8 +98,8 @@ database.ref("settings").once('value').then(function (snapshot) {
                                 let medianValues = [];
                                 for (let i in teamCollect) {
                                     let val = teamCollect[i][s.targetId];
-                                    if (typeof val === 'number' && !teamCollect[i].notShow) {
-                                        medianValues.push(val);
+                                    if (typeof val === 'number' && !teamCollect[i].notShow && !isNaN(val)) {
+                                        medianValues.push(Number(val));
                                     }
                                 }
                                 medianValues.sort((a, b) => a - b);
@@ -113,36 +113,38 @@ database.ref("settings").once('value').then(function (snapshot) {
                                 tdAvg.innerText = median + " (match count: " + medianValues.length + ")";
                                 setTextColor(tdAvg, 0);
                                 break;
-                            case "mode":
+                            case "mode": {
                                 const modeCounts = {};
                                 let totalForMode = 0;
-                                for (let i in teamCollect) {
-                                    const val = teamCollect[i][s.targetId];
-                                    if (!teamCollect[i].notShow && typeof val === "number") {
+                                for (const item of teamCollect) {
+                                    const val = item[s.targetId];
+                                    if (!item.notShow && val !== undefined && val !== null && !isNaN(Number(val))) {
+                                        val = Number(val);
                                         modeCounts[val] = (modeCounts[val] || 0) + 1;
                                         totalForMode++;
                                     }
                                 }
                                 let maxCount = 0;
                                 let modes = [];
-                                for (let val in modeCounts) {
+                                for (const val in modeCounts) {
                                     const count = modeCounts[val];
-                                    const numVal = parseFloat(val);
                                     if (count > maxCount) {
                                         maxCount = count;
-                                        modes = [numVal];
+                                        modes = [val];
                                     } else if (count === maxCount) {
-                                        modes.push(numVal);
+                                        modes.push(val);
                                     }
                                 }
                                 let modeResult = "n/a";
-                                if (modes.length > 0) {
-                                    const finalVal = Math.max(...modes); //取最大值
-                                    modeResult = `${finalVal}（mode, 次數 ${maxCount}）`;
+                                if (modes.length > 0 && maxCount > 0) {
+                                    modeResult = `${modes.join(', ')}（mode, 次數 ${maxCount}）`;
                                 }
-                                tdAvg.innerText = modeResult;
-                                setTextColor(tdAvg, 0);
+                                if (tdAvg) {
+                                    tdAvg.innerText = modeResult;
+                                    setTextColor(tdAvg, 0);
+                                }
                                 break;
+                                }
                             case "count":
                             case "boolean":
                             case "checkbox":
