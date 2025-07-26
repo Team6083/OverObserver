@@ -217,11 +217,15 @@
                 "type": "average",
                 "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.4 平均"
             },
-            "teleopALGAEPROCESSORRate": {
-                "title": "<span class=\"badge badge-pill badge-dark\">ALGAE</span> PROCESSOR 成功率",
-                "type": "successRate",
-                "successId": "teleopALGAEPROCESSOR",
-                "failId": "teleopALGAEPROCESSORFail"
+            "teleopCORALLv4Median": {
+                "type": "median",
+                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.4 中位數",
+                "targetId": "teleopCORALLv4"
+            },
+            "teleopCORALLv4Mode": {
+                "type": "mode",
+                "title": "<span class=\"badge badge-pill badge-primary\">CORAL</span> Lv.4 眾數",
+                "targetId": "teleopCORALLv4"
             },
             "teleopALGAEPROCESSOR": {
                 "type": "average",
