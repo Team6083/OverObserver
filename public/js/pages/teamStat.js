@@ -94,6 +94,37 @@ database.ref("settings").once('value').then(function (snapshot) {
                                     tdAvg.innerText = tdAvg.innerText + " (count: " + successRateRes.count + ")";
                                 }
                                 break;
+                            case "avgSuccessRatePerMatch": 
+                                let sumRate = 0;
+                                let matchCount = 0;
+                                let matchRates = [];
+                                for (const item of teamCollect) {
+                                    if (item.notShow) continue;
+                                    const success = item[s.successId];
+                                    const fail = item[s.failId];
+                                    const total = (success || 0) + (fail || 0);
+                                    if (total === 0) continue;
+                                    const rate = success / total;
+                                    matchRates.push(rate);
+                                    sumRate += rate;
+                                    matchCount++;
+                                }
+                                if (matchCount === 0) {
+                                    tdMin.innerText = "n/a";
+                                    tdMax.innerText = "n/a";
+                                    tdAvg.innerText = "n/a";
+                                } else {
+                                    const min = Math.min(...matchRates).toFixed(2);
+                                    const max = Math.max(...matchRates).toFixed(2);
+                                    const avg = (sumRate / matchCount).toFixed(2);
+                                    tdMin.innerText = min;
+                                    tdMax.innerText = max;
+                                    tdAvg.innerText = avg + ` (count: ${matchCount})`;
+                                    setTextColor(tdMax, 0);
+                                    setTextColor(tdMin, 0);
+                                    setTextColor(tdAvg, 1);
+                                }
+                                break;
                             case "median":
                                 let medianValues = [];
                                 for (let i in teamCollect) {
