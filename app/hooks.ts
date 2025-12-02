@@ -4,6 +4,7 @@ import { getAllEvents, getEventByKey } from "@/lib/event";
 import { Event } from "@/lib/types";
 import { useFirebase } from "./firebase-ctx";
 import { getMatchesForEvent } from "@/lib/match";
+import { getScoutDataForMatch, getScoutDataForMatchAndTeam } from "@/lib/scout-data";
 
 export function useEvents() {
   const { db } = useFirebase();
@@ -40,4 +41,22 @@ export function useMatch(eventKey: string, matchKey: string) {
     }
     return match;
   });
+}
+
+export function useMatchScoutData(eventKey: string, matchKey: string) {
+  const { db } = useFirebase();
+
+  return useSWR(
+    ["scoutData", eventKey, matchKey],
+    (args) => getScoutDataForMatch(db, args[1], args[2]),
+  );
+}
+
+export function useMatchScoutDataForTeam(eventKey: string, matchKey: string, teamKey: string) {
+  const { db } = useFirebase();
+
+  return useSWR(
+    ["scoutData", eventKey, matchKey, teamKey],
+    (args) => getScoutDataForMatchAndTeam(db, args[1], args[2], args[3]),
+  );
 }
